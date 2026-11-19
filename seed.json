@@ -1,0 +1,19 @@
+[
+  { "category": "Pizzas", "name": "Margherita", "price": 900, "description": "Sauce tomate cuisinée, mozzarella fondante, basilic frais et filet d’huile d’olive.", "prepMinutes": 18, "image": "/photos/margherita.jpg" },
+  { "category": "Pizzas", "name": "Diavola", "price": 1250, "description": "Sauce tomate, mozzarella et salami épicé, relevés d’une pointe de piment.", "prepMinutes": 22, "image": "/photos/diavola.jpg" },
+  { "category": "Pizzas", "name": "Quattro Formaggi", "price": 1450, "description": "Mozzarella, gorgonzola, parmesan et fromage de chèvre sur une pâte dorée.", "prepMinutes": 22, "image": "/photos/quattro-formaggi.jpg" },
+  { "category": "Pizzas", "name": "Prosciutto e Funghi", "price": 1400, "description": "Sauce tomate, mozzarella, jambon de dinde et champignons frais.", "prepMinutes": 22, "image": "/photos/prosciutto-funghi.jpg" },
+  { "category": "Pizzas", "name": "Vegetariana", "price": 1200, "description": "Mozzarella, courgettes, poivrons, champignons, olives et basilic.", "prepMinutes": 22, "image": "/photos/vegetariana.jpg" },
+  { "category": "Pasta", "name": "Spaghetti Carbonara", "price": 1350, "description": "Spaghetti enrobés d’une sauce crémeuse aux œufs, parmesan et dinde fumée.", "prepMinutes": 18, "image": "/photos/carbonara.jpg" },
+  { "category": "Pasta", "name": "Penne Arrabbiata", "price": 1100, "description": "Penne al dente, sauce tomate à l’ail, piment doux et persil frais.", "prepMinutes": 16, "image": "/photos/arrabbiata.jpg" },
+  { "category": "Pasta", "name": "Tagliatelle Alfredo", "price": 1450, "description": "Tagliatelles fraîches, poulet grillé, crème légère et parmesan.", "prepMinutes": 20, "image": "/photos/alfredo.jpg" },
+  { "category": "Pasta", "name": "Lasagne della Casa", "price": 1500, "description": "Lasagnes gratinées, sauce tomate mijotée, bœuf haché et béchamel.", "prepMinutes": 25, "image": "/photos/lasagna.jpg" },
+  { "category": "Antipasti", "name": "Bruschetta Pomodoro", "price": 650, "description": "Pain grillé frotté à l’ail, tomates fraîches, basilic et huile d’olive.", "prepMinutes": 10, "image": "/photos/bruschetta.jpg" },
+  { "category": "Antipasti", "name": "Caprese", "price": 950, "description": "Tomates mûres, mozzarella, basilic frais et vinaigrette balsamique.", "prepMinutes": 8, "image": "/photos/caprese.jpg" },
+  { "category": "Dolci italiani", "name": "Tiramisu della Casa", "price": 700, "description": "Crème mascarpone légère, biscuits imbibés de café et cacao saupoudré.", "prepMinutes": 5, "image": "/photos/tiramisu.jpg" },
+  { "category": "Dolci italiani", "name": "Panna Cotta Vanille", "price": 650, "description": "Crème vanillée délicate, servie avec un coulis de fruits rouges.", "prepMinutes": 5, "image": "/photos/panna-cotta.jpg" },
+  { "category": "Dolci italiani", "name": "Cannoli Siciliani", "price": 750, "description": "Coque croustillante garnie de ricotta douce, zestes d’orange et pistache.", "prepMinutes": 8, "image": "/photos/cannoli.jpg" },
+  { "category": "Caffè & boissons", "name": "Espresso Italiano", "price": 200, "description": "Espresso court et intense, extrait à la minute, avec une crema dorée.", "prepMinutes": 3, "image": "/photos/espresso.jpg" },
+  { "category": "Caffè & boissons", "name": "Cappuccino", "price": 350, "description": "Espresso italien, lait chaud et mousse onctueuse, saupoudré de cacao.", "prepMinutes": 5, "image": "/photos/cappuccino.jpg" },
+  { "category": "Caffè & boissons", "name": "Limonata", "price": 350, "description": "Citron pressé, eau fraîche et touche de menthe, préparés à la commande.", "prepMinutes": 5, "image": "/photos/limonata.jpg" }
+]

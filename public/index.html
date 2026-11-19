@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#010736"><meta name="description" content="Delicioso · cuisine italienne, pizzas et pâtes à Constantine"><link rel="icon" type="image/svg+xml" href="/delicioso-mark.svg"><title>Delicioso · Cuisine italienne à Constantine</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Manrope:wght@400;500;600;700;800&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fcf1d0;--ink:#010736;--mut:#5b6480;--card:#fffaf0;--line:#e4d9b8;--night:#010736;--brass:#22396f;--cream:#fcf1d0;--rose:#f2e5bd;--onnight:#fcf1d0;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 "Manrope",system-ui,sans-serif}
+h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-weight:700;line-height:1.05;margin:0}
+a{color:inherit}button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+header.nav{transition:transform .3s ease;position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--night);color:var(--onnight)}
+.nav .wrap{display:flex;justify-content:space-between;align-items:center;height:58px;gap:12px}
+.nav b{font:700 23px "Fraunces",serif;text-decoration:none}
+.nav nav{display:flex;gap:6px;align-items:center}
+.nav nav a{text-decoration:none;padding:6px 11px;border-radius:999px;font-size:15px;opacity:.85}
+.nav nav a.on{background:var(--cream);color:#010736;opacity:1;font-weight:700}
+.cartbtn{background:none;border:1.5px solid var(--cream);color:var(--onnight);border-radius:999px;padding:5px 13px}
+.cartbtn span{background:var(--cream);color:#010736;border-radius:999px;padding:0 8px;margin-inline-start:6px;font-weight:700}
+.fab{display:none;position:fixed;inset-inline-end:16px;bottom:calc(18px + env(safe-area-inset-bottom,0px));width:66px;height:66px;border-radius:50%;border:0;background:var(--night);color:var(--onnight);font-size:30px;box-shadow:0 6px 20px rgba(0,0,0,.35);z-index:8;place-items:center;padding:0}
+.fab span{position:absolute;top:-5px;inset-inline-end:-5px;min-width:28px;height:28px;border-radius:14px;background:var(--cream);color:#010736;font:700 15px/24px "Manrope",sans-serif;text-align:center;padding:0 7px;border:2px solid var(--bg)}
+.pop{animation:pop .55s ease}
+@keyframes pop{0%{transform:scale(1)}35%{transform:scale(1.28) rotate(-10deg)}70%{transform:scale(.94)}100%{transform:scale(1)}}
+@media (max-width:760px){.fab.on{display:grid}.cartbtn{display:none}body[data-p=livraison] .fab.on{display:none}.toast{bottom:calc(96px + env(safe-area-inset-bottom,0px))}}
+@media (prefers-reduced-motion:reduce){.pop{animation:none}}
+#lang{width:auto;background:transparent;color:var(--onnight);border:1.5px solid var(--cream);border-radius:999px;padding:4px 8px;font-size:14px}#lang option{color:#010736;background:#fffaf0}
+html[lang=ar] body{font-family:"Cairo","Manrope",system-ui,sans-serif;line-height:1.75}html[lang=ar] h1,html[lang=ar] h2,html[lang=ar] h3,html[lang=ar] .hero h1 em{font-family:"Cairo",sans-serif;line-height:1.35;letter-spacing:0;font-weight:700}
+@media (max-width:760px){.nav nav a:first-child{display:none}.nav .wrap{gap:8px}}
+input[type=tel]{direction:ltr;unicode-bidi:plaintext}
+.gone{display:none!important}.lk{background:none;border:0;color:var(--night);text-decoration:underline;padding:0 4px;cursor:pointer;font:inherit}
+.authbox{margin-top:14px;padding:14px;border:1.5px dashed var(--line);border-radius:14px}
+.th{overflow:hidden}.th img{width:100%;height:100%;object-fit:cover;display:block}.th.big.has{width:100%;height:clamp(190px,22vw,240px);border-radius:14px;flex:none}
+header.nav.hide{transform:translateY(-110%)}
+@media (prefers-reduced-motion:reduce){header.nav{transition:none}}
+.btn{display:inline-block;padding:13px 22px;border:0;border-radius:999px;background:var(--cream);color:#010736;font-weight:700;text-decoration:none}
+.btn.ghost{background:none;border:1.5px solid var(--cream);color:var(--onnight)}
+.btn.dark{background:var(--night);color:var(--onnight)}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.hero{background:var(--night);color:var(--onnight);padding:70px 0 84px}
+.hero .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(3.4rem,10vw,7rem);letter-spacing:-.02em}
+.hero h1 em{display:block;font-style:italic;font-weight:500;color:var(--cream);font-size:.46em;margin-top:14px;letter-spacing:0}
+.hero p{max-width:34ch;color:#f3d9c4;font-size:19px;margin:22px 0 28px}
+
+section{padding:60px 0}
+h2{font-size:clamp(2.2rem,5vw,3.4rem);margin-bottom:10px}
+.lead{color:var(--mut);max-width:54ch;margin:0 0 28px}
+.band{background:var(--rose)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.tabs button{border:1.5px solid var(--line);background:var(--card);color:var(--ink);padding:8px 16px;border-radius:999px}
+.tabs button[aria-pressed=true]{background:var(--night);color:var(--onnight);border-color:var(--night)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:18px}
+.item{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:6px}
+.item .e{font-size:40px;line-height:1}
+.item h3{font-size:1.5rem}.item p{margin:0;color:var(--mut);font-size:15px;flex:1}
+.row{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.price{font-weight:700}
+.add{background:var(--night);border:0;border-radius:999px;padding:7px 14px;font-weight:700;color:var(--onnight)}
+.tag{font-size:12px;background:var(--rose);color:var(--ink);padding:1px 9px;border-radius:999px;align-self:flex-start}.tag.out{background:#f8d7da;color:#842029}.item.unavailable{opacity:.68}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}.tag.diet{background:#e5eaf6;color:#22396f}.tag.diet:hover{background:#d4dcef}.tiny{font-size:12px;display:block;margin-top:4px}.item .tiny{margin-top:3px}
+.tabs{flex-wrap:nowrap;overflow-x:auto;padding-bottom:8px}.tabs button{white-space:nowrap}
+.th{width:54px;height:54px;border-radius:14px;background:var(--rose);display:grid;place-items:center;color:var(--brass)}.th.big{width:68px;height:68px}.ic{width:36px;height:36px}.big .ic{width:48px;height:48px}
+.gh{font-size:clamp(2.2rem,6vw,3.4rem);margin:50px 0 0;padding:12px 18px;border-radius:16px;background:var(--rose)}.gh:first-of-type{margin-top:26px}.gt button{font-weight:700;font-size:17px;padding:10px 20px}.gt{margin-bottom:4px}
+.sh{font-size:2rem;margin:34px 0 8px;padding-bottom:6px;border-bottom:2px solid var(--brass)}
+.list{display:grid;grid-template-columns:1fr 1fr;gap:0 36px}
+.r{display:grid;grid-template-columns:54px 1fr auto auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.r b{display:block}.r .muted{display:block;font-size:13.5px;line-height:1.35}
+.r .add{width:34px;height:34px;padding:0;font-size:20px;line-height:1}#q{margin-bottom:16px}
+.prep-time{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;margin-top:6px;padding:5px 9px;border-radius:999px;background:#22396f0c;color:#22396f;font-size:12px;font-weight:700;letter-spacing:.01em}.prep-time .clock{font-size:14px}.item .prep-time{margin-top:8px}.r .prep-time{margin-top:5px}
+@media (max-width:760px){.list{grid-template-columns:1fr}}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.steps{list-style:none;counter-reset:s;padding:0;margin:0}
+.steps li{counter-increment:s;padding:10px 0;padding-inline-start:46px;position:relative;border-bottom:1px solid var(--line)}
+.steps li::before{content:counter(s);position:absolute;inset-inline-start:0;top:9px;width:32px;height:32px;border-radius:50%;background:var(--night);color:var(--onnight);display:grid;place-items:center;font-weight:700}
+.box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}
+label{display:block;font-weight:700;margin:14px 0 4px;font-size:15px}
+input,select,textarea{width:100%;padding:11px 13px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+.line{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);align-items:center}
+.qty button{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--line);background:var(--card);color:var(--ink)}
+.qty{display:flex;gap:8px;align-items:center}
+.tot{font-weight:700;font-size:1.15rem}
+.muted{color:var(--mut);font-size:14px}
+.err{color:#c0392b;font-weight:700;min-height:1.4em}
+.destination-tools{display:flex;gap:9px;flex-wrap:wrap;margin:9px 0}.destination-tools button{border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:8px 13px;font-size:14px;font-weight:700}.destination-tools button.primary{background:var(--night);color:var(--onnight);border-color:var(--night)}
+.map-panel{margin-top:10px;padding:12px;border:1px solid var(--line);border-radius:14px;background:var(--card)}.map-panel[hidden]{display:none}#delivery-map{height:280px;border-radius:10px;z-index:0;background:var(--rose);cursor:crosshair;touch-action:pan-x pan-y}.map-help,.map-status{font-size:13px;color:var(--mut);margin:4px 0 9px}.map-status{font-weight:700;color:var(--brass)}
+.map-search{display:flex;gap:8px;margin:8px 0}.map-search input{min-width:0;background:var(--card)}.map-search button{flex:none;border:0;border-radius:10px;background:var(--night);color:var(--onnight);padding:0 14px;font-weight:700}.map-search-results{display:grid;gap:6px;margin:0 0 9px}.map-search-results[hidden]{display:none}.map-search-result{width:100%;padding:9px 11px;text-align:left;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--ink);font:inherit}.map-search-result:hover,.map-search-result:focus{border-color:var(--brass);outline-color:var(--brass)}
+.map-actions{display:flex;justify-content:flex-end;margin-top:8px}.map-actions button{border:1.5px solid var(--night);background:var(--night);color:var(--onnight);border-radius:999px;padding:9px 15px;font:inherit;font-weight:700}.map-actions button:disabled{opacity:.5;cursor:not-allowed}
+@media(max-width:520px){#delivery-map{height:240px}.destination-tools button{flex:1}}
+.srv{background:var(--card);border:1px solid #22396f20;border-radius:16px;padding:14px 16px;margin:0 0 22px;box-shadow:0 8px 20px #01073608}
+.srv .srvline{display:flex;align-items:flex-start;gap:9px;font-weight:700;font-size:15px}
+.srv.ok .srvline{color:#1e7a46}.srv.closed .srvline{color:#a34a12}.srv.paused .srvline{color:#8d3038}
+.srv .srvmsg{color:var(--mut);font-size:14px;margin:3px 0 0}
+.srv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:6px 18px;margin-top:10px}
+.srv h4{margin:10px 0 4px;font-size:13px;color:var(--night);letter-spacing:.02em}
+.srv table{border-collapse:collapse;font-size:13.5px}
+.srv td{padding:2px 10px 2px 0;border-bottom:1px dashed var(--line)}
+.srv .muted{display:block;margin-top:2px}
+.req{width:100%;margin-top:5px;font-size:13px;padding:6px 9px}
+@media(max-width:760px){.srv-grid{grid-template-columns:1fr}}
+.big{font:700 clamp(2rem,6vw,3.2rem) "Fraunces",serif;text-decoration:none;color:var(--cream)}
+.contact{background:var(--night);color:var(--onnight)}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--night);color:var(--onnight);padding:10px 18px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:9}
+.toast.show{opacity:1}
+footer{background:var(--night);color:#FCF1D0ad;text-align:center;font-size:14px;padding:22px}
+@media (max-width:760px){.hero .wrap,.cols{grid-template-columns:1fr}.hero-wordmark{min-height:235px;order:-1}.hero-wordmark:before{width:min(250px,76%)}.hero-wordmark:after{font-size:clamp(12rem,52vw,19rem)}.hero-wordmark strong{font-size:clamp(3rem,13vw,5rem)}.nav nav a{padding:6px 8px;font-size:14px}.nav b{font-size:19px}}
+/* Delicioso identity refresh */
+:root{--bg:#FCF1D0;--ink:#010736;--mut:#59627c;--card:#fffaf0;--line:#e5daba;--night:#010736;--brass:#22396F;--cream:#FCF1D0;--rose:#f2e6c1;--onnight:#FCF1D0;color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#FCF1D0;--ink:#010736;--mut:#59627c;--card:#fffaf0;--line:#e5daba;--night:#010736;--brass:#22396F;--cream:#FCF1D0;--rose:#f2e6c1;--onnight:#FCF1D0}}
+:root[data-theme="dark"]{--bg:#FCF1D0;--ink:#010736;--mut:#59627c;--card:#fffaf0;--line:#e5daba;--night:#010736;--brass:#22396F;--cream:#FCF1D0;--rose:#f2e6c1;--onnight:#FCF1D0}
+body{background:var(--bg);color:var(--ink)}
+header.nav{background:rgba(1,7,54,.97);box-shadow:0 8px 28px #01073622;backdrop-filter:blur(14px)}
+.nav .wrap{height:72px;max-width:1240px}
+.brand-lockup{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--cream)}
+.nav-wordmark{display:flex;flex-direction:column;align-items:flex-start;line-height:1}
+.nav-wordmark strong{font:700 27px/.88 "Fraunces",Georgia,serif;letter-spacing:-.035em}
+.nav-wordmark small{display:block;margin-top:5px;font:500 8px/1.1 "Manrope",sans-serif;letter-spacing:.015em;white-space:nowrap;color:#fcf1d0bf}
+.nav nav{gap:8px}.nav nav a{padding:8px 13px;border-radius:999px;transition:background .18s,color .18s,opacity .18s}
+.nav nav a:hover{opacity:1;background:#ffffff18}.nav nav a.on{background:var(--cream);color:var(--night)}
+#lang,.cartbtn{border-color:#ffffff45}.cartbtn:hover,#lang:hover{background:#ffffff18}
+.hero{position:relative;overflow:hidden;padding:82px 0 96px;background:radial-gradient(circle at 78% 48%,#22396f 0,#0d1c42 34%,#010736 74%);color:var(--cream)}
+.hero::before,.hero::after{content:"";position:absolute;border:1px solid #fcf1d024;border-radius:50%;pointer-events:none}
+.hero::before{width:460px;height:460px;right:-130px;top:-230px}.hero::after{width:290px;height:290px;left:-170px;bottom:-190px}
+.hero .wrap{position:relative;z-index:1;max-width:1180px;gap:52px}
+.hero h1{font-family:"Manrope",sans-serif;font-size:clamp(3.5rem,9vw,6.6rem);font-weight:800;letter-spacing:-.065em}
+.hero h1 em{font-family:"Fraunces",Georgia,serif;font-size:.39em;font-weight:600;letter-spacing:.01em;color:var(--cream)}
+.hero p{color:#f2e6c1;font-size:clamp(17px,2vw,20px);max-width:39ch}
+.hero .btn{box-shadow:0 10px 24px #01073630;transition:transform .18s,box-shadow .18s}.hero .btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px #0107364a}
+.hero .btn.ghost{border-color:#fcf1d080;color:var(--cream)}
+.hero-wordmark{min-height:310px;display:grid;place-items:center;position:relative;text-align:center;isolation:isolate}
+.hero-wordmark:before{content:"";position:absolute;width:min(340px,82%);aspect-ratio:1;border:1px solid #fcf1d052;border-radius:50%;transform:rotate(-14deg) scaleY(.86);z-index:-1}
+.hero-wordmark:after{content:"D";position:absolute;z-index:-1;color:#fcf1d010;font:800 clamp(15rem,29vw,25rem)/.8 "Fraunces",Georgia,serif;transform:rotate(-9deg);letter-spacing:-.1em}
+.hero-wordmark-inner{padding:24px 10px}
+.hero-wordmark .ornament{font-size:18px;letter-spacing:.42em;color:#fcf1d0b8}
+.hero-wordmark strong{display:block;margin:8px 0;font:700 clamp(3.25rem,7.2vw,6.4rem)/.95 "Fraunces",Georgia,serif;letter-spacing:-.045em;text-shadow:0 10px 36px #01073670}
+.hero-wordmark .wordmark-rule{width:min(220px,50vw);height:1px;margin:18px auto 12px;background:linear-gradient(90deg,transparent,#fcf1d0b8,transparent)}
+.hero-wordmark small{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#fcf1d0c9}
+section{padding:76px 0}.wrap{max-width:1160px}
+h2{color:var(--night);letter-spacing:-.025em}.lead{color:var(--mut)}
+.band{background:linear-gradient(180deg,#f2e6c1 0%,#f7edcf 100%)}
+.box,.item,.map-panel{background:var(--card);border:1px solid #22396f20;box-shadow:0 12px 34px #0107360b}
+.item{border-radius:20px;padding:20px;transition:transform .2s,box-shadow .2s,border-color .2s}
+.item:hover{transform:translateY(-4px);border-color:#22396f66;box-shadow:0 18px 42px #01073616}
+.item h3{color:var(--night);font-family:"Manrope",sans-serif;font-size:1.18rem;line-height:1.35}
+.th{background:var(--rose);color:var(--brass)}
+.tag{background:#22396f12;color:var(--brass);font-weight:700}
+.add,.tabs button[aria-pressed=true],.map-actions button,.destination-tools button.primary{background:var(--night);border-color:var(--night);color:var(--cream);transition:transform .16s,background .16s,box-shadow .16s}
+.add:hover,.tabs button[aria-pressed=true]:hover,.map-actions button:not(:disabled):hover,.destination-tools button.primary:hover{background:var(--brass);box-shadow:0 6px 16px #01073624;transform:translateY(-1px)}
+.btn.dark{background:var(--night);color:var(--cream)}
+.tabs button{border-color:var(--line);border-radius:999px;transition:all .16s}.tabs button:hover{border-color:var(--brass);color:var(--brass)}
+.gh{background:var(--rose);color:var(--night)}.sh{border-color:var(--brass);color:var(--night)}
+.box{border-radius:22px;padding:26px}.authbox{border-color:#22396f50}
+input,select,textarea{border-color:var(--line);background:#fffdf6;transition:border-color .16s,box-shadow .16s}
+input:focus,select:focus,textarea:focus{border-color:var(--brass);box-shadow:0 0 0 3px #22396f20;outline:0}
+.qty button{border-color:var(--line);transition:all .15s}.qty button:hover{background:var(--night);color:var(--cream)}
+.destination-tools button{transition:all .16s}.destination-tools button:hover{border-color:var(--brass);color:var(--brass)}
+.map-panel{border-radius:18px;padding:16px}.map-search-result{transition:background .15s,border-color .15s}.map-search-result:hover,.map-search-result:focus{background:#f8efda}
+.map-actions button{border-radius:999px}
+.contact{background:linear-gradient(135deg,#010736,#0d1c42);color:var(--cream)}
+.big{color:var(--cream)}footer{background:#01052d;color:#fcf1d0ad;padding:26px 16px}
+.toast{box-shadow:0 10px 32px #01073640}
+@media(max-width:760px){.nav .wrap{height:auto;min-height:66px}.brand-lockup{gap:5px}.nav-wordmark strong{font-size:23px}.nav-wordmark small{font-size:7px;margin-top:4px}.nav nav{gap:3px}.hero{padding:54px 0 64px}.hero .wrap{gap:28px}.hero h1{font-size:clamp(3.2rem,15vw,5.2rem)}section{padding:56px 0}.box{padding:19px}}
+@media(prefers-reduced-motion:reduce){.item,.tabs button,.add,.hero .btn{transition:none}.item:hover,.hero .btn:hover{transform:none}}
+/* Small-screen layout and comfortable touch targets */
+@media(max-width:600px){
+  body{font-size:16px;overflow-x:hidden}
+  .wrap{padding-inline:16px}
+  .nav .wrap{height:auto;min-height:62px;flex-wrap:wrap;gap:4px 8px;padding-top:8px;padding-bottom:8px}
+  .brand-lockup{flex:0 0 auto}
+  .nav nav{min-width:0;flex:1 1 100%;gap:4px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;padding:2px 0}
+  .nav nav::-webkit-scrollbar,.tabs::-webkit-scrollbar{display:none}
+  .nav nav a{flex:0 0 auto;padding:8px 10px;font-size:13px;white-space:nowrap}
+  .nav nav a:first-child{display:block}
+  #lang{flex:0 0 auto;font-size:13px;padding:7px 8px}
+  .hero{padding:42px 0 52px}
+  .hero .wrap{gap:18px}
+  .hero h1{font-size:clamp(2.75rem,14vw,4.2rem);overflow-wrap:anywhere}
+  .hero p{font-size:16px;margin:15px 0 20px}
+  .hero-wordmark{min-height:190px}
+  .hero-wordmark:after{font-size:clamp(10rem,55vw,15rem)}
+  .hero-wordmark strong{font-size:clamp(2.8rem,13vw,4.4rem)}
+  section{padding:42px 0}
+  h2{font-size:clamp(2rem,9vw,2.8rem)}
+  .grid{grid-template-columns:minmax(0,1fr);gap:13px}
+  .item{padding:15px;border-radius:16px}
+  .th.big.has{height:clamp(190px,58vw,260px)}
+  .gh{font-size:clamp(1.8rem,8vw,2.5rem);margin-top:34px;padding:10px 12px}
+  .gt{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;scrollbar-width:none}
+  .gt button{flex:0 0 auto;font-size:15px;padding:9px 14px}
+  .list{grid-template-columns:minmax(0,1fr)}
+  .r{grid-template-columns:44px minmax(0,1fr) auto;gap:9px}
+  .r .th{width:44px;height:44px}
+  .r .add{grid-column:3;grid-row:1;min-width:40px;min-height:40px}
+  .r .price{grid-column:2;grid-row:2}
+  .cols{grid-template-columns:minmax(0,1fr);gap:20px}
+  .box{padding:16px;border-radius:17px}
+  .steps li{padding-inline-start:42px}
+  .btn{min-height:44px;padding:11px 17px}
+  button,.map-search button,.map-actions button{min-height:44px}
+  input,select,textarea{font-size:16px;min-height:44px}
+  .qty button{min-width:36px;min-height:36px}
+  .map-panel{padding:10px}
+  #delivery-map{height:clamp(220px,68vw,320px)}
+  .map-search{align-items:stretch}
+  .map-search button{padding-inline:12px}
+  .destination-tools button{min-height:44px}
+  .toast{width:max-content;max-width:calc(100vw - 32px);text-align:center;white-space:normal;border-radius:14px}
+}
+@media(max-width:360px){
+  .wrap{padding-inline:12px}
+  .nav-wordmark strong{font-size:21px}
+  .nav-wordmark small{font-size:7px}
+  .nav nav a{padding-inline:8px;font-size:12px}
+  .item .row{align-items:flex-start;gap:8px;flex-wrap:wrap}
+  .box{padding:13px}
+  .map-search{flex-wrap:wrap}
+  .map-search button{width:100%}
+}
+/* table reservations */
+.rsv{align-items:start}
+.rsvcal{border:1px solid var(--line);border-radius:16px;padding:12px;background:var(--card)}
+.rsvcal-h{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.rsvcal-h strong{font:700 20px "Fraunces",serif}
+.rsvcal-nav{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:20px;line-height:1}
+.rsvcal-nav:disabled{opacity:.35;cursor:default}
+.rsvcal-wd{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:4px}
+.rsvcal-wd span{text-align:center;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);font-weight:700}
+.rsvcal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.rsvcal-pad{display:block}
+.rsvcal-day{aspect-ratio:1/1;min-height:38px;border-radius:11px;border:1px solid transparent;background:#fff;color:var(--ink);font-weight:600;display:flex;align-items:center;justify-content:center;transition:transform .15s,box-shadow .15s,background .15s}
+.rsvcal-day:not(.dis):hover{transform:translateY(-1px);box-shadow:0 6px 14px #0107361f}
+.rsvcal-day.today{border-color:var(--brass);color:var(--brass)}
+.rsvcal-day.dis{background:#efe6c9;color:#a49a78;cursor:default}
+.rsvcal-day.on{background:var(--night);color:var(--cream);border-color:var(--night)}
+.rsvstep{display:flex;align-items:center;gap:9px;margin:18px 0 9px;font:700 20px "Fraunces",serif}
+.rsvstep:first-child{margin-top:0}
+.rsvstep .n{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--night);color:var(--cream);font:700 13px "Manrope",sans-serif}
+.rsvslots{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
+.rsvslot{min-height:40px;padding:9px 15px;border-radius:11px;border:1px solid var(--line);background:#fff;color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums;transition:all .15s}
+.rsvslot:not(.dis):hover{border-color:var(--brass);color:var(--brass)}
+.rsvslot.on{background:var(--night);border-color:var(--night);color:var(--cream)}
+.rsvslot.dis{background:#f1ecda;color:#a49a78;cursor:default}
+.rsvseg{display:flex;flex-wrap:wrap;gap:8px}
+.rsvseg button{border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);padding:9px 15px;font-weight:600;transition:all .15s}
+.rsvseg button:hover{border-color:var(--brass);color:var(--brass)}
+.rsvseg button.on{background:var(--night);border-color:var(--night);color:var(--cream)}
+.rsvnote{border:1px solid #efdca6;background:#fff3d3;border-radius:15px;padding:14px 15px;margin:0 0 16px}
+.rsvnote b{display:block;margin-bottom:4px}
+.rsvnote p{margin:0}
+.rsvnote .btn{margin-top:10px}
+.rsvdone{text-align:center}
+.rsvbadge{display:inline-block;padding:5px 13px;border-radius:999px;font-weight:700;font-size:13px}
+.rsvbadge.wait{background:#fff2d0;color:#946200}.rsvbadge.call{background:#ffe1cd;color:#ad4713}.rsvbadge.ok{background:#ddf1de;color:#1e6a30}.rsvbadge.bad{background:#fbdede;color:#a32626}.rsvbadge.off{background:#e9edf2;color:#5b6480}
+.rsvcode{font:700 22px "Fraunces",serif;letter-spacing:.05em;margin:12px 0}
+.rsvadmin{background:#fff3d3;border-radius:11px;padding:10px 12px;margin:10px 0}
+.rsvdone .btn{margin-top:12px}
+#rsvEdit,#rsvNew{background:var(--brass);border-color:var(--brass);color:var(--cream)}
+#rsvEdit:hover,#rsvNew:hover{background:var(--night);border-color:var(--night)}
+@media(max-width:600px){.rsvcal-day{min-height:34px;font-size:15px}.rsvcal-nav{width:44px;height:44px}}
+/* ===== Homepage & typography refresh · Fraunces + Manrope (navy & cream kept) ===== */
+.hero{padding:clamp(60px,7.6vw,106px) 0 clamp(70px,8.6vw,126px);background:radial-gradient(122% 96% at 80% 6%,#22396f 0,#0d1c42 40%,#010736 76%)}
+.hero::before{width:min(640px,125vw);height:min(640px,125vw);right:-170px;top:-280px;border-color:#fcf1d01c}
+.hero::after{width:min(360px,95vw);height:min(360px,95vw);left:-190px;bottom:-220px;border-color:#fcf1d016}
+.hero .wrap{max-width:1200px;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(30px,5vw,66px);align-items:center}
+.hero-copy{position:relative;z-index:1;max-width:44rem}
+.hero-kicker{display:inline-flex;align-items:center;gap:12px;margin:0 0 22px;font:600 12px/1 "Manrope",system-ui,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#fcf1d0c4}
+.hero-kicker::before{content:"";width:32px;height:1px;background:linear-gradient(90deg,#fcf1d000,#fcf1d0a6)}
+.hero h1{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:clamp(2.95rem,7.3vw,5.6rem);line-height:1.02;letter-spacing:-.024em;color:#fcf1d0;text-wrap:balance}
+.hero h1 em{font-weight:500}
+.hero p{color:#efe2c8;font-size:clamp(17px,1.55vw,20px);line-height:1.66;max-width:46ch;margin:22px 0 30px}
+.hero .btns{gap:14px}
+.hero .btn{padding:14px 25px;letter-spacing:.01em;box-shadow:0 12px 28px #0107363d}
+.hero .btn.ghost{background:#fcf1d010;border-color:#fcf1d066;color:#fcf1d0;box-shadow:none}
+.hero .btn.ghost:hover{background:#fcf1d024;border-color:#fcf1d0a6}
+.hero-facts{list-style:none;display:flex;flex-wrap:wrap;gap:16px 30px;margin:38px 0 0;padding:28px 0 0;border-top:1px solid #fcf1d024}
+.hero-facts li{display:flex;align-items:center;gap:11px;font-weight:600;font-size:14px;color:#fcf1d0d6}
+.hero-facts .hf-ic{display:grid;place-items:center;width:36px;height:36px;flex:none;border-radius:50%;background:#fcf1d014;border:1px solid #fcf1d02b;font-size:15px}
+.hero-wordmark{min-height:clamp(250px,30vw,352px)}
+.hero-wordmark:before{width:min(360px,84%);border-color:#fcf1d05e}
+.hero-wordmark strong{font-family:"Fraunces",Georgia,serif;font-weight:600;letter-spacing:-.03em}
+.hero-wordmark small{font-family:"Manrope",system-ui,sans-serif}
+.section-head{max-width:62ch;margin:0 0 30px}
+.eyebrow{display:inline-block;margin:0 0 12px;font:700 12px/1 "Manrope",system-ui,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--brass)}
+.home-pop .lead{margin-bottom:0}
+h2{text-wrap:balance}
+.band .box{background:linear-gradient(180deg,#fffdf6,#fff6e4);box-shadow:0 18px 44px #01073614}
+html[lang=ar] .hero-kicker,html[lang=ar] .eyebrow{font-family:"Cairo",system-ui,sans-serif;letter-spacing:0}
+@media(max-width:760px){.hero .wrap{grid-template-columns:minmax(0,1fr);gap:26px}.hero-copy{max-width:none}.hero-wordmark{min-height:210px}}
+@media(min-width:761px) and (max-width:1060px){.nav .wrap{gap:8px}.nav nav{gap:2px}.nav nav a{padding:6px 8px;font-size:13.5px}#lang{padding:3px 7px;font-size:13px}.cartbtn{padding:4px 10px;font-size:14px}}
+@media(max-width:600px){.hero{padding:44px 0 58px}.hero-facts{gap:12px 22px;margin-top:30px;padding-top:24px}.hero-facts li{font-size:13.5px}.hero-kicker{letter-spacing:.18em}.hero-wordmark{min-height:184px}}
+/* ===== Dish cards: classic readable cards (no flip) ===== */
+.grid>.item .th.big.has{margin-bottom:2px}
+.grid>.item .tags{margin-top:0}
+.grid>.item .row{margin-top:auto}
+/* ===== Size picker on card back (modern segmented control) ===== */
+.size-picker{display:flex;flex-direction:column;gap:7px;margin:10px 0 2px}
+.size-cap{display:flex;align-items:center;gap:8px;font:700 10px/1 "Manrope",system-ui,sans-serif;letter-spacing:.17em;text-transform:uppercase;color:var(--brass)}
+.size-cap::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,#22396f2b,transparent)}
+.size-bar{display:flex;flex-wrap:nowrap;gap:4px}
+.size-pill{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 2px 6px;border:1.5px solid #22396f1f;border-radius:12px;background:#fffdf6;color:var(--night);cursor:pointer;font:inherit;line-height:1;transition:transform .16s ease,border-color .16s ease,background .16s ease,color .16s ease,box-shadow .16s ease}
+.size-pill b{font:800 12.5px/1 "Manrope",system-ui,sans-serif;letter-spacing:.01em}
+.size-pill small{font:600 8.5px/1.15 "Manrope",system-ui,sans-serif;color:var(--mut);white-space:nowrap}
+.size-pill:hover{border-color:#22396f47;transform:translateY(-1px)}
+.size-pill.on{background:linear-gradient(180deg,var(--brass),#0b1c46);border-color:transparent;color:var(--cream);box-shadow:0 7px 16px #0107362b}
+.size-pill.on small{color:#fcf1d0ba}
+.size-pill:focus-visible{outline:0;box-shadow:0 0 0 3px #22396f33}
+/* price updates instantly on size change — no scale (blurry text) and no colour flash */
+html[lang=ar] .size-cap{font-family:"Cairo",system-ui,sans-serif;letter-spacing:0}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="i-crepe" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="24" cy="36" rx="19" ry="5"/><path d="M8 33c2-12 14-18 32-8-2 10-14 14-32 8z" fill="currentColor" fill-opacity=".22"/><path d="M15 29c5-6 11-8 19-6"/></g></symbol><symbol id="i-waffle" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="30" height="30" rx="6" fill="currentColor" fill-opacity=".22"/><path d="M19 9v30M29 9v30M9 19h30M9 29h30"/></g></symbol><symbol id="i-pancake" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="24" cy="34" rx="16" ry="5" fill="currentColor" fill-opacity=".22"/><ellipse cx="24" cy="27" rx="16" ry="5" fill="currentColor" fill-opacity=".22"/><ellipse cx="24" cy="20" rx="16" ry="5" fill="currentColor" fill-opacity=".22"/><rect x="21" y="12" width="6" height="4" rx="1"/></g></symbol><symbol id="i-ice" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M16 24l8 19 8-19z" fill="currentColor" fill-opacity=".22"/><circle cx="24" cy="16" r="9"/><path d="M16 24h16"/></g></symbol><symbol id="i-shake" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 15h22l-3 27H16z" fill="currentColor" fill-opacity=".22"/><path d="M13 15c0-6 22-6 22 0M27 12l6-9M15 24h18"/></g></symbol><symbol id="i-mojito" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 12h20l-3 30H17z" fill="currentColor" fill-opacity=".22"/><path d="M16 22h16M20 8c-2-4 2-6 5-4 0 3-2 5-5 4z"/><circle cx="35" cy="9" r="5"/></g></symbol><symbol id="i-cup" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 20h25v10a10 10 0 0 1-10 10h-5a10 10 0 0 1-10-10z" fill="currentColor" fill-opacity=".22"/><path d="M34 23h3a5 5 0 0 1 0 10h-4M17 8c-2 3 2 4 0 8M25 8c-2 3 2 4 0 8M7 43h30"/></g></symbol><symbol id="i-tea" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22h22v8a9 9 0 0 1-9 9h-4a9 9 0 0 1-9-9z" fill="currentColor" fill-opacity=".22"/><path d="M34 25l6-4M12 25H9a3 3 0 0 0 0 6h3M18 22v-3h10v3M23 19v-4"/></g></symbol><symbol id="i-cake" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 30h32v11H8z"/><path d="M12 30c0-8 6-12 12-12s12 4 12 12z" fill="currentColor" fill-opacity=".22"/><path d="M24 18v-5"/><circle cx="24" cy="10" r="3"/></g></symbol><symbol id="i-sand" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22c0-9 32-9 32 0z" fill="currentColor" fill-opacity=".22"/><path d="M8 26h32M8 30c4 3 8-3 12 0s8-3 12 0 6 0 8 0"/><path d="M8 34h32c0 6-4 8-16 8S8 40 8 34z" fill="currentColor" fill-opacity=".22"/></g></symbol><symbol id="i-bowl" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 24h36c0 10-8 18-18 18S6 34 6 24z" fill="currentColor" fill-opacity=".22"/><path d="M14 22c2-8 8-8 10-4 2-6 8-6 10 4M34 7l-6 13"/></g></symbol><symbol id="i-plate" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="25" r="17"/><path d="M15 22c1-6 9-8 14-4 4 3 3 9-2 11-5 2-12 0-12-7z" fill="currentColor" fill-opacity=".22"/><circle cx="24" cy="25" r="4" fill="currentColor"/></g></symbol><symbol id="i-juice" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14h20l-3 28H17z" fill="currentColor" fill-opacity=".22"/><path d="M27 14l5-9"/><circle cx="35" cy="14" r="6"/><path d="M35 8v12M29 14h12"/></g></symbol><symbol id="i-bottle" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6h8v8l4 6v22H16V20l4-6z" fill="currentColor" fill-opacity=".22"/><path d="M16 28h16"/></g></symbol></defs></svg>
+<header class="nav"><div class="wrap"><a href="#/" class="brand-lockup" aria-label="Delicioso, accueil"><span class="nav-wordmark"><strong>Delicioso</strong><small>Cucina italiana</small></span></a>
+<nav aria-label="Navigation"><a href="#/" data-r="">Accueil</a><a href="#/menu" data-r="menu">Menu</a><a href="#/reservation" data-r="reservation">Réserver</a><a href="#/livraison" data-r="livraison">Livraison</a><a href="#/compte" data-r="compte">Suivre ma commande</a><a href="#/contact" data-r="contact">Contact</a>
+<select id="lang" data-nt aria-label="Langue"><option value="fr">Français</option><option value="en">English</option><option value="ar">العربية</option></select>
+<button class="cartbtn" id="cb" aria-label="Voir ma commande">🛒<span id="cn">0</span></button></nav></div></header>
+<main id="app"></main>
+<footer>© Delicioso · Cuisine italienne · Constantine · 0670 19 58 19</footer>
+<button class="fab" id="fab">🛒<span id="fn">0</span></button>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const PHONE="213670195819",FEE=200,FREE=2500;
+let SVC=null;                                                       // restaurant service config (hours, pause, delivery) from /api/config
+let REQ=(()=>{try{return JSON.parse(localStorage.getItem("lc-req")||"{}")}catch(e){return{}}})();
+
+const POP=["Crêpe Nutella","Gaufre Nutella","Cappuccino","Fondant Chocolat","Panini Poulet","Pasta Poulet","Salade Delicioso"];
+const EM={"Petits déjeuners": "🍳", "Signatures salées": "🍽️", "Croques & burger": "🥪", "Pastas": "🍝", "Wraps": "🌯", "Paninis": "🥪", "Omelettes": "🍳", "Crêpes salées": "🥞", "Crêpes fourrées gratinées": "🧀", "Crêpes Nutella": "🥞", "Crêpes chocolat": "🥞", "Crêpes sucrées": "🥞", "Gaufres simples": "🧇", "Gaufres chocolat": "🧇", "Gaufres Nutella": "🧇", "Pancakes simples": "🥞", "Pancakes chocolat": "🥞", "Pancakes Nutella": "🥞", "Pains perdus": "🍞", "Fondants": "🍫", "Glaces": "🍨", "Jus naturels": "🍊", "Iced coffee": "🧊", "Mojitos": "🍹", "Cocktails": "🍹", "Smoothies": "🥤", "Milkshakes": "🥛", "Cafés frappés": "☕", "Chocolats glacés": "🍫", "Boissons fraîches": "🥤", "Matchas": "🍵", "Ubes": "💜", "Thés": "🫖", "Cafés": "☕", "Chocolats chauds": "🍫"},GDEF={"Petits déjeuners": "Petit déjeuner", "Signatures salées": "Salé", "Croques & burger": "Salé", "Pastas": "Salé", "Wraps": "Salé", "Paninis": "Salé", "Omelettes": "Salé", "Crêpes salées": "Salé", "Crêpes fourrées gratinées": "Salé", "Crêpes Nutella": "Sucré", "Crêpes chocolat": "Sucré", "Crêpes sucrées": "Sucré", "Gaufres simples": "Sucré", "Gaufres chocolat": "Sucré", "Gaufres Nutella": "Sucré", "Pancakes simples": "Sucré", "Pancakes chocolat": "Sucré", "Pancakes Nutella": "Sucré", "Pains perdus": "Sucré", "Fondants": "Sucré", "Glaces": "Sucré", "Jus naturels": "Boissons", "Iced coffee": "Boissons", "Mojitos": "Boissons", "Cocktails": "Boissons", "Smoothies": "Boissons", "Milkshakes": "Boissons", "Cafés frappés": "Boissons", "Chocolats glacés": "Boissons", "Boissons fraîches": "Boissons", "Matchas": "Boissons", "Ubes": "Boissons", "Thés": "Boissons", "Cafés": "Boissons", "Chocolats chauds": "Boissons"};
+POP.splice(0,POP.length,"Margherita","Diavola","Spaghetti Carbonara","Lasagne della Casa","Tiramisu della Casa","Cappuccino");
+Object.assign(EM,{"Pizzas":"🍕","Pasta":"🍝","Antipasti":"🫒","Dolci italiani":"🍰","Caffè & boissons":"☕"});
+Object.assign(GDEF,{"Pizzas":"Salé","Pasta":"Salé","Antipasti":"Salé","Dolci italiani":"Sucré","Caffè & boissons":"Boissons"});
+const SECS=[],ITEMS=[];
+function build(list){SECS.length=0;ITEMS.length=0;const by={};list.forEach(r=>{let S=by[r.category];if(!S){S=by[r.category]={n:r.category,e:EM[r.category]||"🍽️",i:[]};SECS.push(S)}
+const it={id:r.id,c:r.category,e:S.e,n:r.name,p:r.price,d:r.description||"",t:Number(r.prep_minutes)||15,img:r.image||"",available:r.available!==0,pop:POP.includes(r.name),portion:r.portion||"",allergens:((r.allergens||"").split(",").filter(Boolean)),dietary:((r.dietary||"").split(",").filter(Boolean)),sizes:r.sizes||[]};S.i.push(it);ITEMS.push(it)})}
+const TAG_FR={gluten:"Gluten",milk:"Lait",eggs:"Œufs",nuts:"Fruits à coque",peanuts:"Arachides",soy:"Soja",fish:"Poisson",shellfish:"Crustacés",sesame:"Sésame",mustard:"Moutarde",celery:"Céleri",vegetarian:"Végétarien",vegan:"Végétalien",spicy:"Épicé","gluten-free":"Sans gluten","lactose-free":"Sans lactose",halal:"Halal"};
+const tagLabel=k=>TAG_FR[k]||k;
+const dietChips=i=>i.dietary.length?`<span class="tags">${i.dietary.map(t=>`<span class="tag diet">${escH(tagLabel(t))}</span>`).join("")}</span>`:"";
+const ICN={"Petits déjeuners":"plate","Signatures salées":"plate","Croques & burger":"sand","Pastas":"bowl","Wraps":"sand","Paninis":"sand","Omelettes":"plate","Crêpes salées":"crepe","Crêpes fourrées gratinées":"crepe","Crêpes Nutella":"crepe","Crêpes chocolat":"crepe","Crêpes sucrées":"crepe","Gaufres simples":"waffle","Gaufres chocolat":"waffle","Gaufres Nutella":"waffle","Pancakes simples":"pancake","Pancakes chocolat":"pancake","Pancakes Nutella":"pancake","Pains perdus":"cake","Fondants":"cake","Glaces":"ice","Jus naturels":"juice","Iced coffee":"cup","Mojitos":"mojito","Cocktails":"mojito","Smoothies":"juice","Milkshakes":"shake","Cafés frappés":"shake","Chocolats glacés":"shake","Boissons fraîches":"bottle","Matchas":"cup","Ubes":"cup","Thés":"tea","Cafés":"cup","Chocolats chauds":"cup"},COL={"Matchas":"#6b8f3e","Ubes":"#8a5bb5"};
+Object.assign(ICN,{"Pizzas":"plate","Pasta":"bowl","Antipasti":"bowl","Dolci italiani":"cake","Caffè & boissons":"cup"});
+const ic=i=>`<svg class="ic" ${COL[i.c]?`style="color:${COL[i.c]}"`:""} aria-hidden="true"><use href="#i-${/Salade|Granola|Burrata/.test(i.n)?"bowl":(ICN[i.c]||"plate")}"/></svg>`;
+const escH=t=>String(t).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const pic=i=>i.img?`<img src="${escH(i.img)}" alt="${escH(i.n)}" loading="lazy" decoding="async">`:ic(i);
+const CATS=["Tout",...SECS.map(x=>x.n)];
+let cart=(()=>{try{const c=JSON.parse(localStorage.getItem("lc-cart")||"{}");return c&&typeof c==="object"?c:{}}catch(e){return{}}})(),cat="Tout",mode="livraison";
+const $=s=>document.querySelector(s),fmt=n=>n.toLocaleString("fr-FR")+" DA";
+function cartKey(id,size){return size?id+"|"+size:id}
+function count(){let c=0;for(const v of Object.values(cart))c+=v.qty||v;return c}
+function sub(){let s=0;for(const [k,v] of Object.entries(cart)){const [id,size]=k.split("|");const it=ITEMS.find(i=>i.id==id);if(!it)continue;let p=it.p;if(size){const sz=it.sizes.find(s=>s.size_code===size);if(sz)p=sz.price}s+=(v.qty||v)*p}return s}
+function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove("show"),1500)}
+function add(id,btn){const item=ITEMS.find(i=>i.id==id);if(!item||!item.available){toast("Article indisponible");return}let sz="";if(item.sizes.length){const card=btn.closest(".item"),on=card?.querySelector(".size-pill.on");sz=on?.dataset.size||item.sizes[0].size_code}const key=cartKey(id,sz);cart[key]={qty:(cart[key]?.qty||0)+1,size:sz};sync();toast("Ajouté : "+item.n+(sz?" ("+(item.sizes.find(s=>s.size_code===sz)?.size_label||sz)+")":""))}
+function chg(id,d,size){const key=cartKey(id,size);cart[key]={qty:(cart[key]?.qty||0)+d,size:size};if(cart[key].qty<=0)delete cart[key];sync();if(location.hash==="#/livraison")drawCart()}
+function sync(){try{localStorage.setItem("lc-cart",JSON.stringify(cart))}catch(e){}const n=count(),f=$("#fab");$("#cn").textContent=n;$("#fn").textContent=n;f.classList.toggle("on",n>0);f.setAttribute("aria-label","Voir ma commande : "+n+" article"+(n>1?"s":"")+", "+fmt(sub()));[f,$("#cb")].forEach(e=>{e.classList.remove("pop");void e.offsetWidth;e.classList.add("pop")})}
+function fmtSizePrice(p){return p.toLocaleString("fr-FR")+" DA"}
+function sizeSelectorHTML(sizes){if(!sizes.length)return"";const def=sizes.find(s=>s.is_default)||sizes[0];return `<div class="size-picker"><span class="size-cap">Taille</span><div class="size-bar" role="radiogroup" aria-label="Choisir une taille">${sizes.map(s=>`<button type="button" role="radio" class="size-pill${s===def?" on":""}" aria-checked="${s===def}" data-size="${escH(s.size_code)}" data-price="${s.price}" data-label="${escH(s.size_label)}" title="${escH(s.size_label)} · ${fmtSizePrice(s.price)}" onclick="pickSize(this)"><b>${escH(s.size_code)}</b><small>${s.price.toLocaleString("fr-FR")}</small></button>`).join("")}</div></div>`}
+function pickSize(btn){const card=btn.closest(".item");if(!card)return;card.querySelectorAll(".size-pill").forEach(p=>{const on=p===btn;p.classList.toggle("on",on);p.setAttribute("aria-checked",String(on))});const pr=card.querySelector(".row .price");if(pr)pr.textContent=fmt(+btn.dataset.price)}
+function card(i){const szHTML=sizeSelectorHTML(i.sizes);const def=i.sizes.length?(i.sizes.find(s=>s.is_default)||i.sizes[0]):null;const shown=def?def.price:i.p;const tags=(i.pop?'<span class="tag">Sélection</span>':'')+(i.available?'':'<span class="tag out">Indisponible</span>');return `<div class="item${i.available?"":" unavailable"}"><span class="th big${i.img?" has":""}">${pic(i)}</span>${tags?`<div class="tags">${tags}</div>`:""}<h3>${escH(i.n)}</h3><p>${escH(i.d)}</p>${dietChips(i)}${i.portion?`<span class="muted tiny">${escH(i.portion)}</span>`:""}${i.allergens.length?`<span class="muted tiny">Allergènes : ${i.allergens.map(t=>escH(tagLabel(t))).join(", ")}</span>`:""}<span class="prep-time"><span class="clock" aria-hidden="true">◷</span> ${i.t} min</span>${szHTML}<div class="row"><span class="price">${fmt(shown)}</span><button class="add" ${i.available?'':'disabled'} onclick="add(${i.id},this)">${i.available?'Ajouter':'Indisponible'}</button></div></div>`}
+const PAGES={
+"":()=>`<div class="hero"><div class="wrap"><div class="hero-copy"><span class="hero-kicker">Café, restaurant &amp; pâtisserie</span><h1>La cuisine italienne, à Constantine</h1><p>Pizzas généreuses, pasta savoureuses et dolci préparés à la commande. Un goût d’Italie, sur place, à emporter ou livré chez vous.</p><div class="btns"><a class="btn" href="#/menu">Voir le menu</a><a class="btn ghost" href="#/livraison">Commander en livraison</a></div><ul class="hero-facts"><li><span class="hf-ic" aria-hidden="true">🕗</span>Ouvert dès 08:00</li><li><span class="hf-ic" aria-hidden="true">🛵</span>Livré à Constantine</li><li><span class="hf-ic" aria-hidden="true">⭐</span>3,8 sur 5 · 247 avis Google</li></ul></div>
+<div class="hero-wordmark" aria-label="Delicioso"><div class="hero-wordmark-inner"><span class="ornament" aria-hidden="true">✦　✦　✦</span><strong>Delicioso</strong><div class="wordmark-rule"></div><small>Cucina italiana · Constantine</small></div></div></div></div>
+<section class="home-pop"><div class="wrap"><div class="section-head"><span class="eyebrow">À découvrir</span><h2>Les incontournables italiens</h2><p class="lead">Pizzas, pâtes et douceurs italiennes. Chaque plat affiche son temps de préparation estimé.</p></div><div class="grid">${ITEMS.filter(i=>i.pop).map(card).join("")}</div></div></section>
+<section class="band"><div class="wrap cols"><div><h2>Un moment à l’italienne</h2><p>Des recettes inspirées des tables d’Italie, préparées à la commande avec des ingrédients simples et généreux. Terminez par un espresso ou un dolce maison.</p></div><div class="box"><b>À savourer comme vous aimez</b><p>🪑 Sur place<br>🥡 À emporter<br>🛵 Livré à Constantine</p><a class="btn dark" href="#/livraison">Commander maintenant</a></div></div></section>`,
+"menu":()=>`<section><div class="wrap"><h2>Le menu italien</h2><p class="lead">Pizzas, pasta, antipasti et dolci della casa. Les temps indiqués sont estimatifs et peuvent varier selon l’affluence.</p><div id="srv"></div><input id="q" type="search" placeholder="Rechercher un plat ou une boisson" aria-label="Rechercher"><div class="tabs gt" id="groups"></div><div class="tabs" id="tabs"></div><div id="mg"></div></div></section>`,
+"livraison":()=>`<section><div class="wrap"><h2>Livraison &amp; commande</h2><p class="lead">Composez votre commande, remplissez vos coordonnées et validez. Nous confirmons par téléphone.</p><div id="srv"></div>
+<div class="cols"><div><div class="box"><b>Comment ça marche</b><ol class="steps"><li>Ajoutez vos plats depuis le menu.</li><li>Choisissez livraison ou retrait.</li><li>Validez votre commande.</li><li>Nous confirmons l'heure et le prix final.</li></ol></div></div>
+<div class="box"><b>Votre commande</b><div id="cart"></div>
+<label>Mode</label><select id="mode"><option value="livraison">Livraison à domicile</option><option value="emporter">À emporter (retrait au café)</option></select>
+<div id="zoneWrap" class="gone"><label for="zone">Zone de livraison</label><select id="zone"></select><p class="muted" id="zoneNote">Sélectionnez votre zone : les frais sont recalculés à la validation.</p></div>
+<div id="acct"></div><div id="ordblock" class="box gone"></div><div id="ordform" class="gone">
+<label>Nom</label><input id="nm" autocomplete="name"><label>Téléphone</label><input id="ph" type="tel" autocomplete="tel" placeholder="05 / 06 / 07 …">
+<div id="addr"><label for="ad">Adresse ou repère (facultatif si position confirmée)</label><textarea id="ad" rows="2" placeholder="Quartier, rue, repère"></textarea>
+<div class="destination-tools"><button type="button" class="primary" id="useLocation">◎ Utiliser ma position</button><button type="button" id="chooseLocation">⌖ Choisir sur la carte</button></div>
+<div class="map-panel" id="mapPanel" hidden><p class="map-help">Touchez la carte ou déplacez le repère pour choisir le point de livraison. Ajoutez aussi l’adresse ou un repère ci-dessus.</p><div class="map-search"><input type="search" id="mapSearch" placeholder="Rechercher une adresse ou un lieu" aria-label="Rechercher une adresse ou un lieu"><button type="button" id="mapSearchButton">Rechercher</button></div><div class="map-search-results" id="mapSearchResults" role="listbox" aria-label="Résultats de recherche" hidden></div><div id="delivery-map" role="application" aria-label="Carte pour choisir le point de livraison"></div><p class="map-status" id="mapStatus" aria-live="polite"></p><div class="map-actions"><button type="button" id="confirmLocation" disabled>Confirmer ce point</button></div></div></div>
+<label>Remarque (facultatif)</label><input id="rm"><div class="err" id="er"></div><button class="btn" id="send" style="width:100%;margin-top:6px">Passer la commande</button></div><div id="trk"></div></div></div></div></section>`,
+"compte":()=>`<section><div class="wrap"><h2>Suivre ma commande</h2><p class="lead">Saisissez le code reçu après votre commande et le numéro de téléphone utilisé. Aucun compte n’est nécessaire.</p><div id="srv"></div><div id="myorders"></div></div></section>`,
+"reservation":()=>`<section><div class="wrap"><h2>Réserver une table</h2><p class="lead">Choisissez une date, une heure et votre type de table. Nous confirmons chaque demande. Pour aujourd’hui, un appel au restaurant reste le plus rapide.</p><div id="rsvroot"><p class="muted">Chargement des disponibilités…</p></div></div></section>`,
+"contact":()=>`<section class="contact"><div class="wrap"><h2>Venir nous voir</h2><p class="lead" style="color:#f3d9c4">Constantine 25000 · Code Plus 7H7Q+CQ · Ouvert dès 08:00</p><a class="big" dir="ltr" style="unicode-bidi:isolate" href="tel:+${PHONE}">0670 19 58 19</a><div class="btns" style="margin-top:22px"><a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=La+Cal%C3%A8che+caf%C3%A9+restaurant+p%C3%A2tisserie+Constantine">Itinéraire sur Maps</a><a class="btn ghost" target="_blank" rel="noopener" href="https://wa.me/${PHONE}">WhatsApp</a></div><p style="margin-top:30px">⭐ 3,8 sur 5 · 247 avis Google</p></div></section>`};
+const row=i=>`<div class="r${i.available?'':' unavailable'}"><span class="th">${pic(i)}</span><div><b>${escH(i.n)}</b>${i.d?`<span class="muted">${escH(i.d)}</span>`:""}${dietChips(i)}${i.portion?`<span class="muted tiny" style="display:block">${escH(i.portion)}</span>`:""}<span class="prep-time"><span class="clock" aria-hidden="true">◷</span> ${i.t} min</span>${i.available?'':'<span class="tag out">Indisponible</span>'}</div><span class="price">${fmt(i.p)}</span><button class="add" ${i.available?'':'disabled'} aria-label="${i.available?'Ajouter':'Indisponible'} ${escH(i.n)}" onclick="add(${i.id})">${i.available?'+':'—'}</button></div>`;
+let GR=[];
+function mkGR(){GR=[["Petit déjeuner","🥐"],["Salé","🍽️"],["Sucré","🍰"],["Boissons","🥤"],["Autres","✨"]].map(([n,e])=>({n,e,s:SECS.filter(x=>(GDEF[x.n]||"Autres")===n).map(x=>x.n)})).filter(g=>g.s.length)}
+let grp="Tout";
+function drawMenu(){const q=($("#q").value||"").toLowerCase().trim();$("#q").oninput=drawMenu;
+const G=GR.find(g=>g.n===grp);
+$("#groups").innerHTML=[{n:"Tout",e:"📖"},...GR].map(g=>`<button aria-pressed="${g.n===grp}" data-g="${g.n}">${g.e} ${g.n}</button>`).join("");
+$("#tabs").innerHTML=G?["Tout",...G.s].map(c=>`<button aria-pressed="${c===cat}" data-c="${escH(c)}">${c==="Tout"?"Toute la rubrique":escH(c)}</button>`).join(""):"";
+const h=GR.filter(g=>!G||g===G).map(g=>{const b=g.s.filter(n=>cat==="Tout"||n===cat).map(n=>SECS.find(x=>x.n===n)).map(x=>{const l=x.i.filter(i=>!q||(i.n+" "+i.d).toLowerCase().includes(q));return l.length?`<h3 class="sh">${x.e} ${escH(x.n)}</h3><div class="grid">${l.map(card).join("")}</div>`:""}).join("");return b?`<h2 class="gh">${g.e} ${g.n}</h2>`+b:""}).join("");
+$("#mg").innerHTML=h||`<p class="muted">Aucun résultat.</p>`;
+document.querySelectorAll("#groups button").forEach(b=>b.onclick=()=>{grp=b.dataset.g;cat="Tout";drawMenu()});
+document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{cat=b.dataset.c;drawMenu()})}
+const zoneName=()=>{const z=$("#zone");return z?z.value:""};
+function totals(){const s=sub();if(mode!=="livraison")return{s,f:0,t:s}
+const d=(SVC&&SVC.delivery)||{fee:FEE,freeFrom:FREE,zones:[]},zones=d.zones||[],zn=zoneName();
+const base=zones.length?(zones.find(z=>z.name===zn)||{fee:d.fee}).fee:((d.fee==null)?FEE:d.fee);
+const f=s>0&&s<((d.freeFrom==null)?FREE:d.freeFrom)?base:0;return{s,f,t:s+f}}
+function drawCart(){const el=$("#cart");if(!el)return;const keys=Object.keys(cart);
+if(!keys.length){el.innerHTML=`<p class="muted">Votre commande est vide. <a href="#/menu">Ouvrir le menu</a></p>`;return}
+const t=totals(),unavailable=keys.filter(k=>{const [id]=k.split("|");return!ITEMS.find(x=>x.id==id)?.available});el.innerHTML=keys.map(k=>{const [id,size]=k.split("|");const v=cart[k];const i=ITEMS.find(x=>x.id==id);if(!i)return '';let p=i.p;let szLabel="";if(size){const sz=i.sizes.find(s=>s.size_code===size);if(sz){p=sz.price;szLabel=" — "+sz.size_label}}const avail=i.available!==0;const qty=v.qty||v;return `<div class="line"><span>${i.e} ${escH(i.n)}${szLabel}${avail?'':' <b class="tag out">Indisponible</b>'}<br><span class="muted">${fmt(p*qty)}</span><br><input class="req" data-req="${k}" value="${escH(REQ[k]||"")}" placeholder="Demande pour cet article (ex. : sans oignons)" maxlength="120" aria-label="Demande pour ${escH(i.n)}"></span><span class="qty"><button aria-label="Moins" onclick="chg(${id},-1,'${size}')">−</button>${qty}<button aria-label="Plus" ${avail?'':'disabled'} onclick="chg(${id},1,'${size}')">+</button></span></div>`}).join("")+`${unavailable.length?`<div class="err" role="alert">Un ou plusieurs articles ne sont plus disponibles. Retirez-les du panier pour continuer.</div>`:''}`+
+`<div class="line"><span>Sous-total</span><span>${fmt(t.s)}</span></div>${mode==="livraison"?`<div class="line"><span>Livraison</span><span>${t.f?fmt(t.f):"Offerte"}</span></div>`:""}<div class="line tot"><span>Total</span><span>${fmt(t.t)}</span></div>`;
+const prep=Math.max(15,...keys.map(k=>{const [id]=k.split("|");return ITEMS.find(x=>x.id==id)?.t||15}));
+el.innerHTML+=`<div class="line muted"><span>Estimation</span><span>${mode==="livraison"?`${prep} min de préparation, ${prep+15}–${prep+35} min de livraison`:`${prep} min`}</span></div><p class="muted">Les délais sont indicatifs. Le restaurant confirme l'heure définitive.</p>`}
+/* ---------- restaurant status (open/paused, hours, delivery) ---------- */
+const DAW=["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
+function hoursRows(hours){return DAW.map((name,w)=>{const day=hours?hours[String(w)]:null;
+const ranges=day&&!day.closed&&Array.isArray(day.ranges)?day.ranges:[];
+return `<tr><td>${name}</td><td>${ranges.length?ranges.map(r=>`${r[0]} – ${r[1]}`).join(" · "):"Fermé"}</td></tr>`}).join("")}
+const feeSentence=d=>`Livraison : ${fmt(d.fee)}, offerte dès ${fmt(d.freeFrom)} de commande.`;
+const zsSentence=d=>`Zones desservies : ${(d.zones||[]).map(z=>`${z.name} (${fmt(z.fee)})`).join(", ")}.`;
+function srvHtml(){if(!SVC)return `<div class="srv"><div class="srvline"><span>Chargement…</span></div></div>`;
+const {accepting,reason,paused,pauseMessage,hoursConfigured,hours,nextOpen,delivery,pickup}=SVC;
+const cls=reason==="paused"?"paused":reason==="closed"||reason==="unavailable"?"closed":"ok";
+let head,ic;
+if(reason==="paused"){ic="🕒";head="Le restaurant ne prend plus de commandes pour le moment."}
+else if(reason==="closed"){ic="🌙";head="Le restaurant est fermé en ce moment. Réessayez pendant nos horaires d'ouverture."}
+else if(reason==="unavailable"){ic="🚫";head="Le restaurant n'accepte pas de commandes pour le moment."}
+else if(hoursConfigured){ic="✅";head="Le restaurant est ouvert et prend les commandes en ce moment."}
+else{ic="ℹ️";head="Horaires à confirmer avec le restaurant."}
+const delBlock=delivery&&delivery.enabled!==false?`<h4>Zones et frais de livraison</h4><span class="muted">${feeSentence(delivery||{fee:FEE,freeFrom:FREE})}</span>${(delivery&&delivery.zones||[]).length?`<span class="muted">${zsSentence(delivery)}</span>`:""}${delivery&&delivery.notes?`<span class="muted">${escH(delivery.notes)}</span>`:""}`:`<h4>Zones et frais de livraison</h4><span class="muted">Livraison indisponible</span>`;
+const pickLine=`<h4>Retrait sur place</h4>${!pickup||pickup.enabled!==false?`<span class="muted">Retrait sur place${pickup&&pickup.notes?" · "+escH(pickup.notes):""}</span>`:`<span class="muted">Retrait indisponible</span>`}`;
+return `<div class="srv ${cls}"><div class="srvline">${ic} <span>${head}</span></div>
+${paused&&pauseMessage?`<div class="srvmsg">🛑 ${escH(pauseMessage)}</div>`:""}
+${nextOpen?`<div class="srvmsg">Réouverture ${DAW[nextOpen.weekday]} à ${nextOpen.time}.</div>`:""}
+${!accepting?`<div class="srvmsg">Vous pouvez toujours parcourir le menu et composer votre commande.</div>`:""}
+<div class="srv-grid"><div><h4>Horaires d'ouverture</h4>${hoursConfigured?`<table>${hoursRows(hours)}</table>`:`<span class="muted">Horaires à confirmer avec le restaurant.</span>`}</div><div>${delBlock}${pickLine}</div></div></div>`}
+function packFeeUIM(){const d=(SVC&&SVC.delivery)||{fee:FEE,freeFrom:FREE,zones:[]};
+const fs=feeSentence(d),zs=(d.zones||[]).length?zsSentence(d):"";
+UIM.en[nz(fs)]=`Delivery: ${fmt(d.fee)}, free from ${fmt(d.freeFrom)} of order.`;
+UIM.ar[nz(fs)]=`التوصيل: ${fmt(d.fee).replace(" DA","")} دج، مجاني ابتداءً من ${fmt(d.freeFrom).replace(" DA","")} دج من قيمة الطلب.`;
+if(zs){UIM.en[nz(zs)]=`Delivery areas: ${(d.zones||[]).map(z=>`${z.name} (${fmt(z.fee)})`).join(", ")}.`;
+UIM.ar[nz(zs)]=`مناطق التوصيل: ${(d.zones||[]).map(z=>`${z.name} (${fmt(z.fee).replace(" DA","")} دج)`).join("، ")}.`}}
+async function refreshService(){try{const r=await fetch("/api/config");if(r.ok){const cfg=await r.json();SVC=cfg.service||null;applyMenuOptions(cfg.menuOptions);packFeeUIM()}}catch(e){}return SVC}
+function applyMenuOptions(o){if(!o)return;["allergens","dietary"].forEach(k=>(o[k]||[]).forEach(x=>{if(x&&x.key&&x.label)TAG_FR[x.key]=x.label}))}
+function renderService(){document.querySelectorAll("#srv").forEach(el=>{el.innerHTML=srvHtml()});
+const blocked=!!(SVC&&!SVC.accepting);
+const ob=$("#ordblock");if(ob){ob.classList.toggle("gone",!blocked);
+if(blocked)ob.innerHTML=`<b>Pause de commandes</b><br><span class="muted">${SVC.reason==="paused"?(SVC.pauseMessage||"Le restaurant ne prend plus de commandes pour le moment."):SVC.reason==="closed"?"Le restaurant est fermé en ce moment. Réessayez pendant nos horaires d'ouverture.":"Le restaurant n'accepte pas de commandes pour le moment."}</span>`}
+const f=$("#ordform");if(f)f.classList.toggle("gone",blocked);
+const z=$("#zone");if(z){const zones=(SVC&&SVC.delivery&&SVC.delivery.zones)||[],wrap=$("#zoneWrap");
+z.innerHTML=zones.map(x=>`<option value="${escH(x.name)}">${escH(x.name)} (${fmt(x.fee)})</option>`).join("");
+const vis=mode==="livraison"&&zones.length&&!(SVC&&SVC.delivery&&SVC.delivery.enabled===false);
+wrap.classList.toggle("gone",!vis);z.onchange=drawCart}}
+/* ---------- order history & reordering ---------- */
+let HIST=[];
+const fmtDT=u=>{if(!u)return"";const d=new Date((u||"").replace(" ","T")+"Z"),t=new Date(d.getTime()+3600000);
+return `${String(t.getUTCDate()).padStart(2,"0")}/${String(t.getUTCMonth()+1).padStart(2,"0")}/${t.getUTCFullYear()} ${String(t.getUTCHours()).padStart(2,"0")}:${String(t.getUTCMinutes()).padStart(2,"0")}`};
+function orderHtml(o){const st=o.status==="ready"?(o.mode==="delivery"?"Prête à livrer":"Prête à retirer"):(ST[o.status]||o.status);
+return `<div class="box hist"><div class="line"><span><b>Commande ${escH(o.code)}</b><br><span class="muted">${fmtDT(o.created_at)}</span></span><span>${fmt(o.total)}</span></div>
+<div class="muted">${o.mode==="delivery"?"Livraison":"À emporter"}${o.zone?" · "+escH(o.zone):""} · Statut : <b>${st}</b></div>
+<ul class="items">${(o.items||[]).map(it=>`<li>${it.qty} × ${escH(it.name)}${it.request?` <span class="muted">(${escH(it.request)})</span>`:""}</li>`).join("")}</ul>
+<div class="muted">Total : ${fmt(o.total)}${o.fee?` · dont livraison ${fmt(o.fee)}`:""}</div>
+<button type="button" class="btn" data-reorder="${escH(o.code)}">Commander à nouveau</button></div>`}
+async function trackOrder(code, phone, out) {
+  code = String(code || '').trim().toUpperCase();
+  phone = String(phone || '').trim();
+  out.innerHTML = '<p class="muted">Recherche de la commande…</p>';
+  if (!/^[A-Z0-9]{6}$/.test(code)) { out.innerHTML = '<p class="err">Code de commande invalide (6 caractères).</p>'; return; }
+  if (phone.replace(/\D/g, '').length < 8) { out.innerHTML = '<p class="err">Indiquez le numéro utilisé pour la commande.</p>'; return; }
+  try {
+    const r = await fetch("/api/orders/" + encodeURIComponent(code) + "?phone=" + encodeURIComponent(phone));
+    if (r.status === 404) { out.innerHTML = '<p class="err">Aucune commande trouvée avec ce code et ce numéro.</p>'; return; }
+    if (!r.ok) { const d = await r.json().catch(() => ({})); throw new Error(d.error || "Une erreur est survenue."); }
+    const o = await r.json();
+    HIST = [o];
+    out.innerHTML = orderHtml(o);
+    out.querySelectorAll("[data-reorder]").forEach(b => b.onclick = () => reorder(b.dataset.reorder));
+    saveGuest(o.customer, o.phone);
+    try { localStorage.setItem("lc-last", JSON.stringify({ code: o.code, phone: o.phone })); } catch (e) {}
+  } catch (e) {
+    out.innerHTML = '<p class="err">' + escH(e.message || "Une erreur est survenue. Veuillez réessayer.") + '</p>';
+  }
+}
+async function initMyOrders() {
+  const el = $("#myorders"); if (!el) return;
+  const last = lastOrder();
+  el.innerHTML = `<div class="box"><b>Suivre une commande</b>
+  <p class="muted">Entrez le code affiché à la fin de votre commande et le numéro de téléphone utilisé.</p>
+  <label>Code de commande</label><input id="trkCode" maxlength="6" autocapitalize="characters" placeholder="Ex. A1B2C3">
+  <label>Téléphone</label><input id="trkPhone" type="tel" autocomplete="tel" placeholder="05 / 06 / 07 …">
+  <div class="err" id="trkErr"></div><button class="btn" id="trkGo" style="width:100%;margin-top:6px">Suivre ma commande</button></div><div id="trkResult"></div>`;
+  const out = $("#trkResult");
+  if (last) {
+    $("#trkCode").value = last.code || "";
+    $("#trkPhone").value = last.phone || "";
+    if (last.code && last.phone) trackOrder(last.code, last.phone, out);
+  }
+  $("#trkGo").onclick = () => trackOrder($("#trkCode").value, $("#trkPhone").value, out);
+  $("#trkCode").addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); $("#trkGo").click(); } });
+}
+function reorder(code){const o=HIST.find(x=>x.code===code);if(!o)return;
+const missing=[],added=[];
+(o.items||[]).forEach(it=>{const cur=ITEMS.find(i=>i.id==it.id);if(cur&&cur.available){cart[cur.id]=(cart[cur.id]||0)+1;added.push(cur.n)}else missing.push(it.name)});
+if(!added.length){toast("Tous les articles ne sont plus disponibles.");return}
+sync();toast(missing.length?("Certains articles de votre précédente commande ne sont plus disponibles : "+missing.join(", ")):("Commander à nouveau : "+added.length+" article(s) ajouté(s)."));
+location.hash="#/livraison"}
+function guestInfo(){try{const g=JSON.parse(localStorage.getItem("lc-guest")||"{}");return g&&typeof g==="object"?g:{}}catch(e){return{}}}
+function saveGuest(name,phone){try{localStorage.setItem("lc-guest",JSON.stringify({name:String(name||""),phone:String(phone||"")}))}catch(e){}}
+function lastOrder(){try{const v=JSON.parse(localStorage.getItem("lc-last")||"null");if(v&&typeof v==="object"&&v.code)return v;if(typeof v==="string"&&v)return{code:v,phone:""}}catch(e){}return null}
+function drawAcct(){const a=$("#acct"),f=$("#ordform");if(!a)return;
+ f.classList.remove("gone");
+ a.innerHTML=`<p class="muted" style="margin-top:12px">Pas de compte nécessaire : indiquez simplement votre nom et votre téléphone. Nous confirmons chaque commande par appel.</p>`;
+ const g=guestInfo();
+ if(!$("#nm").value&&g.name)$("#nm").value=g.name;
+ if(!$("#ph").value&&g.phone)$("#ph").value=g.phone;
+ try{const last=lastOrder();if(last&&last.code&&last.phone)showTrack(last.code,last.phone)}catch(e){}
+}
+let deliveryMap=null,deliveryMarker=null,deliveryPoint=null,deliveryPointConfirmed=false;
+let googleMapsPromise=null,mapSearchTimer=null,mapSearchRequest=0,mapPlacesSession=null;
+async function loadGoogleMaps(){if(window.google?.maps?.Map&&window.deliveryGooglePlaces)return true;if(googleMapsPromise)return googleMapsPromise;googleMapsPromise=(async()=>{const r=await fetch("/api/config"),cfg=await r.json();if(!r.ok||!cfg.googleMapsApiKey)throw new Error("La clé Google Maps n’est pas configurée.");if(!window.google?.maps?.importLibrary){((g)=>{let h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});const d=b.maps||(b.maps={}),set=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{a=m.createElement("script");e.set("libraries",[...set]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>set.add(f)&&u().then(()=>d[l](f,...n))})({key:cfg.googleMapsApiKey,v:"weekly",language:"fr",region:"DZ"})}const [maps,places]=await Promise.all([google.maps.importLibrary("maps"),google.maps.importLibrary("places")]);window.deliveryGoogleMaps=maps;window.deliveryGooglePlaces=places;return true})().catch(e=>{googleMapsPromise=null;throw e});return googleMapsPromise}
+function setDeliveryPoint(lat,lng,center=true,markUnconfirmed=true){deliveryPoint={lat:Number(lat),lng:Number(lng)};if(markUnconfirmed)deliveryPointConfirmed=false;const p=deliveryPoint,position={lat:p.lat,lng:p.lng};if(deliveryMap){if(!deliveryMarker){deliveryMarker=new google.maps.Marker({map:deliveryMap,position,draggable:true,title:"Point de livraison"});deliveryMarker.addListener("dragend",()=>{const moved=deliveryMarker.getPosition();if(moved)setDeliveryPoint(moved.lat(),moved.lng(),false,true)})}else deliveryMarker.setPosition(position);if(center){deliveryMap.setCenter(position);deliveryMap.setZoom(17)}}$("#confirmLocation").disabled=false;$("#confirmLocation").textContent=deliveryPointConfirmed?"Point confirmé ✓":"Confirmer ce point";$("#chooseLocation").textContent=deliveryPointConfirmed?"⌖ Modifier le point":"⌖ Choisir sur la carte";$("#mapStatus").textContent=(deliveryPointConfirmed?"Point confirmé · ":"Point sélectionné · ")+p.lat.toFixed(5)+", "+p.lng.toFixed(5)}
+function mapSearchText(fr){return L==="fr"?fr:UIM[L][nz(fr)]||fr}
+function renderDeliverySuggestions(suggestions,requestId){const results=$("#mapSearchResults");results.replaceChildren();suggestions.forEach(prediction=>{const option=document.createElement("button");option.type="button";option.className="map-search-result";option.setAttribute("role","option");option.textContent=prediction.text.toString();option.onclick=()=>selectDeliverySuggestion(prediction,requestId);results.appendChild(option)});results.hidden=!results.childElementCount;$("#mapStatus").textContent=results.hidden?mapSearchText("Aucun résultat. Essayez un autre nom ou placez le repère directement sur la carte."):""}
+async function searchDeliveryPlaces(){const query=$("#mapSearch").value.trim(),results=$("#mapSearchResults"),button=$("#mapSearchButton");if(query.length<3){results.hidden=true;$("#mapStatus").textContent=mapSearchText("Saisissez au moins trois caractères pour rechercher.");return}const requestId=++mapSearchRequest;results.replaceChildren();results.hidden=false;button.disabled=true;button.textContent=mapSearchText("Recherche…");try{await loadGoogleMaps();const places=window.deliveryGooglePlaces;if(!mapPlacesSession)mapPlacesSession=new places.AutocompleteSessionToken();const response=await places.AutocompleteSuggestion.fetchAutocompleteSuggestions({input:query,includedRegionCodes:["dz"],region:"dz",origin:deliveryPoint||{lat:36.365,lng:6.57007},sessionToken:mapPlacesSession});if(requestId!==mapSearchRequest)return;const predictions=(response.suggestions||[]).map(s=>s.placePrediction).filter(Boolean).slice(0,5);renderDeliverySuggestions(predictions,requestId)}catch(e){if(requestId===mapSearchRequest){results.hidden=true;$("#mapStatus").textContent=e.message||"Google Places search failed."}}finally{if(requestId===mapSearchRequest){button.disabled=false;button.textContent=mapSearchText("Rechercher")}}}
+async function selectDeliverySuggestion(prediction,requestId){if(requestId!==mapSearchRequest)return;const results=$("#mapSearchResults"),button=$("#mapSearchButton"),selectionId=++mapSearchRequest;results.hidden=true;button.disabled=true;button.textContent=mapSearchText("Recherche…");$("#mapStatus").textContent=mapSearchText("Sélection de l’adresse…");try{const place=prediction.toPlace();await place.fetchFields({fields:["displayName","formattedAddress","location"]});if(selectionId!==mapSearchRequest)return;if(!place.location)throw new Error(mapSearchText("Aucune coordonnée disponible pour cette adresse."));const address=place.formattedAddress||place.displayName?.toString()||prediction.text.toString(),position=place.location;$("#mapSearch").value=address;$("#ad").value=address;mapPlacesSession=null;setDeliveryPoint(position.lat(),position.lng())}catch(e){if(selectionId===mapSearchRequest)$("#mapStatus").textContent=e.message||mapSearchText("Adresse introuvable.")}finally{if(selectionId===mapSearchRequest){mapPlacesSession=null;button.disabled=false;button.textContent=mapSearchText("Rechercher")}}}
+async function showDeliveryMap(){const panel=$("#mapPanel");panel.hidden=false;$("#mapStatus").textContent="Chargement de la carte…";try{await loadGoogleMaps()}catch(e){$("#mapStatus").textContent=e.message;return false}const el=$("#delivery-map");if(!deliveryMap){deliveryMap=new google.maps.Map(el,{center:deliveryPoint||{lat:36.365,lng:6.57007},zoom:deliveryPoint?17:13,mapTypeControl:false,streetViewControl:false,fullscreenControl:false,gestureHandling:"greedy"});deliveryMap.addListener("click",e=>{if(e.latLng)setDeliveryPoint(e.latLng.lat(),e.latLng.lng())})}if(deliveryPoint)setDeliveryPoint(deliveryPoint.lat,deliveryPoint.lng,true,false);requestAnimationFrame(()=>google.maps.event.trigger(deliveryMap,"resize"));return true}
+function initLiv(){drawCart();const m=$("#mode");
+const d=SVC&&SVC.delivery,pk=SVC&&SVC.pickup,delOk=!d||d.enabled!==false,pickOk=!pk||pk.enabled!==false;
+m.innerHTML=`${delOk?'<option value="livraison">Livraison à domicile</option>':''}${pickOk?'<option value="emporter">À emporter (retrait au café)</option>':''}`;
+if(!m.querySelector(`[value="${mode}"]`))mode=delOk?"livraison":"emporter";
+m.value=mode;m.onchange=()=>{mode=m.value;$("#addr").style.display=mode==="livraison"?"":"none";$("#er").textContent="";drawCart();renderService()};m.onchange();
+const cEl=$("#cart");if(cEl)cEl.addEventListener("input",e=>{const t=e.target&&e.target.closest(".req");if(!t)return;REQ[t.dataset.req]=(t.value||"").trim().slice(0,120);try{localStorage.setItem("lc-req",JSON.stringify(REQ))}catch(x){}});
+drawAcct();renderService();
+$("#chooseLocation").onclick=showDeliveryMap;$("#mapSearchButton").onclick=searchDeliveryPlaces;$("#mapSearch").oninput=()=>{clearTimeout(mapSearchTimer);mapSearchRequest++;const query=$("#mapSearch").value.trim(),results=$("#mapSearchResults"),button=$("#mapSearchButton");button.disabled=false;button.textContent=mapSearchText("Rechercher");results.replaceChildren();results.hidden=true;if(query.length<3){$("#mapStatus").textContent=query?mapSearchText("Saisissez au moins trois caractères pour rechercher."):"";return}mapSearchTimer=setTimeout(searchDeliveryPlaces,450)};$("#mapSearch").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();clearTimeout(mapSearchTimer);searchDeliveryPlaces()}};$("#confirmLocation").onclick=()=>{if(!deliveryPoint)return;deliveryPointConfirmed=true;$("#mapPanel").hidden=true;$("#chooseLocation").textContent="⌖ Modifier le point";$("#mapStatus").textContent="Point de livraison confirmé · "+deliveryPoint.lat.toFixed(5)+", "+deliveryPoint.lng.toFixed(5);$("#confirmLocation").textContent="Point confirmé ✓"};$("#useLocation").onclick=()=>{const mapReady=showDeliveryMap(),status=$("#mapStatus");if(!window.isSecureContext){status.textContent="La position nécessite HTTPS. Vous pouvez placer le repère manuellement sur la carte.";return}if(!navigator.geolocation){status.textContent="La géolocalisation n’est pas disponible. Choisissez le point sur la carte.";return}status.textContent="Recherche de votre position… La carte se charge pendant ce temps.";navigator.geolocation.getCurrentPosition(async pos=>{if(!await mapReady)return;setDeliveryPoint(pos.coords.latitude,pos.coords.longitude)},err=>{if(!$("#mapStatus"))return;status.textContent=err.code===1?"Localisation refusée. Choisissez le point sur la carte.":err.code===3?"Délai dépassé. Choisissez le point sur la carte.":"Position indisponible. Choisissez le point sur la carte."},{enableHighAccuracy:false,timeout:10000,maximumAge:120000})};
+$("#send").onclick=()=>{const n=$("#nm").value.trim(),p=$("#ph").value.trim(),a=$("#ad").value.trim(),e=$("#er");
+if(SVC&&!SVC.accepting)return e.textContent=SVC.reason==="paused"?"Le restaurant ne prend plus de commandes pour le moment.":"Le restaurant est fermé en ce moment. Réessayez pendant nos horaires d'ouverture.";
+if(!count())return e.textContent="Ajoutez au moins un plat.";if(!n||p.replace(/\D/g,"").length<9)return e.textContent="Indiquez votre nom et un numéro valide.";if(mode==="livraison"&&deliveryPoint&&!deliveryPointConfirmed)return e.textContent="Confirmez le point de livraison sur la carte avant de commander.";
+if(mode==="livraison"&&!a&&!(deliveryPoint&&deliveryPointConfirmed))return e.textContent="Choisissez et confirmez votre position sur la carte, ou saisissez l’adresse.";e.textContent="";const btn=$("#send");btn.disabled=true;sendOrder().catch(er=>{e.textContent=er.message}).finally(()=>btn.disabled=false)}}
+async function sendOrder(){if(SVC&&!SVC.accepting)throw new Error(SVC.reason==="paused"?"Le restaurant ne prend plus de commandes pour le moment.":"Le restaurant est fermé en ce moment. Réessayez pendant nos horaires d'ouverture.");
+const done=Object.keys(cart);
+const name=$("#nm").value.trim(),phone=$("#ph").value.trim();
+const r=await fetch("/api/orders",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({items:done.map(k=>{const [id,size]=k.split("|");const v=cart[k];return{id:+id,qty:v.qty||v,request:REQ[k]||"",size_code:size||""}}),mode:mode==="livraison"?"delivery":"pickup",zone:mode==="livraison"?zoneName():"",customer:name,phone,address:mode==="livraison"?($("#ad").value.trim()||(deliveryPoint?`Position GPS (${deliveryPoint.lat.toFixed(5)}, ${deliveryPoint.lng.toFixed(5)})`:"")):"",lat:mode==="livraison"?deliveryPoint?.lat:null,lng:mode==="livraison"?deliveryPoint?.lng:null,note:$("#rm").value})});
+const d=await r.json();if(!r.ok)throw new Error(d.error||"Erreur");saveGuest(name,phone);cart={};done.forEach(k=>delete REQ[k]);try{localStorage.setItem("lc-req",JSON.stringify(REQ))}catch(x){}sync();drawCart();try{localStorage.setItem("lc-last",JSON.stringify({code:d.code,phone}))}catch(e){}toast("Merci ! Votre commande est enregistrée.");showTrack(d.code,phone)}
+const postOrder=sendOrder;
+sendOrder=async function(){const r=await fetch("/api/menu?includeUnavailable=1"),items=await r.json();if(!r.ok)throw new Error(items.error||"Menu indisponible, réessayez.");const latest=new Map(items.map(i=>[i.id,i]));ITEMS.forEach(i=>{const current=latest.get(i.id);i.available=!!current&&current.available!==0;if(current&&current.sizes)i.sizes=current.sizes});const unavailable=Object.keys(cart).map(k=>{const [id]=k.split("|");return ITEMS.find(i=>i.id==id)}).filter(i=>!i||!i.available);drawCart();if(unavailable.length)throw new Error(unavailable.map(i=>i?.n||"Un article").join(", ")+" n'est plus disponible. Retirez-le du panier pour continuer.");return postOrder()};
+let tmr;const ST={pending:"En attente de confirmation",accepted:"Acceptée",preparing:"En préparation",out_for_delivery:"En cours de livraison",completed:"Terminée",cancelled:"Annulée"};
+function showTrack(code,phone){clearInterval(tmr);if(!code||!phone)return;const tick=async()=>{const el=$("#trk");if(!el){clearInterval(tmr);return}try{const r=await fetch("/api/orders/"+encodeURIComponent(code)+"?phone="+encodeURIComponent(phone));if(r.status===401||r.status===404){clearInterval(tmr);return}if(!r.ok)return;const o=await r.json();
+const status=o=>o.status==="ready"?(o.mode==="delivery"?"Prête à livrer":"Prête à retirer"):(ST[o.status]||o.status);
+const base=new Date((o.created_at||"").replace(" ","T")+"Z"),tz=ms=>{if(isNaN(ms))return"";const t=new Date(ms+3600000);return String(t.getUTCHours()).padStart(2,"0")+":"+String(t.getUTCMinutes()).padStart(2,"0")};
+const em=o.eta_min==null?null:o.eta_min,ex=(o.eta_max==null?em:o.eta_max);
+const eta=em!=null?(o.mode==="delivery"?"Livraison estimée":"Retrait estimé")+" : entre "+tz(base.getTime()+em*60000)+" et "+tz(base.getTime()+ex*60000):"";
+el.innerHTML=`<div class="box" style="margin-top:14px"><b>Commande ${o.code}</b> · ${fmt(o.total)}<br>Statut : <b>${status(o)}</b>${eta?`<br>${eta} · <span class="muted">délais indicatifs</span>`:""}<br><span class="muted">Le restaurant confirmera l'heure de préparation ou de livraison par téléphone.</span>${o.items&&o.items.length?`<div style="margin-top:6px">${o.items.map(it=>`${it.qty}× ${escH(it.name)}${it.request?` <span class="muted">(${escH(it.request)})</span>`:""}`).join(" · ")}</div>`:""}</div>`;if(o.status==="completed"||o.status==="cancelled")clearInterval(tmr)}catch(e){}};tick();tmr=setInterval(tick,5000)}
+/* ---------- table reservations (customer widget) ---------- */
+const RSV_MONTHS=["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"],RSV_DOW=["Lun","Mar","Mer","Jeu","Ven","Sam","Dim"];
+const RSV_ZONE_NAME={inside:"Intérieur",outside:"Extérieur"};
+const RSV_STATUS={
+  pending:{t:"En attente de validation",c:"wait",d:"Votre demande est enregistrée. L’équipe va la confirmer et vous préviendra au numéro indiqué."},
+  phone_required:{t:"Vérification par téléphone",c:"call",d:"Demande reçue. Comme il s’agit d’aujourd’hui, appelez-nous pour confirmer la table en temps réel."},
+  approved:{t:"Réservation confirmée",c:"ok",d:"Votre table est réservée. Nous vous attendons avec plaisir."},
+  rejected:{t:"Demande refusée",c:"bad",d:"Cette demande n’a pas pu être acceptée. Appelez-nous, nous trouverons une solution."},
+  cancelled:{t:"Réservation annulée",c:"off",d:"Cette réservation a été annulée."},
+  completed:{t:"Réservation terminée",c:"ok",d:"Merci de votre visite et à bientôt !"},
+};
+let rsvCfg=null,rsvState=null,rsvES=null,rsvESCode=null,rsvSeq=0;
+const rsvPhone=p=>{let d=String(p||"").replace(/[^\d+]/g,"");if(/^213\d{9}$/.test(d))d="0"+d.slice(3);return d.replace(/^(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})$/,"$1 $2 $3 $4 $5")||d};
+const rsvAddDays=(ds,n)=>{const d=new Date(ds+"T00:00:00Z");d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10)};
+const rsvDateLabel=ds=>{try{return new Date(ds+"T12:00:00").toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"})}catch(e){return ds}};
+function rsvOpen(ds){const h=rsvCfg&&rsvCfg.hours;if(!h)return false;const day=h[String(new Date(ds+"T00:00:00Z").getUTCDay())];return !!(day&&!day.closed&&Array.isArray(day.ranges)&&day.ranges.length)}
+function initReservations(){
+  const root=$("#rsvroot");if(!root)return;
+  if(rsvCfg){rsvRender();return}
+  root.innerHTML='<p class="muted">Chargement des disponibilités…</p>';
+  fetch("/api/reservations/config").then(r=>r.json()).then(cfg=>{
+    rsvCfg=cfg;const t=cfg.today,g=guestInfo();
+    rsvState={y:+t.slice(0,4),m:+t.slice(5,7)-1,date:"",time:"",zone:"",capacity:0,party:2,name:g.name||"",phone:g.phone||"",note:"",day:null,err:"",busy:false,result:null};
+    let active=null;
+    try{const saved=JSON.parse(localStorage.getItem("lc-resv")||"null");if(saved&&saved.code&&saved.phone&&!rsvFinished(saved))active=saved}catch(e){}
+    if(active){rsvState.result=active;rsvState.name=active.name||rsvState.name;rsvState.phone=active.phone||rsvState.phone;rsvTrack(active.code,active.phone)}
+    if(!active&&cfg.hoursConfigured){let d=t;for(let i=0;i<cfg.leadDays&&!rsvOpen(d);i++)d=rsvAddDays(d,1);if(rsvOpen(d))rsvSelectDate(d)}
+    rsvRender();
+  }).catch(()=>{if($("#rsvroot"))$("#rsvroot").innerHTML='<div class="box"><p>Les réservations sont momentanément indisponibles. Réessayez dans un instant ou appelez-nous.</p></div>'});
+}
+function rsvSelectDate(date,keepTime){
+  if(!rsvState)return;rsvState.date=date;if(!keepTime)rsvState.time="";rsvState.err="";rsvState.day=null;
+  const seq=++rsvSeq;
+  let url="/api/reservations/availability?date="+encodeURIComponent(date);
+  if(rsvState.edit)url+="&code="+encodeURIComponent(rsvState.edit.code)+"&phone="+encodeURIComponent(rsvState.edit.phone);
+  fetch(url).then(r=>r.json()).then(day=>{
+    if(seq!==rsvSeq||!rsvState)return;rsvState.day=day;rsvEnsureChoice();rsvRender();
+  }).catch(()=>{if(seq!==rsvSeq||!rsvState)return;rsvState.day={closed:true,reason:"error",slots:[]};rsvRender()});
+}
+function rsvEnsureChoice(){
+  if(!rsvState||!rsvCfg)return;
+  const inv=rsvCfg.inventory||{};
+  const zones=Object.keys(rsvCfg.zones||{}).filter(z=>Object.values(inv[z]||{}).some(n=>n>0));
+  if(!zones.length)return;
+  if(!zones.includes(rsvState.zone)){rsvState.zone=zones[0];rsvState.time=""}
+  const caps=(rsvCfg.zones[rsvState.zone]||[]).filter(c=>(inv[rsvState.zone]||{})[c]>0);
+  if(!caps.includes(rsvState.capacity)){rsvState.capacity=caps[0]||0;rsvState.time=""}
+  if(rsvState.party>rsvState.capacity)rsvState.party=rsvState.capacity||1;
+}
+function rsvRender(){
+  const root=$("#rsvroot");if(!root||!rsvCfg||!rsvState)return;
+  const phone=rsvCfg.phone||PHONE;
+  if(!rsvCfg.enabled){root.innerHTML='<div class="box"><h3>Réservation en ligne indisponible</h3><p>Le restaurant ne prend pas de réservation en ligne pour le moment. Appelez-nous au <a href="tel:+'+phone+'">'+rsvPhone(phone)+'</a>.</p></div>';return}
+  if(!rsvCfg.hoursConfigured){root.innerHTML='<div class="box rsvnote"><b>Réservation par téléphone</b><p>Les horaires du restaurant ne sont pas encore publiés en ligne. Appelez-nous : nous notons votre table avec plaisir.</p><a class="btn dark" href="tel:+'+phone+'">📞 Appeler '+rsvPhone(phone)+'</a></div>';return}
+  if(rsvState.result){root.innerHTML=rsvDone();rsvBindResult();return}
+  root.innerHTML='<div class="cols rsv"><div class="box">'+rsvCalendar()+'<p class="muted tiny" style="margin:10px 0 0">Les jours grisés sont fermés ou hors de la période de réservation.</p></div>'
+    +'<div class="box">'+(rsvState.edit?rsvEditNote():"")+(rsvState.date===rsvCfg.today?rsvSameDay():"")
+    +'<div class="rsvstep"><span class="n">1</span> Votre table</div>'+rsvSeating()
+    +'<div class="rsvstep"><span class="n">2</span> Votre créneau</div>'+rsvSlots()
+    +'<div class="rsvstep"><span class="n">3</span> Vos coordonnées</div>'+rsvForm()+'</div></div>';
+  rsvBindForm();
+}
+function rsvCalendar(){
+  const y=rsvState.y,m=rsvState.m,today=rsvCfg.today,max=rsvAddDays(today,rsvCfg.leadDays);
+  const pad=(new Date(Date.UTC(y,m,1)).getUTCDay()+6)%7,days=new Date(Date.UTC(y,m+1,0)).getUTCDate();
+  const cur=y+"-"+String(m+1).padStart(2,"0");
+  let cells="";
+  for(let i=0;i<pad;i++)cells+='<span class="rsvcal-pad"></span>';
+  for(let d=1;d<=days;d++){
+    const ds=cur+"-"+String(d).padStart(2,"0");
+    const dis=ds<today||ds>max||!rsvOpen(ds);
+    const cls="rsvcal-day"+(dis?" dis":"")+(ds===rsvState.date?" on":"")+(ds===today?" today":"");
+    cells+='<button type="button" class="'+cls+'"'+(dis?' disabled aria-disabled="true"':'')+' data-rsvdate="'+ds+'">'+d+'</button>';
+  }
+  return '<div class="rsvcal"><div class="rsvcal-h"><button type="button" class="rsvcal-nav" data-rsvmonth="-1"'+(cur<=today.slice(0,7)?' disabled':'')+' aria-label="Mois précédent">‹</button><strong>'+RSV_MONTHS[m]+' '+y+'</strong><button type="button" class="rsvcal-nav" data-rsvmonth="1"'+(cur>=max.slice(0,7)?' disabled':'')+' aria-label="Mois suivant">›</button></div><div class="rsvcal-wd">'+RSV_DOW.map(d=>'<span>'+d+'</span>').join("")+'</div><div class="rsvcal-grid">'+cells+'</div></div>';
+}
+function rsvSlots(){
+  if(!rsvState.date)return '<p class="muted">Choisissez d’abord une date.</p>';
+  if(!rsvState.zone||!rsvState.capacity)return '<p class="muted">Choisissez d’abord une table.</p>';
+  const day=rsvState.day;
+  if(!day)return '<p class="muted">Chargement des créneaux…</p>';
+  if(day.closed){const msg=day.reason==="hours"?"Les horaires ne sont pas publiés en ligne.":day.reason==="range"?"Cette date est hors de la période de réservation.":"Le restaurant est fermé ce jour-là.";return '<p class="muted">'+msg+'</p>'}
+  if(!day.slots||!day.slots.length)return '<p class="muted">Aucun créneau disponible ce jour-là.</p>';
+  const zone=rsvState.zone,cap=rsvState.capacity;
+  const cells=day.slots.map(s=>{const left=(s.avail&&s.avail[zone]&&s.avail[zone][cap])||0,dis=left<=0;return '<button type="button" class="rsvslot'+(dis?" dis":"")+(rsvState.time===s.time?" on":"")+'"'+(dis?' disabled':'')+' data-rsvtime="'+s.time+'">'+s.time+'</button>'}).join("");
+  return '<div class="rsvslots">'+cells+'</div>';
+}
+function rsvSeating(){
+  const inv=rsvCfg.inventory||{};
+  const zones=Object.keys(rsvCfg.zones||{}).filter(z=>Object.values(inv[z]||{}).some(n=>n>0));
+  if(!zones.length)return '<p class="muted">Aucune table configurée pour le moment. Appelez le restaurant.</p>';
+  const caps=(rsvCfg.zones[rsvState.zone]||[]).filter(c=>(inv[rsvState.zone]||{})[c]>0);
+  const zbtn=zones.map(z=>'<button type="button" class="'+(rsvState.zone===z?"on":"")+'" data-rsvzone="'+z+'">'+(RSV_ZONE_NAME[z]||z)+'</button>').join("");
+  const cbtn=caps.map(c=>'<button type="button" class="'+(rsvState.capacity===c?"on":"")+'" data-rsvcap="'+c+'">'+c+' pers.</button>').join("");
+  const party=Array.from({length:rsvState.capacity||1},(_,i)=>i+1).map(n=>'<option value="'+n+'"'+(n===rsvState.party?" selected":"")+'>'+n+'</option>').join("");
+  return '<label>Zone</label><div class="rsvseg">'+zbtn+'</div><label>Type de table</label><div class="rsvseg small">'+cbtn+'</div><label for="rsvParty">Nombre de personnes</label><select id="rsvParty">'+party+'</select>';
+}
+function rsvForm(){
+  return '<label for="rsvName">Nom</label><input id="rsvName" autocomplete="name" value="'+escH(rsvState.name||"")+'">'
+    +'<label for="rsvPhone">Téléphone</label><input id="rsvPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="05 / 06 / 07 …" value="'+escH(rsvState.phone||"")+'"'+(rsvState.edit?' readonly aria-readonly="true"':'')+'>'
+    +'<label for="rsvNote">Remarque (facultatif)</label><input id="rsvNote" maxlength="200" placeholder="Occasion, table près de la fenêtre…" value="'+escH(rsvState.note||"")+'">'
+    +'<div class="err" id="rsvErr">'+escH(rsvState.err||"")+'</div>'
+    +'<button type="button" class="btn" id="rsvSend" style="width:100%;margin-top:6px"'+(rsvState.busy?" disabled":"")+'>'+(rsvState.busy?"Envoi…":(rsvState.edit?"Enregistrer les modifications":"Demander cette table"))+'</button>';
+}
+function rsvSameDay(){
+  const phone=rsvCfg.phone||PHONE;
+  return '<div class="rsvnote"><b>Vous réservez pour aujourd’hui</b><p>La disponibilité change au fil de la journée : le plus simple est de nous appeler pour réserver en direct.</p><a class="btn dark" href="tel:+'+phone+'">📞 Appeler '+rsvPhone(phone)+'</a><p class="muted tiny" style="margin:8px 0 0">Vous pouvez aussi envoyer votre demande : elle sera marquée « vérification par téléphone ».</p></div>';
+}
+function rsvEditNote(){
+  return '<div class="rsvnote"><b>Modification de la réservation '+escH((rsvState.edit&&rsvState.edit.code)||"")+'</b>'
+    +'<p>Choisissez le nouveau créneau puis enregistrez. Votre réservation repassera en attente et l’équipe la confirmera à nouveau.</p>'
+    +'<button type="button" class="btn ghost" id="rsvCancel">Annuler la modification</button></div>';
+}
+function rsvFinished(r){                                          // the server only returns a booking that still holds a table; once it is settled the customer may book again
+  return !!r&&(r.status==="completed"||r.status==="cancelled"||r.status==="rejected");
+}
+function rsvDone(){
+  const r=rsvState.result,S=RSV_STATUS[r.status]||{t:r.status||"Enregistrée",c:"wait",d:""};
+  const phone=rsvCfg.phone||PHONE,zone=RSV_ZONE_NAME[r.zone]||r.zone||"";
+  return '<div class="box rsvdone"><span class="rsvbadge '+S.c+'">'+S.t+'</span>'
+    +'<h3 style="margin:12px 0 4px">Table '+(r.party?("pour "+r.party+" personne"+(r.party>1?"s":"")):"")+'</h3>'
+    +'<p class="muted">'+rsvDateLabel(r.date)+' à '+escH(r.time||"")+(zone?" · "+zone:"")+(r.capacity?" · table "+r.capacity+' personnes':"")+'</p>'
+    +'<p class="rsvcode">Code : <b>'+escH(r.code||"")+'</b></p>'
+    +'<p>'+S.d+'</p>'
+    +(r.status==="phone_required"?'<a class="btn dark" href="tel:+'+phone+'">📞 Appeler '+rsvPhone(phone)+'</a>':"")
+    +(r.adminNote?'<p class="rsvadmin">Message du restaurant : '+escH(r.adminNote)+'</p>':"")
+    +((r.status==="pending"||r.status==="phone_required"||r.status==="approved")?'<button type="button" class="btn ghost" id="rsvEdit">Modifier ma réservation</button>':"")
+    +(rsvFinished(r)?'<button type="button" class="btn ghost" id="rsvNew">Nouvelle réservation</button>':'<p class="muted tiny" style="margin:10px 0 0">Vous pourrez réserver une nouvelle table une fois cette réservation terminée.</p>')
+    +'<p class="muted tiny" style="margin:12px 0 0">Le statut se met à jour en direct tant que cette page reste ouverte.</p></div>';
+}
+function rsvBindForm(){
+  document.querySelectorAll("[data-rsvmonth]").forEach(b=>b.onclick=()=>rsvMonth(+b.dataset.rsvmonth));
+  document.querySelectorAll("[data-rsvdate]").forEach(b=>b.onclick=()=>rsvSelectDate(b.dataset.rsvdate));
+  document.querySelectorAll("[data-rsvzone]").forEach(b=>b.onclick=()=>{rsvState.zone=b.dataset.rsvzone;rsvEnsureChoice();rsvState.time="";rsvRender()});
+  document.querySelectorAll("[data-rsvcap]").forEach(b=>b.onclick=()=>{rsvState.capacity=+b.dataset.rsvcap;if(rsvState.party>rsvState.capacity)rsvState.party=rsvState.capacity;rsvState.time="";rsvRender()});
+  document.querySelectorAll("[data-rsvtime]").forEach(b=>b.onclick=()=>{rsvState.time=b.dataset.rsvtime;rsvState.err="";rsvRender()});
+  const p=$("#rsvParty");if(p)p.onchange=()=>{rsvState.party=+p.value;rsvState.err=""};
+  const nm=$("#rsvName");if(nm)nm.oninput=()=>{rsvState.name=nm.value};
+  const ph=$("#rsvPhone");if(ph)ph.oninput=()=>{rsvState.phone=ph.value};
+  const nt=$("#rsvNote");if(nt)nt.oninput=()=>{rsvState.note=nt.value};
+  const send=$("#rsvSend");if(send)send.onclick=rsvSubmit;
+  const cancel=$("#rsvCancel");if(cancel)cancel.onclick=rsvCancelEdit;
+}
+function rsvBindResult(){
+  const b=$("#rsvNew");if(b)b.onclick=()=>{if(rsvES){try{rsvES.close()}catch(e){}}rsvES=null;rsvESCode=null;rsvState.result=null;rsvState.edit=null;rsvState.time="";rsvState.err="";try{localStorage.removeItem("lc-resv")}catch(e){}rsvRender()};
+  const e=$("#rsvEdit");if(e)e.onclick=rsvEdit;
+}
+function rsvEdit(){
+  const r=rsvState.result;if(!r||!r.code)return;
+  rsvState.edit={code:r.code,phone:r.phone,back:r};
+  rsvState.name=r.name||rsvState.name;rsvState.phone=r.phone||rsvState.phone;rsvState.note=r.note||"";
+  rsvState.zone=r.zone;rsvState.capacity=r.capacity;rsvState.party=r.party;rsvState.result=null;rsvState.err="";
+  const p=(r.date||"").split("-");if(p.length===3){rsvState.y=+p[0];rsvState.m=+p[1]-1}
+  rsvEnsureChoice();
+  if(r.date)rsvSelectDate(r.date,true);else rsvRender();
+}
+function rsvCancelEdit(){if(!rsvState.edit)return;rsvState.result=rsvState.edit.back||null;rsvState.edit=null;rsvState.err="";rsvRender()}
+function rsvMonth(d){
+  let y=rsvState.y,m=rsvState.m+d;
+  if(m<0){m=11;y--}else if(m>11){m=0;y++}
+  const cur=y+"-"+String(m+1).padStart(2,"0"),min=rsvCfg.today.slice(0,7),max=rsvAddDays(rsvCfg.today,rsvCfg.leadDays).slice(0,7);
+  if(cur<min||cur>max)return;
+  rsvState.y=y;rsvState.m=m;rsvRender();
+}
+async function rsvSubmit(){
+  const st=rsvState;if(!st||st.busy)return;
+  const name=(st.name||"").trim(),phone=(st.phone||"").trim();
+  if(name.length<2)st.err="Indiquez votre nom.";
+  else if(phone.replace(/\D/g,"").length<8)st.err="Indiquez un numéro de téléphone valide.";
+  else if(!st.date)st.err="Choisissez une date.";
+  else if(!st.time)st.err="Choisissez un créneau.";
+  else if(!st.zone||!st.capacity)st.err="Choisissez une table.";
+  else st.err="";
+  if(st.err){rsvRender();return}
+  st.busy=true;rsvRender();
+  try{
+    const editing=!!st.edit;
+    const url=editing?("/api/reservations/"+encodeURIComponent(st.edit.code)):"/api/reservations";
+    const r=await fetch(url,{method:editing?"PATCH":"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,phone,date:st.date,time:st.time,zone:st.zone,capacity:st.capacity,party:st.party,note:(st.note||"").trim()})});
+    const d=await r.json();
+    if(!r.ok)throw new Error(d.error||"Une erreur est survenue.");
+    st.busy=false;st.result=d;st.edit=null;saveGuest(name,phone);
+    try{localStorage.setItem("lc-resv",JSON.stringify({code:d.code,phone:d.phone,status:d.status,date:d.date,time:d.time,zone:d.zone,capacity:d.capacity,party:d.party}))}catch(e){}
+    rsvRender();rsvWatch();
+  }catch(e){st.busy=false;st.err=e.message||"Une erreur est survenue.";rsvRender()}
+}
+function rsvWatch(){
+  const r=rsvState&&rsvState.result;
+  if(!r||!r.code||!r.phone)return;                                 // the stream is scoped to this one booking
+  if(rsvES&&rsvESCode===r.code)return;
+  if(rsvES){try{rsvES.close()}catch(e){}rsvES=null}
+  try{
+    rsvESCode=r.code;
+    rsvES=new EventSource("/api/reservations/stream?code="+encodeURIComponent(r.code)+"&phone="+encodeURIComponent(r.phone));
+    rsvES.addEventListener("reservation",e=>{
+      let d;try{d=JSON.parse(e.data)}catch(x){return}
+      if(rsvState&&rsvState.result&&d.code===rsvState.result.code){
+        rsvState.result=Object.assign({},rsvState.result,d);
+        try{localStorage.setItem("lc-resv",JSON.stringify(rsvState.result))}catch(x){}
+        if(location.hash.replace(/^#\/?/,"")==="reservation")rsvRender();
+      }
+    });
+  }catch(e){rsvES=null;rsvESCode=null}
+}
+function rsvTrack(code,phone){
+  if(!code||!phone)return;
+  rsvWatch();
+  fetch("/api/reservations/"+encodeURIComponent(code)+"?phone="+encodeURIComponent(phone)).then(r=>r.ok?r.json():null).then(d=>{
+    if(d&&rsvState&&rsvState.result&&rsvState.result.code===d.code){rsvState.result=Object.assign({},rsvState.result,d);try{localStorage.setItem("lc-resv",JSON.stringify(rsvState.result))}catch(e){}rsvRender()}
+  }).catch(()=>{});
+}
+function route(){const r=(location.hash.replace(/^#\/?/,"")||"");const k=PAGES[r]?r:"";$("#app").innerHTML=PAGES[k]();document.body.dataset.p=k;
+document.querySelectorAll(".nav nav a").forEach(a=>a.classList.toggle("on",a.dataset.r===k));
+if(k==="menu"){drawMenu();renderService()}if(k==="reservation")initReservations();if(k==="livraison")initLiv();if(k==="compte"){refreshService().then(()=>{renderService();initMyOrders()})}window.scrollTo(0,0)}
+$("#cb").onclick=$("#fab").onclick=()=>{location.hash="#/livraison"};
+
+const UIR=`Café, restaurant & pâtisserie|Café, restaurant & pastry shop|مقهى ومطعم ومحل حلويات
+La cuisine italienne, à Constantine|Italian cuisine in Constantine|المطبخ الإيطالي في قسنطينة
+Pizzas généreuses, pasta savoureuses et dolci préparés à la commande. Un goût d’Italie, sur place, à emporter ou livré chez vous.|Generous pizzas, delicious pasta and dolci made to order. A taste of Italy, for dining in, takeaway or delivery.|بيتزا غنية، ومعكرونة لذيذة وحلويات إيطالية تُحضّر عند الطلب. مذاق إيطاليا، في المطعم أو للاستلام أو التوصيل.
+Cucina italiana · Constantine|Italian cuisine · Constantine|مطبخ إيطالي · قسنطينة
+Les incontournables italiens|Italian favourites|أطباق إيطالية مميزة
+Pizzas, pâtes et douceurs italiennes. Chaque plat affiche son temps de préparation estimé.|Pizzas, pasta and Italian treats. Every dish shows its estimated preparation time.|بيتزا ومعكرونة وحلويات إيطالية. يظهر وقت التحضير التقديري لكل طبق.
+Un moment à l’italienne|A little taste of Italy|لحظات على الطريقة الإيطالية
+Des recettes inspirées des tables d’Italie, préparées à la commande avec des ingrédients simples et généreux. Terminez par un espresso ou un dolce maison.|Recipes inspired by Italian tables, made to order with simple, generous ingredients. Finish with an espresso or a homemade dolce.|وصفات مستوحاة من موائد إيطاليا، تُحضّر عند الطلب بمكونات بسيطة وغنية. اختم بإسبريسو أو حلوى منزلية.
+À savourer comme vous aimez|Enjoy it your way|استمتع كما تحب
+Sur place|Dine in|في المطعم
+À emporter|Takeaway|للأخذ
+Livré à Constantine|Delivered in Constantine|توصيل في قسنطينة
+Le menu italien|The Italian menu|القائمة الإيطالية
+Pizzas, pasta, antipasti et dolci della casa. Les temps indiqués sont estimatifs et peuvent varier selon l’affluence.|Pizzas, pasta, antipasti and house-made dolci. Preparation times are estimates and may vary with order volume.|بيتزا ومعكرونة ومقبلات وحلويات من إعداد المطعم. أوقات التحضير تقديرية وقد تختلف حسب ضغط الطلبات.
+Cuisine italienne|Italian cuisine|مطبخ إيطالي
+Sauce tomate cuisinée, mozzarella fondante, basilic frais et filet d’huile d’olive.|Slow-cooked tomato sauce, melting mozzarella, fresh basil and a drizzle of olive oil.|صلصة طماطم مطهوة، وموزاريلا ذائبة، وريحان طازج ولمسة من زيت الزيتون.
+Sauce tomate, mozzarella et salami épicé, relevés d’une pointe de piment.|Tomato sauce, mozzarella and spicy salami with a hint of chili.|صلصة طماطم وموزاريلا وسلامي حار مع لمسة من الفلفل.
+Mozzarella, gorgonzola, parmesan et fromage de chèvre sur une pâte dorée.|Mozzarella, gorgonzola, parmesan and goat cheese on golden crust.|موزاريلا وغورغونزولا وبارميزان وجبن الماعز فوق عجينة ذهبية.
+Sauce tomate, mozzarella, jambon de dinde et champignons frais.|Tomato sauce, mozzarella, turkey ham and fresh mushrooms.|صلصة طماطم وموزاريلا ولحم ديك رومي مدخن وفطر طازج.
+Mozzarella, courgettes, poivrons, champignons, olives et basilic.|Mozzarella, zucchini, peppers, mushrooms, olives and basil.|موزاريلا وكوسة وفلفل وفطر وزيتون وريحان.
+Spaghetti enrobés d’une sauce crémeuse aux œufs, parmesan et dinde fumée.|Spaghetti tossed in a creamy egg sauce with parmesan and smoked turkey.|سباغيتي بصلصة كريمية من البيض والبارميزان والديك الرومي المدخن.
+Penne al dente, sauce tomate à l’ail, piment doux et persil frais.|Al dente penne with garlic tomato sauce, mild chili and fresh parsley.|بيني مطهوة بإتقان مع صلصة طماطم وثوم وفلفل خفيف وبقدونس طازج.
+Tagliatelles fraîches, poulet grillé, crème légère et parmesan.|Fresh tagliatelle with grilled chicken, light cream and parmesan.|تالياتيلي طازجة مع دجاج مشوي وكريمة خفيفة وبارميزان.
+Lasagnes gratinées, sauce tomate mijotée, bœuf haché et béchamel.|Baked lasagne with slow-cooked tomato sauce, ground beef and béchamel.|لازانيا مخبوزة مع صلصة طماطم مطهوة ولحم بقري مفروم وبشاميل.
+Pain grillé frotté à l’ail, tomates fraîches, basilic et huile d’olive.|Toasted bread rubbed with garlic, fresh tomatoes, basil and olive oil.|خبز محمص بالثوم والطماطم الطازجة والريحان وزيت الزيتون.
+Tomates mûres, mozzarella, basilic frais et vinaigrette balsamique.|Ripe tomatoes, mozzarella, fresh basil and balsamic dressing.|طماطم ناضجة وموزاريلا وريحان طازج وصلصة بلسميك.
+Crème mascarpone légère, biscuits imbibés de café et cacao saupoudré.|Light mascarpone cream, coffee-soaked biscuits and a dusting of cocoa.|كريمة ماسكاربوني خفيفة وبسكويت مغموس بالقهوة ورشة كاكاو.
+Crème vanillée délicate, servie avec un coulis de fruits rouges.|Delicate vanilla cream served with a red berry coulis.|كريمة فانيليا ناعمة تُقدّم مع صلصة التوت الأحمر.
+Coque croustillante garnie de ricotta douce, zestes d’orange et pistache.|Crisp shell filled with sweet ricotta, orange zest and pistachio.|قشرة مقرمشة محشوة بجبن ريكوتا حلو وقشر البرتقال والفستق.
+Espresso court et intense, extrait à la minute, avec une crema dorée.|Short, bold espresso, freshly pulled with a golden crema.|إسبريسو قصير ومركز يُحضّر طازجًا بطبقة كريما ذهبية.
+Espresso italien, lait chaud et mousse onctueuse, saupoudré de cacao.|Italian espresso with warm milk and velvety foam, finished with cocoa.|إسبريسو إيطالي مع حليب دافئ ورغوة ناعمة ورشة كاكاو.
+Citron pressé, eau fraîche et touche de menthe, préparés à la commande.|Freshly squeezed lemon, chilled water and a hint of mint, made to order.|ليمون معصور وماء بارد ولمسة نعناع، يُحضّر عند الطلب.
+Crêpes, gaufres, desserts du jour et café. Sur place, à emporter ou livré chez vous à Constantine.|Crepes, waffles, daily desserts and coffee. Dine in, take away, or delivered to your door in Constantine.|كريب ووافل وحلويات اليوم وقهوة. في المكان أو للأخذ أو التوصيل إلى باب بيتك في قسنطينة.
+Voir le menu|View the menu|عرض القائمة
+Commander en livraison|Order for delivery|اطلب بالتوصيل
+À découvrir|To discover|اكتشف
+Une sélection de la carte. Touchez « Ajouter » pour l'ajouter à votre commande.|A selection from the menu. Tap “Add” to put it in your order.|مختارات من القائمة. اضغط «أضف» لإضافتها إلى طلبك.
+Sélection|Pick|مختار
+Ajouter|Add|أضف
+Un grand salon pour prendre son temps|A spacious lounge to take your time|صالون واسع لتأخذ وقتك
+Un espace spacieux et propre, avec une terrasse. Ouvert dès 08:00, pour un cappuccino du matin ou un goûter entre amis.|A spacious, clean place with a terrace. Open from 08:00, for a morning cappuccino or an afternoon snack with friends.|مكان واسع ونظيف مع شرفة. مفتوح من 08:00 لكابتشينو الصباح أو وجبة خفيفة مع الأصدقاء.
+Trois façons de profiter|Three ways to enjoy|ثلاث طرق للاستمتاع
+Repas sur place|Dine in|تناول الطعام في المكان
+Vente à emporter|Takeaway|للأخذ
+Livraison à Constantine|Delivery in Constantine|التوصيل في قسنطينة
+Commander maintenant|Order now|اطلب الآن
+Accueil|Home|الرئيسية
+Menu|Menu|القائمة
+Livraison|Delivery|التوصيل
+Contact|Contact|اتصل بنا
+La carte|The menu|القائمة
+Toute la carte, par rubrique. Touchez + pour ajouter un article à votre commande.|The full menu by section. Tap + to add an item to your order.|القائمة كاملة حسب الأقسام. اضغط + لإضافة صنف إلى طلبك.
+Rechercher un plat ou une boisson|Search for a dish or a drink|ابحث عن طبق أو مشروب
+Tout|All|الكل
+Toute la rubrique|Whole section|كل القسم
+Petit déjeuner|Breakfast|الفطور
+Salé|Savory|مالح
+Sucré|Sweet|حلو
+Boissons|Drinks|المشروبات
+Aucun résultat.|No results.|لا توجد نتائج.
+Livraison & commande|Delivery & order|التوصيل والطلب
+Composez votre commande, remplissez vos coordonnées et validez. Nous confirmons par téléphone.|Build your order, fill in your details and confirm. We confirm by phone.|كوّن طلبك واملأ بياناتك ثم أكّده. نؤكد الطلب بالهاتف.
+Comment ça marche|How it works|كيف يعمل
+Ajoutez vos plats depuis le menu.|Add your dishes from the menu.|أضف أطباقك من القائمة.
+Choisissez livraison ou retrait.|Choose delivery or pickup.|اختر التوصيل أو الاستلام.
+Validez votre commande.|Confirm your order.|أكّد طلبك.
+Nous confirmons l'heure et le prix final.|We confirm the time and the final price.|نؤكد لك الوقت والسعر النهائي.
+Votre commande|Your order|طلبك
+Votre commande est vide.|Your order is empty.|طلبك فارغ.
+Ouvrir le menu|Open the menu|افتح القائمة
+Sous-total|Subtotal|المجموع الفرعي
+Offerte|Free|مجاني
+Total|Total|المجموع
+Mode|Mode|الطريقة
+Livraison à domicile|Home delivery|توصيل إلى المنزل
+À emporter (retrait au café)|Takeaway (pickup at the café)|للأخذ (الاستلام من المقهى)
+Nom|Name|الاسم
+Téléphone|Phone|الهاتف
+Adresse de livraison|Delivery address|عنوان التوصيل
+Adresse ou repère (facultatif si position confirmée)|Address or landmark (optional when location is confirmed)|العنوان أو معلم قريب (اختياري عند تأكيد الموقع)
+Quartier, rue, repère|Neighborhood, street, landmark|الحي، الشارع، معلم قريب
+◎ Utiliser ma position|◎ Use my location|◎ استخدم موقعي
+⌖ Choisir sur la carte|⌖ Choose on map|⌖ اختر على الخريطة
+Rechercher une adresse ou un lieu|Search for an address or place|ابحث عن عنوان أو مكان
+Rechercher|Search|بحث
+Recherche…|Searching…|جار البحث…
+Confirmer ce point|Confirm this point|تأكيد هذه النقطة
+Point confirmé ✓|Point confirmed ✓|تم تأكيد الموقع ✓
+⌖ Modifier le point|⌖ Change the point|⌖ تغيير الموقع
+Touchez la carte ou déplacez le repère pour choisir le point de livraison. Ajoutez aussi l’adresse ou un repère ci-dessus.|Tap the map or move the pin to choose the delivery point. Also enter the address or a landmark above.|اضغط على الخريطة أو حرّك الدبوس لاختيار نقطة التوصيل. أضف العنوان أو معلماً قريباً أعلاه.
+Point sélectionné|Selected point|تم اختيار النقطة
+Saisissez une adresse ou un lieu à rechercher.|Enter an address or place to search.|أدخل عنوانًا أو مكانًا للبحث.
+Saisissez au moins trois caractères pour rechercher.|Enter at least three characters to search.|أدخل ثلاثة أحرف على الأقل للبحث.
+Aucun résultat. Essayez un autre nom ou placez le repère directement sur la carte.|No results. Try another name or place the pin directly on the map.|لم يتم العثور على نتائج. جرّب اسمًا آخر أو ضع الدبوس مباشرة على الخريطة.
+Sélection de l’adresse…|Selecting address…|جارٍ اختيار العنوان…
+Adresse introuvable.|Address not found.|لم يتم العثور على العنوان.
+Aucune coordonnée disponible pour cette adresse.|No coordinates are available for this address.|لا تتوفر إحداثيات لهذا العنوان.
+La carte n’a pas pu charger. Vous pouvez toujours saisir l’adresse.|The map could not load. You can still enter the address.|تعذر تحميل الخريطة. لا يزال بإمكانك إدخال العنوان.
+Remarque (facultatif)|Note (optional)|ملاحظة (اختياري)
+Passer la commande|Place order|تأكيد الطلب
+Autres|Others|أخرى
+Commande|Order|طلب
+Statut :|Status:|الحالة:
+En attente de confirmation|Waiting for confirmation|في انتظار التأكيد
+Acceptée|Accepted|تم القبول
+En préparation|Being prepared|قيد التحضير
+Prête|Ready|جاهز
+Prête à retirer|Ready for pickup|جاهزة للاستلام
+Prête à livrer|Ready for delivery|جاهزة للتوصيل
+Terminée|Completed|مكتمل
+Annulée|Cancelled|ملغى
+Merci ! Votre commande est enregistrée.|Thank you! Your order has been received.|شكرًا! تم تسجيل طلبك.
+Ajoutez au moins un plat.|Add at least one item.|أضف صنفًا واحدًا على الأقل.
+Indiquez votre nom et un numéro valide.|Enter your name and a valid number.|أدخل اسمك ورقمًا صحيحًا.
+Indiquez votre adresse de livraison.|Enter your delivery address.|أدخل عنوان التوصيل.
+Choisissez et confirmez votre position sur la carte, ou saisissez l’adresse.|Choose and confirm your location on the map, or enter the address.|اختر موقعك على الخريطة وأكّده، أو أدخل العنوان.
+Moins|Less|أقل
+Plus|More|أكثر
+Venir nous voir|Visit us|زورونا
+Constantine 25000 · Code Plus 7H7Q+CQ · Ouvert dès 08:00|Constantine 25000 · Plus Code 7H7Q+CQ · Open from 08:00|قسنطينة 25000 · الرمز ⁦7H7Q+CQ⁩ · مفتوح من 08:00
+Itinéraire sur Maps|Directions on Maps|الاتجاهات على الخرائط
+3,8 sur 5 · 247 avis Google|3.8 out of 5 · 247 Google reviews|3.8 من 5 · 247 تقييمًا على Google
+Delicioso · Pâtisserie, café & restaurant · Depuis 1985 · Constantine · 0670 19 58 19|Delicioso · Pastry, café & restaurant · Since 1985 · Constantine · 0670 19 58 19|Delicioso · حلويات ومقهى ومطعم · منذ 1985 · قسنطينة · ⁦0670 19 58 19⁩
+Langue|Language|اللغة
+Pour commander, connectez-vous ou créez un compte.|To order, log in or create an account.|للطلب، سجّل الدخول أو أنشئ حسابًا.
+Vous pouvez parcourir le menu sans compte.|You can browse the menu without an account.|يمكنك تصفح القائمة دون حساب.
+Créer un compte|Create an account|إنشاء حساب
+Se connecter|Log in|تسجيل الدخول
+Créer mon compte|Create my account|إنشاء حسابي
+Mot de passe|Password|كلمة المرور
+6 caractères minimum|6 characters minimum|6 أحرف على الأقل
+Connecté :|Logged in:|مسجّل الدخول:
+Se déconnecter|Log out|تسجيل الخروج
+Bienvenue !|Welcome!|مرحبًا!
+Indiquez votre nom (2 lettres minimum).|Enter your name (2 letters minimum).|أدخل اسمك (حرفان على الأقل).
+Indiquez un numéro de téléphone valide.|Enter a valid phone number.|أدخل رقم هاتف صحيحًا.
+Mot de passe : 6 caractères minimum.|Password: 6 characters minimum.|كلمة المرور: 6 أحرف على الأقل.
+Indiquez votre mot de passe.|Enter your password.|أدخل كلمة المرور.
+Ce numéro a déjà un compte. Connectez-vous.|This number already has an account. Log in.|هذا الرقم لديه حساب بالفعل. سجّل الدخول.
+Numéro ou mot de passe incorrect.|Wrong number or password.|الرقم أو كلمة المرور غير صحيحة.
+Numéro de téléphone invalide.|Invalid phone number.|رقم الهاتف غير صحيح.
+Votre session a expiré. Connectez-vous à nouveau.|Your session has expired. Please log in again.|انتهت جلستك. سجّل الدخول من جديد.
+Connectez-vous ou créez un compte pour commander.|Log in or create an account to order.|سجّل الدخول أو أنشئ حسابًا للطلب.
+Une erreur est survenue. Veuillez réessayer.|Something went wrong. Please try again.|حدث خطأ. يُرجى المحاولة مجددًا.
+Un article n'est plus disponible.|An item is no longer available.|أحد الأصناف لم يعد متاحًا.
+Panier vide|Empty cart|السلة فارغة
+Voir ma commande|View my order|عرض طلبي
+Mes commandes|My orders|طلباتي
+Suivre ma commande|Track my order|تتبع طلبي
+Suivre une commande|Track an order|تتبع طلبًا
+Code de commande|Order code|رمز الطلب
+Saisissez le code reçu après votre commande et le numéro de téléphone utilisé. Aucun compte n’est nécessaire.|Enter the code you received after ordering and the phone number you used. No account needed.|أدخل الرمز الذي تلقيته بعد طلبك ورقم الهاتف الذي استخدمته. لا حاجة إلى حساب.
+Pas de compte nécessaire : indiquez simplement votre nom et votre téléphone. Nous confirmons chaque commande par appel.|No account needed: just enter your name and phone. We confirm every order by phone.|لا حاجة إلى حساب: أدخل اسمك ورقم هاتفك فقط. نؤكد كل طلب عبر الهاتف.
+Entrez le code affiché à la fin de votre commande et le numéro de téléphone utilisé.|Enter the code shown at the end of your order and the phone number you used.|أدخل الرمز الظاهر في نهاية طلبك ورقم الهاتف الذي استخدمته.
+Aucune commande trouvée avec ce code et ce numéro.|No order found with this code and phone number.|لا يوجد طلب بهذا الرمز ورقم الهاتف.
+Indiquez le numéro utilisé pour la commande.|Enter the phone number used for the order.|أدخل رقم الهاتف المستخدم في الطلب.
+Retrouvez vos commandes passées et recommandez en un instant.|View your past orders and reorder in a click.|اطّلع على طلباتك السابقة وأعد طلبها بلمسة.
+Horaires d'ouverture|Opening hours|ساعات العمل
+Zones et frais de livraison|Delivery zones & fees|مناطق ورسوم التوصيل
+Retrait sur place|Pickup at the café|الاستلام من المقهى
+Livraison indisponible|Delivery unavailable|التوصيل غير متاح
+Retrait indisponible|Pickup unavailable|الاستلام غير متاح
+Réouverture|Reopens|يعاود فتحه
+Le restaurant est ouvert et prend les commandes en ce moment.|The restaurant is open and taking orders now.|المطعم مفتوح ويستقبل الطلبات الآن.
+Le restaurant est fermé en ce moment. Réessayez pendant nos horaires d'ouverture.|The restaurant is closed right now. Try again during opening hours.|المطعم مغلق حاليًا. حاول مجددًا خلال ساعات العمل.
+Le restaurant ne prend plus de commandes pour le moment.|The restaurant is not taking orders right now.|المطعم لا يستقبل الطلبات حاليًا.
+Le restaurant n'accepte pas de commandes pour le moment.|The restaurant is not accepting orders right now.|المطعم لا يستقبل الطلبات حاليًا.
+Horaires à confirmer avec le restaurant.|Opening hours to be confirmed with the restaurant.|ساعات العمل تُؤكَّد مع المطعم.
+Vous pouvez toujours parcourir le menu et composer votre commande.|You can still browse the menu and build your order.|يمكنك دائمًا تصفح القائمة وتجهيز طلبك.
+Pause de commandes|Orders paused|الطلبات متوقفة مؤقتًا
+Impossible de commander en ce moment.|Ordering is currently unavailable.|الطلب غير متاح حاليًا.
+Zone de livraison|Delivery area|منطقة التوصيل
+Sélectionnez votre zone : les frais sont recalculés à la validation.|Select your area: fees are recalculated on validation.|اختر منطقتك: تُعاد احتساب الرسوم عند التحقق.
+Demande pour cet article (ex. : sans oignons)|Request for this item (e.g. no onions)|طلب خاص لهذا الصنف (مثال: بدون بصل)
+Allergènes|Allergens|مسببات الحساسية
+Portion|Portion|الحصة
+Estimation|Estimate|التقدير
+Les délais sont indicatifs. Le restaurant confirme l'heure définitive.|Times are estimates. The restaurant confirms the final time.|الأوقات تقديرية. يؤكد المطعم الموعد النهائي.
+Commander à nouveau|Order again|اطلب مرة أخرى
+Aucune commande pour le moment.|No orders yet.|لا توجد طلبات بعد.
+Tous les articles ne sont plus disponibles.|All items are no longer available.|جميع الأصناف لم تعد متاحة.
+Certains articles de votre précédente commande ne sont plus disponibles :|Some items from your previous order are no longer available:|بعض أصناف طلبك السابق لم تعد متاحة:
+En cours de livraison|Out for delivery|قيد التوصيل
+Livraison estimée|Estimated delivery|التوصيل المتوقع
+Retrait estimé|Estimated pickup|الاستلام المتوقع
+Statut :|Status:|الحالة:
+Total :|Total:|المجموع:
+dont livraison|including delivery|بما في ذلك التوصيل
+Le restaurant confirmera l'heure de préparation ou de livraison par téléphone.|The restaurant will confirm the preparation or delivery time by phone.|سيؤكد المطعم موعد التحضير أو التوصيل عبر الهاتف.
+Pour consulter vos commandes, connectez-vous.|To view your orders, log in.|لعرض طلباتك، سجّل الدخول.
+Voir le menu|View the menu|عرض القائمة
+Offerte|Free|مجانية
+Sous-total|Subtotal|المجموع الفرعي
+Livraison|Delivery|التوصيل
+Total|Total|المجموع
+Commande|Order|طلب
+Lundi|Monday|الاثنين
+Mardi|Tuesday|الثلاثاء
+Mercredi|Wednesday|الأربعاء
+Jeudi|Thursday|الخميس
+Vendredi|Friday|الجمعة
+Samedi|Saturday|السبت
+Dimanche|Sunday|الأحد`,DICT=`Petit déjeuner=Breakfast=فطور
+Petits déjeuners=Breakfasts=وجبات الفطور
+Menu Enfant=Kids Menu=قائمة الأطفال
+Continental=Continental=كونتيننتال
+Complet=Full=كامل
+Algérien=Algerian=جزائري
+Matinal=Morning=صباحي
+Healthy=Healthy=صحي
+Café au choix=Coffee of your choice=قهوة حسب الاختيار
+Tasse de lait=Cup of milk=كوب حليب
+Poêle du Chef=Chef's Pan=مقلاة الشيف
+Plat Poulet Grillé=Grilled Chicken Plate=طبق دجاج مشوي
+Signatures salées=Savory Signatures=أطباق مميزة مالحة
+Tranche d'escalope grillée accompagnée de riz et de salade=Grilled escalope slice served with rice and salad=شريحة إسكالوب مشوية مع الأرز والسلطة
+Salade=Salad=سلطة
+Croûtons de pain=Bread croutons=قطع خبز محمصة
+Œufs au plat=Fried eggs=بيض مقلي
+Œufs pochés=Poached eggs=بيض بوشيه
+Œufs brouillés=Scrambled eggs=بيض مخفوق
+Œufs bouillis=Boiled eggs=بيض مسلوق
+Œufs=Eggs=بيض
+Œuf=Egg=بيضة
+Scrambled Eggs=Scrambled Eggs=بيض مخفوق
+Poached Egg Burrata=Poached Egg Burrata=بيض بوشيه مع البوراتا
+Rôti de poulet fumé=Smoked roast chicken=دجاج مشوي مدخن
+Poulet fumé=Smoked chicken=دجاج مدخن
+Burrata=Burrata=بوراتا
+Olives noires=Black olives=زيتون أسود
+Fromage à l'ail=Garlic cheese=جبنة بالثوم
+Huile d'olive=Olive oil=زيت الزيتون
+Avocat=Avocado=أفوكادو
+Toast garni=Loaded toast=توست محشو
+Pain toast=Toast bread=خبز توست
+Pain=Bread=خبز
+Beurre=Butter=زبدة
+Confiture=Jam=مربى
+Chocolat au Lait=Chocolate Milk=حليب بالشوكولا
+Chocolat Chaud=Hot Chocolate=شوكولا ساخنة
+Chocolat Glacé=Iced Chocolate=شوكولا مثلجة
+Thé Glacé=Iced Tea=شاي مثلج
+Chocolat=Chocolate=شوكولا
+Charcuterie=Cold cuts=لحوم باردة
+Viennoiserie=Pastry=معجنات
+Gâteau au choix=Cake of your choice=كيكة حسب الاختيار
+Mini jus=Mini juice=عصير صغير
+Eau minérale=Mineral water=ماء معدني
+Eau pétillante=Sparkling Water=ماء غازي
+Céréales=Cereals=حبوب الإفطار
+Mini crêpe=Mini crepe=كريب صغير
+Yaourt grec=Greek yogurt=زبادي يوناني
+Yaourt=Yogurt=زبادي
+Fruits secs=Nuts=مكسرات
+Fruits=Fruits=فواكه
+Granola=Granola=جرانولا
+Mini omelette=Mini omelette=عجة صغيرة
+Mini pancake=Mini pancake=بانكيك صغير
+Mini smoothie=Mini smoothie=سموذي صغير
+Champignons grillés=Grilled mushrooms=فطر مشوي
+Champignons=Mushrooms=فطر
+Champignon=Mushroom=فطر
+Concombre=Cucumber=خيار
+Tomate cerise=Cherry tomato=طماطم كرزية
+Tomates=Tomatoes=طماطم
+Tomate=Tomato=طماطم
+Piments=Chili peppers=فلفل حار
+Merguez grillées=Grilled merguez=مرقاز مشوي
+Merguez=Merguez=مرقاز
+Frites=Fries=بطاطس مقلية
+Msemen=Msemen=مسمن
+Miel=Honey=عسل
+Brunch=Brunch=برانش
+Croque monsieur=Croque Monsieur=كروك موسيو
+Classic Burger=Classic Burger=برغر كلاسيك
+Croques & burger=Croques & Burger=كروك وبرغر
+Pastas=Pastas=باستا
+Pasta=Pasta=باستا
+Arrabbiata=Arrabbiata=أرابياتا
+Lasagne Bolognaise=Lasagna Bolognese=لازانيا بولونيز
+Bolognaise=Bolognese=بولونيز
+4 Fromages=4 Cheeses=4 أجبان
+Fromage=Cheese=جبنة
+Poulet=Chicken=دجاج
+Thon=Tuna=تونة
+Viande hachée=Minced meat=لحم مفروم
+Viande=Meat=لحم
+Escalope de Poulet=Chicken Escalope=إسكالوب دجاج
+Escalope=Escalope=إسكالوب
+Mixte=Mixed=مشكل
+Wraps=Wraps=راب
+Wrap=Wrap=راب
+Paninis=Paninis=بانيني
+Panini=Panini=بانيني
+Omelettes=Omelettes=عجّات
+Omelette=Omelette=عجة
+Burger=Burger=برغر
+Sauce au choix=Sauce of your choice=صلصة حسب الاختيار
+Oignon=Onion=بصل
+Jambon de Poulet=Chicken Ham=جامبون الدجاج
+Jambon Fumé=Smoked Ham=جامبون مدخن
+Jambon=Ham=جامبون
+Salami=Salami=سلامي
+Spéciale=Special=خاصة
+Fourrée=Stuffed=محشوة
+Fourrées gratinées=Stuffed & Gratinéed=محشوة ومحمّرة
+Salées=Savory=مالحة
+Sucrées=Sweet=حلوة
+Simples=Plain=سادة
+Crêpes=Crepes=كريب
+Crêpe=Crepe=كريب
+Gaufres=Waffles=وافل
+Gaufre=Waffle=وافل
+Pancakes=Pancakes=بانكيك
+Pancake=Pancake=بانكيك
+Pains perdus=French Toasts=بان بيردو
+Pain Perdu=French Toast=بان بيردو
+Fondants=Fondants=فوندان
+Fondant=Fondant=فوندان
+Nutella=Nutella=نوتيلا
+Nestlé=Nestlé=نستله
+Brownies=Brownies=براوني
+Pistachiella=Pistachiella=بيستاشيلا
+Pistachio=Pistachio=فستق
+Pistache=Pistachio=فستق
+Amandine=Almond=باللوز
+Caramello=Caramello=كاراميلو
+Sucre Roux=Brown Sugar=سكر بني
+Crème de Citron=Lemon Cream=كريمة الليمون
+Crème Anglaise=Custard=كاسترد
+Crème fouettée=Whipped cream=كريمة مخفوقة
+Crème chantilly=Whipped cream=كريمة شانتيلي
+Crème pistache=Pistachio cream=كريمة الفستق
+Crème=Cream=كريمة
+Accompagnement au choix=Topping of your choice=إضافة حسب الاختيار
+Fettuccine=Fettuccine=فيتوتشيني
+Crêpe coupée en lanières fines remplie de Nutella=Crepe cut into thin strips filled with Nutella=كريب مقطع إلى شرائح رفيعة محشو بالنوتيلا
+Banane=Banana=موز
+Caramel au beurre salé=Salted butter caramel=كراميل بالزبدة المملحة
+Caramel=Caramel=كراميل
+Cannelle=Cinnamon=قرفة
+Amandes effilées=Sliced almonds=لوز مقطع
+Amandes=Almonds=لوز
+Noix de coco=Coconut=جوز الهند
+Noix=Walnuts=جوز
+Boule de glace vanille=Vanilla ice cream scoop=كرة آيس كريم فانيلا
+Boule de glace=Ice cream scoop=كرة آيس كريم
+Deux boules de glace=Two ice cream scoops=كرتا آيس كريم
+À base de boule de glace et crème=Made with ice cream and cream=مصنوع من الآيس كريم والكريمة
+Glaces=Ice Creams=آيس كريم
+Glace=Ice Cream=آيس كريم
+Liégeois=Liégeois=ليجوا
+Coupe Simple=Simple Sundae=كوب بسيط
+Banana Split=Banana Split=بانانا سبليت
+Affogato=Affogato=أفوغاتو
+Expresso=Espresso=إسبريسو
+Vanille=Vanilla=فانيلا
+Jus naturels=Natural Juices=عصائر طبيعية
+Citronnade=Lemonade=عصير الليمون
+Royale=Royal=رويال
+Jus d'Orange=Orange Juice=عصير برتقال
+Jus de Fruits=Fruit Juice=عصير فواكه
+Jus de Pêche=Peach Juice=عصير خوخ
+Jus de Fraise=Strawberry Juice=عصير فراولة
+Jus de Banane=Banana Juice=عصير موز
+Sorbet citron=Lemon sorbet=سوربيه الليمون
+Menthe fraîche=Fresh mint=نعناع طازج
+Menthe=Mint=نعناع
+Iced coffee=Iced Coffee=قهوة مثلجة
+Iced=Iced=مثلج
+Latté=Latte=لاتيه
+Aromatisé=Flavored=بنكهة
+Lait concentré=Condensed milk=حليب مركز
+Lait=Milk=حليب
+Mojitos=Mojitos=موهيتو
+Mojito=Mojito=موهيتو
+Virgin=Virgin=بدون كحول
+Cocktails=Cocktails=كوكتيلات
+Cocktail=Cocktail=كوكتيل
+Pomme=Apple=تفاح
+Citron=Lemon=ليمون
+Fraise=Strawberry=فراولة
+Framboise=Raspberry=توت العليق
+Ananas=Pineapple=أناناس
+Noisette=Hazelnut=بندق
+Smoothies=Smoothies=سموذي
+Smoothie=Smoothie=سموذي
+Milkshakes=Milkshakes=ميلك شيك
+Milkshake=Milkshake=ميلك شيك
+Cafés frappés=Frappé Coffees=قهوة مثلجة مخفوقة
+Spéculoos=Speculoos=سبيكولوس
+Nature=Plain=سادة
+Chocolats glacés=Iced Chocolates=شوكولا مثلجة
+Glacé=Iced=مثلج
+Boissons fraîches=Cold Drinks=مشروبات باردة
+Soda=Soda=مشروب غازي
+Énergétique=Energy Drink=مشروب طاقة
+Matchas=Matchas=ماتشا
+Ubes=Ubes=أوبي
+Thés=Teas=شاي
+Thé à la Menthe=Mint Tea=شاي بالنعناع
+Thé=Tea=شاي
+Grand=Large=كبير
+Pignons=Pine Nuts=صنوبر
+Infusions=Herbal Teas=أعشاب
+Verveine=Verbena=لويزة
+Gingembre=Ginger=زنجبيل
+Camomille thym=Chamomile thyme=بابونج وزعتر
+Cafés=Coffees=قهوة
+Café Crème=Coffee with Cream=قهوة بالكريمة
+Café Viennois=Viennese Coffee=قهوة فيينية
+Café=Coffee=قهوة
+Américano=Americano=أمريكانو
+Capsule=Capsule=كبسولة
+Cappuccino=Cappuccino=كابتشينو
+Capucin=Capucin=كابوسان
+Macchiato=Macchiato=ماكياتو
+Chocolats chauds=Hot Chocolates=شوكولا ساخنة
+Chaud=Hot=ساخن
+Banane Noix=Banana Walnut=موز وجوز
+Restaurant=Restaurant=مطعم
+Pâtisserie=Pastry=حلويات
+Constantine=Constantine=قسنطينة
+Depuis=Since=منذ
+Ouvert dès=Open from=مفتوح من
+Ajouté :=Added:=تمت الإضافة:
+Ajouter=Add=أضف
+Voir ma commande=View my order=عرض طلبي
+Articles=Items=أصناف
+Article=Item=صنف
+Aux=with=مع
+Au=with=مع
+À la=with=مع
+Et=and=و
+Ou=or=أو
+Pizzas=Pizzas=بيتزا
+Pasta=Italian pasta=باستا إيطالية
+Antipasti=Antipasti=مقبلات إيطالية
+Dolci italiani=Italian desserts=حلويات إيطالية
+Caffè & boissons=Coffee & drinks=قهوة ومشروبات
+Indisponible=Unavailable=غير متاح
+Commande=Order=طلب
+Mes commandes=My orders=طلباتي
+Livraison=Delivery=توصيل
+Retrait=Pickup=استلام
+Estimation=Estimate=تقدير
+préparation=preparation=تحضير
+min=min=دقيقة
+entre=between=بين
+Fermé=Closed=مغلق
+Ouvert=Open=مفتوح
+Horaires=Opening hours=ساعات العمل
+confirmer=confirm=تأكيد
+Réouverture=Reopens=يعاود فتحه
+Lundi=Monday=الاثنين
+Mardi=Tuesday=الثلاثاء
+Mercredi=Wednesday=الأربعاء
+Jeudi=Thursday=الخميس
+Vendredi=Friday=الجمعة
+Samedi=Saturday=السبت
+Dimanche=Sunday=الأحد
+Allergènes=Allergens=مسببات الحساسية
+Demande=Request=طلب
+article=item=صنف
+Offerte=Free=مجانية
+dès=from=ابتداءً من
+de commande=of the order=من الطلب
+Zone=Zone=منطقة
+Zones=Zones=مناطق
+desservies=served=المخدومة
+délais=times=أوقات
+indicatifs=indicative=تقديرية
+confirmera=will confirm=سيؤكد
+l'heure=the time=الوقت
+Actuellement=Right now=حاليًا
+En attente=Awaiting=قيد الانتظار
+Acceptée=Accepted=مقبولة
+En préparation=Being prepared=قيد التحضير
+Prête=Ready=جاهزة
+En cours de livraison=Out for delivery=قيد التوصيل
+Terminée=Completed=مكتملة
+Annulée=Cancelled=ملغاة
+Sous-total=Subtotal=المجموع الفرعي
+Article=Item=صنف
+Articles=Items=أصناف
+Statut=Status=الحالة
+Confirmer=Confirm=تأكيد
+Modifier=Change=تعديل
+Point=Point=نقطة
+Position=Location=الموقع
+Heure=Time=الوقت
+restaurant=restaurant=المطعم
+Préparation=Preparation=تحضير
+Livraison estimée=Estimated delivery=التوصيل المتوقع
+Retrait estimé=Estimated pickup=الاستلام المتوقع`;
+const UIM={en:{},ar:{}},D={};
+const nz=x=>x.replace(/[\u202f\u00a0]/g," ");
+UIR.split("\n").forEach(l=>{const[f,e,a]=l.split("|");UIM.en[nz(f)]=e;UIM.ar[nz(f)]=a});
+UIM.en[nz("Livraison : "+fmt(FEE)+", offerte dès "+fmt(FREE)+" de commande. Les zones desservies sont confirmées à la commande.")]="Delivery: "+fmt(FEE)+", free from "+fmt(FREE)+" of order. Delivery areas are confirmed when you order.";
+UIM.ar[nz("Livraison : "+fmt(FEE)+", offerte dès "+fmt(FREE)+" de commande. Les zones desservies sont confirmées à la commande.")]="التوصيل: "+fmt(FEE)+"، مجاني ابتداءً من "+fmt(FREE)+" من قيمة الطلب. تؤكَّد المناطق المخدومة عند الطلب.";
+DICT.split("\n").forEach(l=>{const[f,e,a]=l.split("=");D[f.toLowerCase()]={en:e,ar:a}});
+const KS=Object.keys(D).sort((a,b)=>b.length-a.length).map(k=>k.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"));
+const RX=new RegExp("(?<![\\p{L}\\p{N}])(?:"+KS.join("|")+")(?![\\p{L}\\p{N}])","giu");
+let L="fr";
+function core(t){const k=nz(t);if(UIM[L][k]!==undefined)return UIM[L][k];
+let o=t.replace(RX,m=>{const v=D[m.toLowerCase()][L];return L==="en"&&m[0]!==m[0].toUpperCase()?v[0].toLowerCase()+v.slice(1):v});
+return L==="ar"?o.replace(/,\s/g,"، "):o}
+function trs(f){if(L==="fr")return f;const m=/^(\s*[^\p{L}\p{N}]*)([\s\S]*?)(\s*)$/u.exec(f);if(!m||!m[2])return f;let o=m[1]+core(m[2])+m[3];return L==="ar"?o.replace(/\bDA\b/g,"دج"):o}
+const SKIP=new Set(["SCRIPT","STYLE","SVG","TEXTAREA"]);
+function tx(n){if(n.nodeType===3){if(n.parentElement&&n.parentElement.closest("[data-nt]"))return;if(n.__f===undefined)n.__f=n.nodeValue;n.nodeValue=trs(n.__f);return}
+if(n.nodeType!==1||SKIP.has(n.tagName.toUpperCase())||n.closest("[data-nt]"))return;
+for(const a of["placeholder","aria-label","alt"])if(n.hasAttribute(a)){n.__a=n.__a||{};if(!(a in n.__a))n.__a[a]=n.getAttribute(a);n.setAttribute(a,trs(n.__a[a]))}
+n.childNodes.forEach(tx)}
+function setLang(l){L=l;document.documentElement.lang=l;document.documentElement.dir=l==="ar"?"rtl":"ltr";try{localStorage.setItem("lc-lang",l)}catch(e){}$("#lang").value=l;tx(document.body)}
+new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(tx))).observe(document.body,{childList:true,subtree:true});
+$("#lang").onchange=e=>setLang(e.target.value);
+{let l="fr";try{l=localStorage.getItem("lc-lang")||""}catch(e){}if(!["fr","en","ar"].includes(l)){const n=(navigator.language||"fr").slice(0,2);l=n==="ar"||n==="en"?n:"fr"}setLang(l)}
+let ly=0;addEventListener("scroll",()=>{const y=scrollY,h=document.querySelector("header.nav");h.classList.toggle("hide",y>ly&&y>90);ly=y},{passive:true});
+addEventListener("hashchange",route);
+// Render immediately so the landing page appears without waiting for menu/config network calls.
+route();
+Promise.all([fetch("/api/menu?includeUnavailable=1").then(r=>r.json()),refreshService()]).then(([l])=>{
+  build(l);mkGR();
+  Object.keys(cart).forEach(k=>{const [id]=k.split("|");const v=cart[k];if(!ITEMS.some(i=>i.id==id)||!(v.qty>0))delete cart[k]});
+  sync();
+  // Hydrate current route with loaded data.
+  route();
+}).catch(()=>{
+  // Keep shell/content visible; show a non-destructive notice if menu data failed to load.
+  const app=$("#app"); if(app && !ITEMS.length) app.innerHTML="<section><div class=\"wrap\"><p>Menu indisponible, réessayez dans un instant.</p></div></section>";
+});
+</script>
+<!-- Motion layer: GSAP (core, ScrollTrigger) + Lenis + centralized animations. Remove these to disable. -->
+<script defer src="/vendor/gsap.min.js"></script>
+<script defer src="/vendor/ScrollTrigger.min.js"></script>
+<script defer src="/vendor/lenis.min.js"></script>
+<script defer src="/animations.js?v=6"></script>
+</body>
+</html>

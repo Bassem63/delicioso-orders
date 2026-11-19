@@ -1,0 +1,51 @@
+LibsqlError: SQL_INPUT_ERROR: SQLite input error: no such column: "now" - should this be a string literal in single-quotes? (at offset 47)
+    at mapHranaError (C:\Users\User\Desktop\Open_Code\delicioso\node_modules\@libsql\client\lib-cjs\hrana.js:340:16)
+    at C:\Users\User\Desktop\Open_Code\delicioso\node_modules\@libsql\client\lib-cjs\http.js:120:52
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async Object.run (C:\Users\User\Desktop\Open_Code\delicioso\db-sync.cjs:41:18)
+    at async Server.handleRequest (C:\Users\User\Desktop\Open_Code\delicioso\server.cjs:644:9) {
+  code: 'SQL_INPUT_ERROR',
+  extendedCode: undefined,
+  rawCode: undefined,
+  [cause]: [ResponseError: SQLite input error: no such column: "now" - should this be a string literal in single-quotes? (at offset 47)] {
+    code: 'SQL_INPUT_ERROR',
+    proto: {
+      message: 'SQLite input error: no such column: "now" - should this be a string literal in single-quotes? (at offset 47)',
+      code: 'SQL_INPUT_ERROR'
+    }
+  }
+}
+LibsqlError: SQL_INPUT_ERROR: SQLite input error: no such column: "now" - should this be a string literal in single-quotes? (at offset 47)
+    at mapHranaError (C:\Users\User\Desktop\Open_Code\delicioso\node_modules\@libsql\client\lib-cjs\hrana.js:340:16)
+    at C:\Users\User\Desktop\Open_Code\delicioso\node_modules\@libsql\client\lib-cjs\http.js:120:52
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async Object.run (C:\Users\User\Desktop\Open_Code\delicioso\db-sync.cjs:41:18)
+    at async Server.handleRequest (C:\Users\User\Desktop\Open_Code\delicioso\server.cjs:644:9) {
+  code: 'SQL_INPUT_ERROR',
+  extendedCode: undefined,
+  rawCode: undefined,
+  [cause]: [ResponseError: SQLite input error: no such column: "now" - should this be a string literal in single-quotes? (at offset 47)] {
+    code: 'SQL_INPUT_ERROR',
+    proto: {
+      message: 'SQLite input error: no such column: "now" - should this be a string literal in single-quotes? (at offset 47)',
+      code: 'SQL_INPUT_ERROR'
+    }
+  }
+}
+LibsqlError: SQL_INPUT_ERROR: SQLite input error: no such column: "now" - should this be a string literal in single-quotes? (at offset 47)
+    at mapHranaError (C:\Users\User\Desktop\Open_Code\delicioso\node_modules\@libsql\client\lib-cjs\hrana.js:340:16)
+    at C:\Users\User\Desktop\Open_Code\delicioso\node_modules\@libsql\client\lib-cjs\http.js:120:52
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async Object.run (C:\Users\User\Desktop\Open_Code\delicioso\db-sync.cjs:41:18)
+    at async Server.handleRequest (C:\Users\User\Desktop\Open_Code\delicioso\server.cjs:644:9) {
+  code: 'SQL_INPUT_ERROR',
+  extendedCode: undefined,
+  rawCode: undefined,
+  [cause]: [ResponseError: SQLite input error: no such column: "now" - should this be a string literal in single-quotes? (at offset 47)] {
+    code: 'SQL_INPUT_ERROR',
+    proto: {
+      message: 'SQLite input error: no such column: "now" - should this be a string literal in single-quotes? (at offset 47)',
+      code: 'SQL_INPUT_ERROR'
+    }
+  }
+}
