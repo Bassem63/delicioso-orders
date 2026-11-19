@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#010736"><link rel="icon" type="image/svg+xml" href="/delicioso-mark.svg"><title>Delicioso · Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--c:#010736;--bg:#FCF1D0;--ink:#010736;--mut:#59627c;--line:#e5daba;--card:#fffaf0;--accent:#22396F}
+*{box-sizing:border-box}body{margin:0;font:15px/1.45 system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:var(--c);color:#FCF1D0;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+button{font:inherit;cursor:pointer;border:1.5px solid var(--line);background:var(--card);color:var(--ink);padding:6px 12px;border-radius:8px}
+button.pri{background:var(--c);color:#fff;border-color:var(--c)}button.bad{color:#c0392b}
+.avail-toggle{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-width:132px;padding:7px 11px;border-radius:999px;font-size:13px;font-weight:700;transition:transform .15s,box-shadow .15s}.avail-toggle:hover{transform:translateY(-1px);box-shadow:0 4px 12px #01073618}.avail-toggle:disabled{opacity:.55;cursor:wait;transform:none}.avail-toggle.yes{background:#eef0dc;border-color:#22396f52;color:#0d1c42}.avail-toggle.no{background:#f3e5bd;border-color:#22396f4d;color:#010736}.avail-icon{display:grid;place-items:center;width:19px;height:19px;border-radius:50%;background:#ffffffb8;font-size:12px}
+.tabs{display:flex;gap:8px;padding:12px 20px}.tabs button.on{background:var(--ink);color:#fff}
+.wrap{padding:0 20px 30px}.cols{display:grid;grid-template-columns:repeat(var(--cols,4),minmax(230px,1fr));gap:14px;overflow-x:auto}
+.col h3{margin:0 0 8px}.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:10px}
+.card.new{animation:flash 2s}@keyframes flash{from{background:#FCF1D0}}
+.card ul{margin:6px 0;padding-left:18px}.btns{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.muted{color:var(--mut);font-size:13px}.err{color:#c0392b;min-height:1.3em}.ok{color:#0d1c42;min-height:1.3em}
+.login{max-width:340px;margin:80px auto;background:var(--card);padding:24px;border-radius:14px}
+label{display:block;font-weight:600;font-size:14px;margin-bottom:4px}
+input,select,textarea{width:100%;padding:9px 10px;border:1.5px solid var(--line);border-radius:8px;font:inherit;background:#fff;color:var(--ink)}
+input[type=checkbox]{width:auto}
+.form{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px}
+.form h3{margin:0 0 12px}.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.pic{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.pic img,.thumb{width:64px;height:64px;object-fit:cover;border-radius:10px;border:1px solid var(--line);background:#f2e6c1}
+.noimg{width:64px;height:64px;border-radius:10px;border:1px dashed var(--line);display:grid;place-items:center;color:var(--mut);font-size:12px;text-align:center}
+.bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}.bar input,.bar select{flex:1;min-width:160px}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden}td,th{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+.hide{display:none!important}
+/* Delicioso admin identity */
+body{min-height:100vh;background:radial-gradient(ellipse at 90% 0,#f2e6c1 0,transparent 40%),var(--bg);font-family:"Manrope",system-ui,sans-serif}h1,h2,.admin-brand b{font-family:"Fraunces",Georgia,serif}
+header{position:sticky;top:0;z-index:5;background:linear-gradient(105deg,#010736,#0d1c42 65%,#22396f);padding:12px clamp(16px,4vw,42px);box-shadow:0 8px 26px #01073624}
+.admin-brand{display:flex;align-items:center;gap:10px;color:#fcf1d0}.admin-brand img{width:46px;height:46px;object-fit:contain}.admin-brand b{display:block;font-size:20px;letter-spacing:.04em}.admin-brand small{display:block;color:#fcf1d0b8;font-size:12px;letter-spacing:.08em;text-transform:uppercase}.admin-tools{display:flex;align-items:center;gap:14px}.admin-tools #live{color:#fcf1d0!important}
+.admin-tools #out{border-color:#fcf1d066;background:#ffffff12;color:#fcf1d0;border-radius:999px;padding:8px 15px}.admin-tools #out:hover{background:#ffffff24}
+.tabs{position:sticky;top:70px;z-index:4;padding:14px clamp(16px,4vw,42px);background:#fcf1d0eF;backdrop-filter:blur(12px);border-bottom:1px solid var(--line);overflow-x:auto}.tabs button{flex:0 0 auto;border-radius:999px;padding:9px 17px;font-weight:700;background:transparent}.tabs button.on{background:#010736;color:#fcf1d0}
+.wrap{max-width:1480px;margin:0 auto;padding:22px clamp(16px,4vw,42px) 36px}.cols{gap:16px}.col h3{color:#22396f;font-size:16px;letter-spacing:.01em}
+.card,.form,.login{background:var(--card);border:1px solid #22396f1c;border-radius:18px;box-shadow:0 10px 30px #0107360c}.card{padding:16px;transition:transform .18s,box-shadow .18s}.card:hover{transform:translateY(-2px);box-shadow:0 15px 34px #01073616}.card.new{animation:flash 2s}.form{padding:22px}
+button{border-radius:10px;padding:8px 13px;transition:transform .15s,background .15s,border-color .15s,box-shadow .15s}button:hover{border-color:#22396f70;box-shadow:0 5px 14px #01073612}button:active{transform:translateY(1px)}button.pri{background:#010736;color:#fcf1d0;border-color:#010736;font-weight:700}button.pri:hover{background:#22396f;border-color:#22396f}button.bad{color:#8d3038}button:disabled{opacity:.55;cursor:wait}
+.avail-toggle.yes{background:#eef0dc;border-color:#22396f52;color:#0d1c42}.avail-toggle.no{background:#f3e5bd;border-color:#22396f4d;color:#010736}
+input,select,textarea{background:#fffdf6;border-color:var(--line);border-radius:10px}input:focus,select:focus,textarea:focus{outline:0;border-color:#22396f;box-shadow:0 0 0 3px #22396f1e}
+table{min-width:720px;border-radius:16px;box-shadow:0 10px 30px #0107360c}th{background:#0d1c42;color:#fcf1d0;font-weight:700}td,th{padding:11px 12px;border-color:var(--line)}tbody tr:hover{background:#f7efd8}
+.login{max-width:400px;margin:clamp(48px,12vh,110px) auto;padding:30px}.login h2{color:#010736}.login .pri{min-width:120px}
+.login-brand{display:flex;align-items:center;gap:14px;margin-bottom:20px}.login-brand img{width:62px;height:62px;object-fit:contain}.login-brand h2{margin:0}.login-brand p{margin:3px 0 0;color:var(--mut);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.dash-intro{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:20px}.dash-intro h1{margin:0;color:var(--c);font-size:clamp(26px,4vw,38px);letter-spacing:-.04em}.dash-kicker{margin:0 0 4px;color:#22396f;font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}.period-switch{display:flex;gap:6px;padding:5px;background:#22396f12;border-radius:999px}.period-switch button{border:0;border-radius:999px;background:transparent;padding:8px 13px;font-size:13px;font-weight:700;color:#59627c}.period-switch button.on{background:#010736;color:#fcf1d0;box-shadow:0 4px 12px #01073624}.metric-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:14px;margin-bottom:16px}.metric-card,.chart-card{border:1px solid #22396f1c;border-radius:18px;background:var(--card);box-shadow:0 10px 30px #0107360c}.metric-card{padding:20px;min-height:116px}.metric-card.featured{background:linear-gradient(135deg,#010736,#22396f);color:#fcf1d0}.metric-label{display:block;color:#59627c;font-size:13px;font-weight:600}.metric-card.featured .metric-label{color:#fcf1d0b8}.metric-value{display:block;margin-top:9px;font-size:clamp(24px,3.3vw,34px);font-weight:800;letter-spacing:-.04em}.metric-foot{display:block;margin-top:3px;color:#59627c;font-size:12px}.metric-card.featured .metric-foot{color:#fcf1d0ad}.chart-card{padding:20px}.chart-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}.chart-heading h2{margin:0;color:#010736;font-size:19px}.chart-legend{display:flex;align-items:center;gap:7px;color:#59627c;font-size:12px}.chart-dot{width:9px;height:9px;border-radius:50%;background:#22396f}.chart-wrap{height:310px;position:relative}#salesChart{width:100%;height:100%;display:block;touch-action:pan-y}.chart-tooltip{position:absolute;z-index:2;pointer-events:none;min-width:130px;padding:9px 11px;border-radius:10px;background:#010736;color:#fcf1d0;font-size:12px;line-height:1.55;box-shadow:0 8px 24px #01073630;transform:translate(-50%,-110%)}.chart-tooltip[hidden]{display:none}.sales-message{min-height:20px;margin:4px 2px 0;color:#59627c;font-size:12px}
+.sales-detail-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);gap:16px;margin-top:16px;align-items:start}.sales-days-card,.sales-items-card{min-width:0;animation:rise-in .45s both}.sales-items-card{animation-delay:.06s}.sales-days-card .chart-heading,.sales-items-card .chart-heading{margin-bottom:8px}.sales-subtitle{margin:0 0 12px;color:var(--mut);font-size:13px}.sales-live-dot{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;background:#22396f0d;color:#22396f;font-size:11px;font-weight:700;white-space:nowrap}.sales-live-dot:before{content:"";width:7px;height:7px;border-radius:50%;background:#45a477;box-shadow:0 0 0 4px #45a4771c}.sales-item-count{color:var(--mut);font-size:12px;font-weight:700}.sales-table-scroll{max-height:390px;overflow:auto;border:1px solid var(--line);border-radius:12px}.sales-table{min-width:0;box-shadow:none;border-radius:0;font-size:13px}.sales-table th{position:sticky;top:0;z-index:1;padding:10px;background:#0d1c42}.sales-table td{padding:9px 10px}.sales-table tbody tr{transition:background .18s,transform .18s}.sales-table tbody tr:hover{background:#f3ecd4}.sales-table .day-select{width:100%;padding:2px 0;border:0;background:transparent;text-align:left;color:var(--ink);font-weight:700;box-shadow:none}.sales-table .day-select:hover{color:#22396f;text-decoration:underline}.sales-table tr.selected{background:#22396f10}.sales-table .money{font-weight:800;color:#22396f;text-align:right;white-space:nowrap}.sales-table td:last-child,.sales-table th:last-child{text-align:right}.sales-date-picker{margin:12px 0}.sales-date-picker label{display:block;margin-bottom:5px;color:var(--mut);font-size:12px}.sales-date-picker>div{display:flex;gap:8px}.sales-date-picker input{min-width:0}.sales-date-picker button{flex:0 0 auto}.sales-day-summary{margin:12px 0;padding:11px 13px;border-radius:12px;background:linear-gradient(120deg,#22396f0d,#fcf1d0);color:#0d1c42;font-size:13px;font-weight:700}.sales-empty{text-align:center!important;padding:22px!important;color:var(--mut)!important;font-weight:500!important}.metric-card{transition:transform .18s,box-shadow .18s}.metric-card:hover{transform:translateY(-2px);box-shadow:0 15px 38px #01073618}@keyframes rise-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:760px){header{padding:10px 14px}.admin-brand img{width:38px;height:38px}.admin-brand b{font-size:17px}.admin-tools{gap:7px}.tabs{top:58px;padding:10px 14px}.tabs button{padding:8px 12px}.wrap{padding:16px 14px 28px}.cols{grid-template-columns:repeat(4,minmax(245px,1fr))}.form{padding:16px}}
+@media(max-width:760px){.metric-grid{grid-template-columns:1fr 1fr}.metric-card.featured{grid-column:1/-1}.metric-card{padding:16px;min-height:98px}.chart-card{padding:14px}.chart-wrap{height:250px}.period-switch{width:100%;justify-content:space-between}.period-switch button{padding:8px 10px;font-size:12px}.dash-intro{align-items:flex-start}}
+@media(max-width:900px){.sales-detail-grid{grid-template-columns:1fr}.sales-table-scroll{max-height:320px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:13px;background:#fffdf6;border:1.5px solid var(--line);padding:6px 10px;border-radius:999px;margin:0}
+.hours-grid{display:grid;gap:8px}
+.hours-row{display:grid;grid-template-columns:110px 90px 1fr;gap:8px;align-items:center}
+.hours-row .hours-day{font-weight:600;font-size:14px}
+.hours-row .ranges{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.hours-row input{width:auto}
+.zones-row{display:flex;gap:8px;align-items:center;margin-bottom:6px;flex-wrap:wrap}
+.zones-row input{width:auto}
+/* allergen / dietary option chips */
+.opt-chip{display:inline-flex;align-items:center;gap:4px;background:#fffdf6;border:1.5px solid var(--line);padding:4px 8px;border-radius:999px}
+.opt-chip input{width:150px;padding:5px 7px}
+.opt-chip button{padding:2px 9px;line-height:1.1;border-radius:999px}
+/* ---------- responsive: tablets & phones (admin) ---------- */
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:16px}
+.tabs{scrollbar-width:none;-webkit-overflow-scrolling:touch}.tabs::-webkit-scrollbar{display:none}
+@media(max-width:1100px){.cols{gap:14px}}
+@media(max-width:900px){.cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){
+  .cols{grid-template-columns:minmax(0,1fr)}
+  header{padding-left:calc(14px + env(safe-area-inset-left));padding-right:calc(14px + env(safe-area-inset-right))}
+  .tabs{padding-left:calc(14px + env(safe-area-inset-left));padding-right:calc(14px + env(safe-area-inset-right))}
+  .wrap{padding-left:calc(14px + env(safe-area-inset-left));padding-right:calc(14px + env(safe-area-inset-right))}
+  .hours-row{grid-template-columns:1fr auto}
+  .hours-row .ranges{grid-column:1/-1}
+  .bar input,.bar select{min-width:0}
+  .dash-intro h1{font-size:clamp(24px,7vw,32px)}
+  .sales-detail-grid{gap:14px}
+}
+@media(max-width:560px){
+  .admin-tools #live{display:none}
+  .opt-chip{display:flex;width:100%}
+  .opt-chip input{width:auto;flex:1;min-width:0}
+  .hours-row input[type=time]{width:96px;min-width:0}
+  .hours-row .ranges>span{flex-wrap:wrap;max-width:100%}
+  .login{margin:40px 14px;padding:22px}
+  .zones-row input{width:100%}
+  .sales-date-picker>div{flex-wrap:wrap}
+  .sales-date-picker button{flex:1 1 auto}
+}
+@media(max-width:480px){
+  .metric-grid{grid-template-columns:1fr}
+  .metric-card.featured{grid-column:auto}
+  .chart-wrap{height:215px}
+  .period-switch button{padding:7px 9px;font-size:12px}
+  .tabs button{padding:8px 11px;font-size:13px}
+}
+@media(max-width:360px){
+  .admin-brand small{display:none}
+  .tabs button{padding:7px 9px;font-size:12px}
+}
+.m-break{display:none}
+/* menu list: compact card per dish below tablet width so Modifier/Supprimer stay reachable without sideways scrolling */
+@media(max-width:900px){
+  .table-scroll{overflow:visible;border-radius:0}
+  .table-scroll table{min-width:0;display:block;background:transparent;box-shadow:none;border-radius:0}
+  .table-scroll thead{display:none}
+  .table-scroll tbody{display:block}
+  .table-scroll tr{display:flex;flex-wrap:wrap;align-items:center;column-gap:10px;row-gap:3px;background:var(--card);border:1px solid #22396f1c;border-radius:14px;box-shadow:0 8px 22px #0107360c;padding:10px 12px;margin:0 0 10px}
+  .table-scroll td{border:0;padding:1px 0;text-align:left;vertical-align:middle}
+  /* line 1: photo · name · availability */
+  .table-scroll td.m-photo{order:1;flex:0 0 auto;padding:0}
+  .table-scroll td.m-photo .thumb,.table-scroll td.m-photo .noimg{width:46px;height:46px;border-radius:9px}
+  .table-scroll td.m-name{order:2;flex:1 1 84px;min-width:0;font-size:16px;font-weight:800;color:#010736;line-height:1.25}
+  .table-scroll td.m-avail{order:3;flex:0 0 auto}
+  .table-scroll .avail-toggle{min-width:0;padding:6px 10px;font-size:12.5px}
+  /* full-width break forces the meta line to start on its own row */
+  .table-scroll td.m-break{order:4;display:block;flex:0 0 100%;height:0;padding:0;margin:0;border:0}
+  /* line 2: category · price · prep (values only) */
+  .table-scroll td[data-label="Catégorie"],
+  .table-scroll td[data-label="Prix"],
+  .table-scroll td[data-label="Préparation"]{order:5;flex:0 0 auto;font-size:13px;color:#4a5670;white-space:nowrap}
+  .table-scroll td[data-label="Catégorie"]::before,
+  .table-scroll td[data-label="Prix"]::before,
+  .table-scroll td[data-label="Préparation"]::before{content:none}
+  .table-scroll td[data-label="Catégorie"]::after,
+  .table-scroll td[data-label="Prix"]::after{content:"·";margin:0 7px;color:#9aa4b8}
+  /* full width: details then action buttons */
+  .table-scroll td.m-details{order:6;flex:1 1 100%;font-size:12.5px;line-height:1.4;color:#4a5670;padding-top:3px}
+  .table-scroll td.m-details::before{content:none}
+  .table-scroll td.m-actions{order:7;flex:1 1 100%;display:flex;gap:8px;padding-top:9px;margin-top:5px;border-top:1px solid var(--line)}
+  .table-scroll td.m-actions button{flex:1 1 0;padding:8px 10px;font-size:13px}
+  .table-scroll td.m-actions button{flex:1 1 0;padding:8px 10px;font-size:13px}
+}
+/* table reservations */
+.rv-day{margin:0 0 18px}
+.rv-day h3{text-transform:capitalize;margin:0 0 8px;color:var(--accent);font-size:17px}
+.rv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.rv-card{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:6px}
+.rv-card.wait{border-left:4px solid #cbb26a}.rv-card.call{border-left:4px solid #d97a2b}.rv-card.ok{border-left:4px solid #3a8a4d}.rv-card.bad{border-left:4px solid #c0392b}.rv-card.off{border-left:4px solid #aab3c2}
+.rv-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.rv-top b{font-size:18px}
+.rv-badge{font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px}
+.rv-badge.wait{background:#fff2d0;color:#946200}.rv-badge.call{background:#ffe1cd;color:#ad4713}.rv-badge.ok{background:#ddf1de;color:#1e6a30}.rv-badge.bad{background:#fbdede;color:#a32626}.rv-badge.off{background:#e9edf2;color:#5b6480}
+.rv-note{background:#fff3d3;border-radius:8px;padding:6px 9px}
+.rv-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.tables-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.tables-caps{display:flex;gap:10px;flex-wrap:wrap}
+.tcap{display:inline-flex;align-items:center;gap:6px;background:#fffdf6;border:1.5px solid var(--line);border-radius:10px;padding:6px 10px}
+.tcap input{width:70px}
+.rv-edited{font-size:12px;font-weight:700;color:#8a5a00;background:#fff2d0;border-radius:8px;padding:4px 8px;align-self:flex-start}
+@media(max-width:560px){.rv-grid{grid-template-columns:1fr}}
+</style></head><body>
+<div id="login" class="login"><div class="login-brand"><img src="/delicioso-mark.svg" alt=""><div><h2>Delicioso</h2><p>Administration</p></div></div><form id="loginForm"><label for="pw">Mot de passe</label><input id="pw" type="password" autocomplete="current-password" autofocus required><p class="err" id="lerr" role="status" aria-live="polite"></p><button class="pri" id="go" type="submit">Connexion</button></form></div>
+<div id="app" class="hide">
+  <header><div class="admin-brand"><img src="/delicioso-mark.svg" alt=""><div><b>Delicioso</b><small>Gestion</small></div></div><span class="admin-tools"><span id="live" class="muted">● connexion…</span> <button id="out">Quitter</button></span></header>
+  <div class="tabs"><button data-t="dashboard" class="on">📊 Ventes</button><button data-t="orders">Commandes</button><button data-t="reservations">🍽️ Réservations</button><button data-t="menu">Menu</button><button data-t="settings">⚙️ Réglages</button><button data-t="password">Sécurité</button></div>
+  <div class="wrap" id="dashboardTab">
+    <div class="dash-intro"><div><p class="dash-kicker">Delicioso · aperçu de l’activité</p><h1>Ventes & revenus</h1><p class="muted" id="salesCaption">Les commandes terminées sont comptabilisées en heure d’Algérie.</p></div>
+      <div class="period-switch" id="salesPeriods" aria-label="Période des ventes"><button data-period="daily" class="on">Jour</button><button data-period="weekly">Semaine</button><button data-period="monthly">Mois</button><button data-period="yearly">Année</button></div>
+    </div>
+    <div class="metric-grid"><article class="metric-card featured"><span class="metric-label">Revenus encaissés</span><strong class="metric-value" id="salesRevenue">—</strong><span class="metric-foot" id="salesRange">Aujourd’hui</span></article>
+      <article class="metric-card"><span class="metric-label">Commandes terminées</span><strong class="metric-value" id="salesOrders">—</strong><span class="metric-foot">Commandes remises au client</span></article>
+      <article class="metric-card"><span class="metric-label">Panier moyen</span><strong class="metric-value" id="salesAverage">—</strong><span class="metric-foot">Revenu moyen par commande</span></article>
+    </div>
+    <div class="chart-card"><div class="chart-heading"><h2>Évolution des ventes</h2><span class="chart-legend"><i class="chart-dot"></i> Revenus</span></div>
+      <div class="chart-wrap"><canvas id="salesChart" aria-label="Graphique des revenus et commandes terminées"></canvas><div id="salesTooltip" class="chart-tooltip" hidden></div></div><p id="salesMessage" class="sales-message" role="status"></p>
+    </div>
+    <div class="sales-detail-grid">
+      <section class="chart-card sales-days-card"><div class="chart-heading"><div><p class="dash-kicker">Détail de la période</p><h2>Ventes jour par jour</h2></div><span class="sales-live-dot">Mis à jour en direct</span></div>
+        <p class="sales-subtitle" id="salesDaysHint">Sélectionnez une journée pour voir les plats vendus.</p>
+        <div class="sales-table-scroll"><table class="sales-table"><thead><tr><th>Journée</th><th>Commandes</th><th>Revenus</th></tr></thead><tbody id="salesDaysBody"></tbody></table></div>
+      </section>
+      <section class="chart-card sales-items-card"><div class="chart-heading"><div><p class="dash-kicker">Articles terminés</p><h2>Plats vendus</h2></div><span class="sales-item-count" id="salesItemCount">0 articles</span></div>
+        <div class="sales-date-picker"><label for="salesDetailDate">Choisir une journée</label><div><input type="date" id="salesDetailDate"><button type="button" class="pri" id="salesDateApply">Afficher</button></div></div>
+        <p class="sales-day-summary" id="salesDaySummary" aria-live="polite">Choisissez une journée pour afficher les ventes.</p>
+        <div class="sales-table-scroll"><table class="sales-table"><thead><tr><th>Plat</th><th>Qté</th><th>Ventes</th></tr></thead><tbody id="salesItemsBody"></tbody></table></div>
+      </section>
+    </div>
+    <section class="chart-card" style="margin-top:16px">
+      <div class="chart-heading"><div><p class="dash-kicker">Analyse du menu</p><h2>Plats les plus vendus</h2></div><span class="sales-live-dot">Sur la période choisie</span></div>
+      <div class="sales-detail-grid">
+        <div><div class="sales-table-scroll"><table class="sales-table"><thead><tr><th>Plat</th><th>Qté</th><th>Ventes</th></tr></thead><tbody id="insTopBody"></tbody></table></div></div>
+        <div><p class="sales-subtitle">Articles actuellement indisponibles</p><div class="sales-table-scroll"><table class="sales-table"><thead><tr><th>Article</th><th>Catégorie</th></tr></thead><tbody id="insUnavailBody"></tbody></table></div></div>
+      </div>
+    </section>
+  </div>
+  <div class="wrap hide" id="orders">
+    <div class="bar" id="orderBar">
+      <select id="ofStatus" aria-label="Filtrer par statut"><option value="">Tous les statuts</option><option value="pending">En attente</option><option value="accepted">Acceptées</option><option value="preparing">En préparation</option><option value="ready">Prêtes</option><option value="out_for_delivery">En livraison</option><option value="completed">Terminées</option><option value="cancelled">Annulées</option></select>
+      <select id="ofMode" aria-label="Filtrer par mode"><option value="">Livraison &amp; retrait</option><option value="delivery">Livraison</option><option value="emporter">Retrait</option></select>
+      <input id="ofFrom" type="date" aria-label="Du"><input id="ofTo" type="date" aria-label="Au">
+      <input id="ofQ" type="search" placeholder="Rechercher (code, nom, téléphone)" aria-label="Recherche">
+      <button type="button" id="ofApply" class="pri">Filtrer</button>
+      <button type="button" id="ofClear">Effacer</button>
+      <button type="button" id="exportCsv">⬇️ Exporter CSV</button>
+      <button type="button" id="pauseBtn" class="bad">Mettre en pause</button>
+    </div>
+    <p class="muted" id="orderFilterInfo" aria-live="polite"></p>
+    <div class="cols" id="cols"></div>
+  </div>
+    <div class="cols" id="cols"></div>
+  </div>
+  <div class="wrap hide" id="reservationsTab">
+    <div class="bar">
+      <select id="rvStatus" aria-label="Filtrer par statut"><option value="">Tous les statuts</option><option value="pending">À valider</option><option value="phone_required">À rappeler (aujourd’hui)</option><option value="approved">Confirmées</option><option value="completed">Terminées</option><option value="rejected">Refusées</option><option value="cancelled">Annulées</option></select>
+      <input id="rvDate" type="date" aria-label="Date précise"><input id="rvFrom" type="date" aria-label="Du"><input id="rvTo" type="date" aria-label="Au">
+      <input id="rvQ" type="search" placeholder="Rechercher (nom, téléphone, code)" aria-label="Recherche">
+      <button type="button" id="rvApply" class="pri">Filtrer</button>
+      <button type="button" id="rvClear">Effacer</button>
+    </div>
+    <p class="muted" id="rvInfo" aria-live="polite"></p>
+    <div id="rvList"></div>
+  </div>
+  <div class="wrap hide" id="menuTab">
+    <form class="form" id="mf">
+      <h3 id="ft">Ajouter un article</h3><input type="hidden" id="mid">
+      <div class="fg">
+        <div><label for="mn">Nom</label><input id="mn" required maxlength="80"></div>
+        <div><label for="mc">Catégorie</label><input id="mc" required maxlength="40" list="cats"></div>
+        <div><label for="mp">Prix de base (DA)</label><input id="mp" type="number" min="0" step="10" required></div>
+        <div><label for="mpt">Préparation estimée (minutes)</label><input id="mpt" type="number" min="1" max="240" step="1" value="15" required></div>
+        <div><label for="md">Description (facultatif)</label><input id="md" maxlength="200"></div>
+        <div><label for="mpo">Portion (facultatif)</label><input id="mpo" maxlength="60" placeholder="Ex. 4 parts · 33 cm"></div>
+      </div>
+      <div style="margin-top:14px">
+        <label>Tailles / Variantes de prix <span class="muted">(optionnel, ex. pour les pizzas)</span></label>
+        <div id="msz" class="chips"></div>
+        <button type="button" class="pri" id="addSize" style="margin-top:6px">+ Ajouter une taille</button>
+      </div>
+      <div style="margin-top:14px"><label>Allergènes</label><div class="chips" id="malg"></div></div>
+      <div style="margin-top:14px"><label>Régimes &amp; particularités</label><div class="chips" id="mdiet"></div></div>
+      <div class="pic" style="margin-top:14px">
+        <div id="prev"><div class="noimg">Pas de photo</div></div>
+        <div><label for="mf2">Photo du plat (facultatif)</label><input id="mf2" type="file" accept="image/jpeg,image/png,image/webp">
+          <div class="muted">La photo est réduite automatiquement.</div>
+          <button type="button" id="rmimg" class="bad hide" style="margin-top:6px">Retirer la photo</button></div>
+      </div>
+      <p style="margin:14px 0 4px"><label style="display:inline-flex;gap:6px;align-items:center"><input id="ma" type="checkbox" checked> Disponible à la commande</label></p>
+      <div class="err" id="merr"></div>
+      <button class="pri" id="msave">Enregistrer</button> <button type="button" id="mx" class="hide">Annuler la modification</button>
+    </form><datalist id="cats"></datalist>
+    <div class="bar"><input id="fq" type="search" placeholder="Rechercher un article" aria-label="Rechercher un article"><select id="fc" aria-label="Catégorie"></select></div>
+    <div class="table-scroll"><table><thead><tr><th>Photo</th><th>Nom</th><th>Catégorie</th><th>Prix</th><th>Préparation</th><th>Dispo</th><th>Détails</th><th></th></tr></thead><tbody id="mt"></tbody></table></div>
+  </div>
+  <div class="wrap hide" id="settingsTab">
+    <div class="form">
+      <h3>Service &amp; horaires</h3>
+      <p style="margin:0 0 10px"><label style="display:inline-flex;gap:8px;align-items:center"><input id="pauseOn" type="checkbox"> Mettre les commandes en pause</label></p>
+      <div><label for="pauseMsg">Message de pause (facultatif)</label><input id="pauseMsg" maxlength="240" placeholder="Ex. Cuisine complète, reprise à 19h."></div>
+      <p class="muted" style="margin-top:8px">Laissez les horaires vides pour ne pas les afficher (le client verra « à confirmer avec le restaurant »).</p>
+      <div class="hours-grid" id="hoursGrid" style="margin-top:8px"></div>
+    </div>
+    <div class="form">
+      <h3>Livraison</h3>
+      <p style="margin:0 0 10px"><label style="display:inline-flex;gap:8px;align-items:center"><input id="delOn" type="checkbox"> Proposer la livraison</label></p>
+      <div class="fg"><div><label for="delFee">Frais de livraison (DA)</label><input id="delFee" type="number" min="0" step="10"></div><div><label for="delFree">Livraison offerte à partir de (DA)</label><input id="delFree" type="number" min="0" step="100"></div></div>
+      <div style="margin-top:10px"><label for="delNote">Remarque (facultatif)</label><input id="delNote" maxlength="200" placeholder="Ex. Livraison à Constantine uniquement."></div>
+      <p style="margin:14px 0 6px"><b>Zones de livraison</b> <span class="muted">— si vous en ajoutez, le client devra choisir sa zone.</span></p>
+      <div id="zonesList"></div>
+      <button type="button" id="addZone">+ Ajouter une zone</button>
+    </div>
+    <div class="form">
+      <h3>Retrait sur place</h3>
+      <p style="margin:0"><label style="display:inline-flex;gap:8px;align-items:center"><input id="pickOn" type="checkbox"> Proposer le retrait</label></p>
+      <div style="margin-top:10px"><label for="pickNote">Remarque (facultatif)</label><input id="pickNote" maxlength="200" placeholder="Ex. Retrait au comptoir."></div>
+    </div>
+    <div class="form">
+      <h3>Allergènes &amp; régimes</h3>
+      <p class="muted">Ces listes alimentent le formulaire des plats et s'affichent sur le menu client. Renommez une option, ajoutez-en de nouvelles ou supprimez celles que vous n'utilisez pas.</p>
+      <p style="margin:12px 0 6px"><b>Allergènes</b></p>
+      <div id="allergenEditor" class="chips"></div>
+      <button type="button" data-addopt="allergens" style="margin-top:8px">+ Ajouter un allergène</button>
+      <p style="margin:16px 0 6px"><b>Régimes &amp; particularités</b></p>
+      <div id="dietaryEditor" class="chips"></div>
+      <button type="button" data-addopt="dietary" style="margin-top:8px">+ Ajouter un régime</button>
+    </div>
+    <div class="form">
+      <h3>Réservations de table</h3>
+      <p style="margin:0 0 10px"><label style="display:inline-flex;gap:6px;align-items:center"><input id="resvOn" type="checkbox"> Accepter les demandes de réservation en ligne</label></p>
+      <div class="fg">
+        <div><label for="resvPhone">Numéro affiché aux clients</label><input id="resvPhone" maxlength="20" placeholder="213670195819"></div>
+        <div><label for="resvLead">Ouverture des réservations (jours à l'avance)</label><input id="resvLead" type="number" min="1" max="180" step="1" value="60"></div>
+      </div>
+      <p class="muted" style="margin:10px 0 0">Les créneaux suivent vos horaires d'ouverture (voir plus haut). Les demandes du jour même sont signalées « à rappeler ».</p>
+      <p style="margin:14px 0 6px"><b>Tables disponibles</b> <span class="muted">— combien de tables de chaque taille peuvent être réservées.</span></p>
+      <div id="tablesEditor"></div>
+    </div>
+    <div class="form"><button class="pri" id="saveSettings">Enregistrer les réglages</button> <span class="ok" id="sok" aria-live="polite"></span><span class="err" id="serr" aria-live="polite"></span></div>
+  </div>
+  <div class="wrap hide" id="passwordTab"><form class="form" id="pf" style="max-width:520px">
+    <h3>Changer le mot de passe admin</h3>
+    <label for="pc">Mot de passe actuel</label><input id="pc" type="password" autocomplete="current-password" required>
+    <label for="pn" style="margin-top:12px">Nouveau mot de passe</label><input id="pn" type="password" autocomplete="new-password" minlength="8" maxlength="100" required>
+    <label for="pconfirm" style="margin-top:12px">Confirmer le nouveau mot de passe</label><input id="pconfirm" type="password" autocomplete="new-password" minlength="8" maxlength="100" required>
+    <p class="muted">8 caractères minimum.</p><div class="err" id="perr"></div><div class="ok" id="pok" aria-live="polite"></div>
+    <button class="pri" id="psave">Enregistrer le nouveau mot de passe</button>
+  </form></div>
+</div>
+<script>
+const $ = s => document.querySelector(s), fmt = n => (n == null ? '—' : n.toLocaleString('fr-FR') + ' DA');
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const COLS = [['pending','🆕 En attente'],['accepted','✅ Acceptées'],['preparing','👨‍🍳 En préparation'],['ready','📦 Prêtes à retirer / livrer'],['out_for_delivery','🚚 En livraison']];
+const NEXT = {pending:[['accepted','Accepter','pri'],['cancelled','Refuser','bad']], accepted:[['preparing','Préparer','pri'],['cancelled','Annuler','bad']],
+              preparing:[['ready','Prête','pri'],['cancelled','Annuler','bad']], ready:[['out_for_delivery','En livraison','pri'],['completed','Terminée','pri']],
+              out_for_delivery:[['completed','Terminée','pri']]};
+const DEFAULT_ALLERGENS = [{ key: 'gluten', label: 'Gluten' },{ key: 'milk', label: 'Lait' },{ key: 'eggs', label: 'Œufs' },{ key: 'nuts', label: 'Fruits à coque' },{ key: 'peanuts', label: 'Arachides' },{ key: 'soy', label: 'Soja' },{ key: 'fish', label: 'Poisson' },{ key: 'shellfish', label: 'Crustacés' },{ key: 'sesame', label: 'Sésame' },{ key: 'mustard', label: 'Moutarde' },{ key: 'celery', label: 'Céleri' }];
+const DEFAULT_DIETARY = [{ key: 'vegetarian', label: 'Végétarien' },{ key: 'vegan', label: 'Végétalien' },{ key: 'spicy', label: 'Épicé' },{ key: 'gluten-free', label: 'Sans gluten' },{ key: 'lactose-free', label: 'Sans lactose' },{ key: 'halal', label: 'Halal' }];
+let allergenOptions = DEFAULT_ALLERGENS.slice(), dietaryOptions = DEFAULT_DIETARY.slice();
+const WEEKDAYS = [[0,'Dimanche'],[1,'Lundi'],[2,'Mardi'],[3,'Mercredi'],[4,'Jeudi'],[5,'Vendredi'],[6,'Samedi']];
+let token = ''; try { token = sessionStorage.getItem('tok') || ''; } catch {} let orders = new Map(), menu = [], fresh = new Set(), es, salesPeriod = 'daily', salesData = null;
+let pending = null, removeImg = false, curImg = '';        // picture state of the menu form
+
+async function api(path, method = 'GET', data) {
+  const r = await fetch('/api/admin/' + path, { method, headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token }, body: data ? JSON.stringify(data) : undefined });
+  if (r.status === 401) {
+    try { sessionStorage.removeItem('tok'); } catch {}
+    token = null;
+    $('#login').classList.remove('hide');
+    $('#app').classList.add('hide');
+    throw new Error('Session expirée. Reconnectez-vous.');
+  }
+  const j = await r.json(); if (!r.ok) throw new Error(j.error || 'Erreur'); return j;
+}
+async function doLogin() {
+  if (location.protocol === 'file:') { $('#lerr').textContent = 'Ouvrez la page depuis http://localhost:3000/admin.html. Le fichier local ne peut pas contacter le serveur.'; return; }
+  const button = $('#go'); button.disabled = true; button.textContent = 'Connexion…'; $('#lerr').textContent = '';
+  try {
+    const r = await fetch('/api/admin/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: $('#pw').value }) });
+    const j = await r.json().catch(() => ({})); if (!r.ok) throw new Error(j.error || `Erreur serveur (${r.status})`);
+    token = j.token; try { sessionStorage.setItem('tok', token); } catch {} await start();
+  } catch (e) {
+    try { sessionStorage.removeItem('tok'); } catch {} token = null;
+    $('#lerr').textContent = e instanceof TypeError ? 'Impossible de joindre le serveur. Vérifiez que node server.js est lancé sur localhost:3000.' : e.message;
+  } finally { button.disabled = false; button.textContent = 'Connexion'; }
+}
+$('#loginForm').addEventListener('submit', e => { e.preventDefault(); doLogin(); });
+function logout() { try { sessionStorage.removeItem('tok'); } catch {} token = null; es?.close(); location.reload(); }
+$('#out').addEventListener('click', logout);
+
+async function start() {
+  try {
+    (await api('orders')).forEach(o => orders.set(o.id, o));
+    $('#login').classList.add('hide'); $('#app').classList.remove('hide');
+    await loadSettings(true);
+    drawOrders();
+    await loadMenu();
+    await loadSales();
+    await loadInsights();
+    markResvTab(0);
+    await loadReservations();
+    es = new EventSource('/api/admin/stream?token=' + token);
+    es.onopen = () => $('#live').textContent = '● en direct';
+    es.onerror = () => $('#live').textContent = '○ reconnexion…';
+    es.addEventListener('new', e => { const o = JSON.parse(e.data); orders.set(o.id, o); fresh.add(o.id); beep(); drawOrders(); });
+    es.addEventListener('update', e => { const o = JSON.parse(e.data); orders.set(o.id, o); drawOrders(); if (o.status === 'completed') loadSales(); });
+    es.addEventListener('reservation', e => { resvNew++; markResvTab(resvNew); if (!$('#reservationsTab').classList.contains('hide')) loadReservations(); });
+  } catch (e) {
+    // Don't clear token here - let the 401 handler in api() handle it
+    throw e;
+  }
+}
+function beep() { try { const a = new AudioContext(), o = a.createOscillator(); o.connect(a.destination); o.frequency.value = 880; o.start(); o.stop(a.currentTime + .25); } catch {} }
+
+const SALES_PERIODS = { daily: 'Aujourd’hui', weekly: 'Cette semaine', monthly: 'Ce mois-ci', yearly: 'Cette année' };
+async function loadSales() {
+  $('#salesMessage').textContent = 'Chargement des ventes…';
+  try {
+    salesData = await api('sales?period=' + salesPeriod);
+    $('#salesRevenue').textContent = fmt(salesData.revenue);
+    $('#salesOrders').textContent = salesData.orders.toLocaleString('fr-FR');
+    $('#salesAverage').textContent = fmt(salesData.averageOrder);
+    $('#salesRange').textContent = SALES_PERIODS[salesPeriod];
+    $('#salesMessage').textContent = salesData.orders ? `${salesData.orders} commande${salesData.orders > 1 ? 's' : ''} terminée${salesData.orders > 1 ? 's' : ''} sur la période.` : 'Aucune commande terminée sur cette période pour le moment.';
+    if (!$('#salesDetailDate').value) $('#salesDetailDate').value = salesData.today;
+    $('#salesDetailDate').max = salesData.today;
+    renderSalesDays(); drawSalesChart(); await loadSalesDay($('#salesDetailDate').value || salesData.today);
+  } catch (e) { $('#salesMessage').textContent = e.message || 'Impossible de charger les ventes.'; }
+}
+function renderSalesDays() {
+  const days = salesData?.days || [];
+  $('#salesDaysHint').textContent = salesPeriod === 'yearly' ? 'Toute l’année · choisissez n’importe quelle journée pour voir ses plats.' : salesPeriod === 'monthly' ? 'Chaque journée du mois · sélectionnez une ligne pour afficher les plats vendus.' : salesPeriod === 'weekly' ? 'Cette semaine · sélectionnez une journée pour afficher les plats vendus.' : 'Aujourd’hui · le graphique montre aussi les ventes heure par heure.';
+  $('#salesDaysBody').innerHTML = days.length ? days.slice().reverse().map(day => `<tr class="${$('#salesDetailDate').value === day.date ? 'selected' : ''}"><td><button type="button" class="day-select" data-sales-date="${day.date}">${esc(day.label)}</button></td><td>${day.orders}</td><td class="money">${fmt(day.revenue)}</td></tr>`).join('') : '<tr><td colspan="3" class="sales-empty">Aucune journée sur cette période.</td></tr>';
+}
+async function loadSalesDay(date) {
+  if (!date) return;
+  $('#salesDaySummary').textContent = 'Chargement des plats vendus…';
+  try {
+    const data = await api('sales/day?date=' + encodeURIComponent(date));
+    const totalQty = data.items.reduce((sum, item) => sum + item.quantity, 0);
+    const readableDate = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'full', timeZone: 'Africa/Algiers' }).format(new Date(`${data.date}T12:00:00Z`));
+    $('#salesDaySummary').textContent = `${readableDate} · ${data.orders} commande${data.orders === 1 ? '' : 's'} terminée${data.orders === 1 ? '' : 's'} · ${fmt(data.revenue)} encaissés`;
+    $('#salesItemCount').textContent = `${totalQty} article${totalQty === 1 ? '' : 's'}`;
+    $('#salesItemsBody').innerHTML = data.items.length ? data.items.map(item => `<tr><td>${esc(item.name)}</td><td>${item.quantity}</td><td class="money">${fmt(item.revenue)}</td></tr>`).join('') : '<tr><td colspan="3" class="sales-empty">Aucun plat vendu ce jour-là.</td></tr>';
+    document.querySelectorAll('#salesDaysBody tr').forEach(row => row.classList.toggle('selected', row.querySelector('[data-sales-date]')?.dataset.salesDate === date));
+  } catch (e) { $('#salesDaySummary').textContent = e.message || 'Impossible de charger les plats vendus.'; $('#salesItemsBody').innerHTML = '<tr><td colspan="3" class="sales-empty">Réessayez dans un instant.</td></tr>'; }
+}
+function drawSalesChart() {
+  if (!salesData) return;
+  const canvas = $('#salesChart'), rect = canvas.getBoundingClientRect();
+  if (rect.width < 10 || rect.height < 10) return;
+  const dpr = window.devicePixelRatio || 1, width = rect.width, height = rect.height;
+  canvas.width = Math.round(width * dpr); canvas.height = Math.round(height * dpr);
+  const ctx = canvas.getContext('2d'); ctx.scale(dpr, dpr); ctx.clearRect(0, 0, width, height);
+  const points = salesData.points, values = points.map(p => p.revenue), maxValue = Math.max(0, ...values);
+  const step = maxValue ? 10 ** Math.floor(Math.log10(maxValue)) : 1, ceiling = maxValue ? Math.ceil(maxValue / step) * step : 1;
+  const pad = { top: 14, right: 14, bottom: 32, left: 56 }, plotW = width - pad.left - pad.right, plotH = height - pad.top - pad.bottom;
+  const xy = values.map((v, i) => ({ x: pad.left + (points.length < 2 ? plotW / 2 : i * plotW / (points.length - 1)), y: pad.top + plotH - (v / ceiling) * plotH }));
+  ctx.font = '11px "Manrope", sans-serif'; ctx.textBaseline = 'middle'; ctx.textAlign = 'right';
+  for (let i = 0; i <= 4; i++) {
+    const y = pad.top + plotH * i / 4, value = ceiling * (4 - i) / 4;
+    ctx.strokeStyle = '#22396f18'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(width - pad.right, y); ctx.stroke();
+    ctx.fillStyle = '#59627c'; ctx.fillText(value >= 1000 ? `${Math.round(value / 1000)}k` : Math.round(value).toString(), pad.left - 9, y);
+  }
+  const area = ctx.createLinearGradient(0, pad.top, 0, pad.top + plotH); area.addColorStop(0, '#22396f45'); area.addColorStop(1, '#22396f03');
+  ctx.beginPath(); ctx.moveTo(xy[0].x, pad.top + plotH); xy.forEach(p => ctx.lineTo(p.x, p.y)); ctx.lineTo(xy[xy.length - 1].x, pad.top + plotH); ctx.closePath(); ctx.fillStyle = area; ctx.fill();
+  ctx.beginPath(); xy.forEach((p, i) => i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)); ctx.strokeStyle = '#22396f'; ctx.lineWidth = 3; ctx.lineJoin = 'round'; ctx.lineCap = 'round'; ctx.stroke();
+  xy.forEach(p => { ctx.beginPath(); ctx.arc(p.x, p.y, 3.5, 0, Math.PI * 2); ctx.fillStyle = '#fcf1d0'; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = '#22396f'; ctx.stroke(); });
+  const stride = points.length > 18 ? Math.ceil(points.length / 9) : points.length > 8 ? 2 : 1;
+  ctx.textAlign = 'center'; ctx.textBaseline = 'top'; ctx.fillStyle = '#59627c';
+  points.forEach((p, i) => { if (i % stride === 0 || i === points.length - 1) ctx.fillText(p.label, xy[i].x, pad.top + plotH + 10); });
+  canvas.onpointermove = e => {
+    const r = canvas.getBoundingClientRect(), x = e.clientX - r.left, idx = Math.max(0, Math.min(points.length - 1, Math.round((x - pad.left) / plotW * (points.length - 1))));
+    const p = points[idx], tip = $('#salesTooltip'); tip.innerHTML = `<b>${esc(p.label)}</b><br>${fmt(p.revenue)}<br>${p.orders} commande${p.orders === 1 ? '' : 's'}`; tip.hidden = false;
+    tip.style.left = `${Math.max(72, Math.min(width - 72, xy[idx].x))}px`; tip.style.top = `${xy[idx].y}px`;
+  };
+  canvas.onpointerleave = () => { $('#salesTooltip').hidden = true; };
+}
+window.addEventListener('resize', drawSalesChart);
+
+function orderMatches(o) {
+  const st = $('#ofStatus')?.value || '', mo = $('#ofMode')?.value || '', q = ($('#ofQ')?.value || '').trim().toLowerCase();
+  const from = $('#ofFrom')?.value || '', to = $('#ofTo')?.value || '';
+  if (st && o.status !== st) return false;
+  if (mo && o.mode !== mo) return false;
+  if (q && !(`${o.code || ''} ${o.customer || ''} ${o.phone || ''}`).toLowerCase().includes(q)) return false;
+  if (from || to) { const d = (o.created_at || '').slice(0, 10); if (from && d < from) return false; if (to && d > to) return false; }
+  return true;
+}
+function drawOrders() {
+  const list = [...orders.values()].filter(orderMatches);
+  const info = $('#orderFilterInfo');
+  if (info) { const active = $('#ofStatus').value || $('#ofMode').value || $('#ofFrom').value || $('#ofTo').value || $('#ofQ').value.trim(); info.textContent = active ? `${list.length} commande(s) correspondant au filtre.` : ''; }
+  const columns = COLS.map(([st, title]) => {
+    const col = list.filter(o => o.status === st).sort((a, b) => a.id - b.id);
+    if (!col.length && (st === 'accepted' || st === 'preparing')) return '';
+    return `<div class="col"><h3>${title} (${col.length})</h3>${col.map(o => `
+      <div class="card ${fresh.has(o.id) ? 'new' : ''}"><b>#${esc(o.code)}</b> <span class="muted">${esc(o.created_at.slice(11, 16))} UTC</span>
+        <div>${esc(o.customer)} · <a href="tel:${esc(o.phone)}">${esc(o.phone)}</a></div>
+        <div class="muted">${o.mode === 'delivery' ? '🛵 ' + esc(o.address || '') + (o.zone ? ' · Zone : ' + esc(o.zone) : '') + (o.address_lat != null && o.address_lng != null ? ` · <a href="https://www.google.com/maps/search/?api=1&amp;query=${encodeURIComponent(o.address_lat + ',' + o.address_lng)}" target="_blank" rel="noopener">📍 Ouvrir dans Google Maps</a>` : '') : '🥡 À emporter'}</div>
+        <ul>${(typeof o.items === 'string' ? JSON.parse(o.items) : (o.items || [])).map(i => `<li>${i.qty} × ${esc(i.name)}${i.request ? ` <span class="muted">— ${esc(i.request)}</span>` : ''}</li>`).join('')}</ul>
+        ${o.fee ? `<div class="muted">Livraison : ${fmt(o.fee)}</div>` : ''}
+        ${o.note ? `<div class="muted">📝 ${esc(o.note)}</div>` : ''}<b>${fmt(o.total)}</b>
+        <div class="muted" style="margin-top:6px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">Délai (min) : <input type="number" min="1" max="600" value="${o.eta_min ?? ''}" style="width:64px" data-emin="${o.id}" aria-label="Délai minimum">–<input type="number" min="1" max="600" value="${o.eta_max ?? ''}" style="width:64px" data-emax="${o.id}" aria-label="Délai maximum"><button type="button" data-eta="${o.id}">OK</button></div>
+        <div class="btns">${(NEXT[o.status] || []).filter(([s]) => !(s === 'out_for_delivery' && o.mode !== 'delivery')).map(([s, l, c]) => { let label = l; if (s === 'ready') label = o.mode === 'delivery' ? 'Prête à livrer' : 'Prête à retirer'; return `<button class="${c}" data-o="${o.id}" data-s="${s}" ${s === 'cancelled' ? 'data-cancel="1"' : ''}>${label}</button>`; }).join('')} <button type="button" data-print="${o.id}">🖨️ Imprimer</button></div></div>`).join('')}</div>`;
+  });
+  $('#cols').style.setProperty('--cols', columns.filter(Boolean).length || 1);
+  $('#cols').innerHTML = columns.join('') || '<p class="muted">Aucune commande pour ces filtres.</p>';
+  fresh.clear();
+}
+document.addEventListener('click', async e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.period) { salesPeriod = b.dataset.period; document.querySelectorAll('#salesPeriods button').forEach(x => x.classList.toggle('on', x === b)); loadSales(); }
+  if (b.dataset.salesDate) { $('#salesDetailDate').value = b.dataset.salesDate; loadSalesDay(b.dataset.salesDate); renderSalesDays(); }
+  if (b.id === 'salesDateApply') { loadSalesDay($('#salesDetailDate').value); renderSalesDays(); }
+  if (b.dataset.t) { document.querySelectorAll('.tabs button').forEach(x => x.classList.toggle('on', x === b));
+    $('#dashboardTab').classList.toggle('hide', b.dataset.t !== 'dashboard'); $('#orders').classList.toggle('hide', b.dataset.t !== 'orders'); $('#reservationsTab').classList.toggle('hide', b.dataset.t !== 'reservations'); $('#menuTab').classList.toggle('hide', b.dataset.t !== 'menu'); $('#settingsTab').classList.toggle('hide', b.dataset.t !== 'settings'); $('#passwordTab').classList.toggle('hide', b.dataset.t !== 'password');
+    if (b.dataset.t === 'dashboard') { loadSales(); loadInsights(); } if (b.dataset.t === 'orders') drawOrders(); if (b.dataset.t === 'reservations') { resvNew = 0; markResvTab(0); loadReservations(); } if (b.dataset.t === 'settings') loadSettings(); }
+  if (b.dataset.avail) { try { await toggleAvailability(+b.dataset.avail); } catch (er) { alert(er.message); } }
+  if (b.dataset.o) { if (b.dataset.cancel === '1' && !confirm('Annuler cette commande ? Cette action est définitive.')) return; try { await api('orders/' + b.dataset.o, 'PATCH', { status: b.dataset.s }); } catch (er) { alert(er.message); } }
+  if (b.dataset.print) printOrder(+b.dataset.print);
+  if (b.dataset.eta) updateEta(+b.dataset.eta, $(`[data-emin="${+b.dataset.eta}"]`).value, $(`[data-emax="${+b.dataset.eta}"]`).value);
+  if (b.dataset.edit) editItem(menu.find(x => x.id == b.dataset.edit));
+  if (b.dataset.del && confirm('Supprimer cet article ?')) { await api('menu/' + b.dataset.del, 'DELETE'); loadMenu(); }
+  if (b.id === 'ofApply') drawOrders();
+  if (b.id === 'ofClear') { $('#ofStatus').value = ''; $('#ofMode').value = ''; $('#ofFrom').value = ''; $('#ofTo').value = ''; $('#ofQ').value = ''; drawOrders(); }
+  if (b.id === 'exportCsv') exportCsv();
+  if (b.id === 'pauseBtn') setPaused(!pauseState);
+  if (b.id === 'addZone') addZone();
+  if (b.id === 'saveSettings') saveSettings();
+  if (b.dataset.rv) { if (b.dataset.rvConfirm === '1' && !confirm('Refuser cette réservation ? Le client verra « refusée ».')) return; try { await api('reservations/' + b.dataset.rv, 'PATCH', { status: b.dataset.rs }); loadReservations(); } catch (er) { alert(er.message); } }
+  if (b.dataset.rvnote) editResvNote(+b.dataset.rvnote);
+  if (b.id === 'rvApply') loadReservations();
+  if (b.id === 'rvClear') { $('#rvStatus').value = ''; $('#rvDate').value = ''; $('#rvFrom').value = ''; $('#rvTo').value = ''; $('#rvQ').value = ''; loadReservations(); }
+});
+
+$('#pf').addEventListener('submit', async e => {
+  e.preventDefault(); const err = $('#perr'), ok = $('#pok'), btn = $('#psave'); err.textContent = ''; ok.textContent = '';
+  const currentPassword = $('#pc').value, newPassword = $('#pn').value;
+  if (newPassword.length < 8) { err.textContent = 'Le nouveau mot de passe doit contenir au moins 8 caractères.'; return; }
+  if (newPassword !== $('#pconfirm').value) { err.textContent = 'Les deux nouveaux mots de passe ne correspondent pas.'; return; }
+  btn.disabled = true;
+  try { await api('password', 'POST', { currentPassword, newPassword }); $('#pf').reset(); ok.textContent = 'Mot de passe modifié avec succès.'; }
+  catch (ex) { err.textContent = ex.message; }
+  finally { btn.disabled = false; }
+});
+
+/* ---- menu management ---- */
+async function loadMenu() { menu = await api('menu'); drawMenu(); }
+async function toggleAvailability(id) {
+  const item = menu.find(m => m.id === id); if (!item) return;
+  const updated = await api('menu/' + id, 'PUT', {
+    name: item.name, category: item.category, price: item.price, description: item.description,
+    prep_minutes: item.prep_minutes || 15, available: item.available ? 0 : 1, image: item.image || '',
+    portion: item.portion || '', allergens: listOf(item.allergens), dietary: listOf(item.dietary),
+    sizes: item.sizes || []
+  });
+  menu = menu.map(m => m.id === id ? updated : m); drawMenu();
+}
+function labelOf(list, key) { const f = list.find(o => o.key === key); return f ? f.label : key; }
+function menuDetails(m) {
+  const alg = listOf(m.allergens), die = listOf(m.dietary), parts = [];
+  if (m.portion) parts.push('Portion : ' + esc(m.portion));
+  if (alg.length) parts.push('Allergènes : ' + alg.map(a => esc(labelOf(allergenOptions, a))).join(', '));
+  if (die.length) parts.push('Régimes : ' + die.map(a => esc(labelOf(dietaryOptions, a))).join(', '));
+  return parts.length ? `<span class="muted">${parts.join('<br>')}</span>` : '<span class="muted">—</span>';
+}
+const listOf = v => Array.isArray(v) ? v.slice() : String(v == null ? '' : v).split(',').map(s => s.trim()).filter(Boolean);
+function drawMenu() {
+  const cats = [...new Set(menu.map(m => m.category))], fcv = $('#fc').value;
+  $('#cats').innerHTML = cats.map(c => `<option value="${esc(c)}">`).join('');
+  $('#fc').innerHTML = '<option value="">Toutes les catégories</option>' + cats.map(c => `<option ${c === fcv ? 'selected' : ''}>${esc(c)}</option>`).join('');
+  const q = $('#fq').value.toLowerCase().trim(), c = $('#fc').value;
+  $('#mt').innerHTML = menu.filter(m => (!c || m.category === c) && (!q || m.name.toLowerCase().includes(q))).map(m => {
+    const sz = m.sizes && m.sizes.length ? `<br><span class="muted">Tailles: ${m.sizes.map(s => `${s.size_label} ${fmt(s.price)}${s.is_default?' ●':''}`).join(' · ')}</span>` : '';
+    return `<tr>
+      <td class="m-photo">${m.image ? `<img class="thumb" src="${esc(m.image)}" alt="">` : '<div class="noimg">—</div>'}</td>
+      <td class="m-name">${esc(m.name)}</td>
+      <td data-label="Catégorie">${esc(m.category)}</td>
+      <td data-label="Prix">${fmt(m.price)}</td>
+      <td data-label="Préparation">◷ ${m.prep_minutes || 15} min</td>
+      <td class="m-avail" data-label="Disponibilité"><button class="avail-toggle ${m.available ? 'yes' : 'no'}" data-avail="${m.id}" aria-pressed="${!!m.available}" aria-label="${m.available ? 'Désactiver' : 'Rendre disponible'} : ${esc(m.name)}"><span class="avail-icon">${m.available ? '✓' : '×'}</span>${m.available ? 'Disponible' : 'Indisponible'}</button></td>
+      <td class="m-break" aria-hidden="true"></td>
+      <td class="m-details" data-label="Détails">${menuDetails(m)}${sz}</td>
+      <td class="m-actions"><button data-edit="${m.id}">Modifier</button> <button class="bad" data-del="${m.id}">Supprimer</button></td></tr>`;
+  }).join('');
+}
+$('#fq').addEventListener('input', drawMenu); $('#fc').addEventListener('change', drawMenu);
+function showPrev() {
+  const src = pending || (removeImg ? '' : curImg);
+  $('#prev').innerHTML = src ? `<img src="${esc(src)}" alt="Aperçu">` : '<div class="noimg">Pas de photo</div>';
+  $('#rmimg').classList.toggle('hide', !src);
+}
+function resetForm() {
+  $('#mf').reset(); $('#mid').value = ''; $('#ma').checked = true; $('#mpt').value = 15; $('#mpo').value = ''; pending = null; removeImg = false; curImg = '';
+  document.querySelectorAll('#malg input,#mdiet input').forEach(i => i.checked = false);
+  $('#msz').innerHTML = ''; sizeRows = [];
+  $('#ft').textContent = 'Ajouter un article'; $('#mx').classList.add('hide'); $('#merr').textContent = ''; showPrev();
+}
+function buildChips() {
+  $('#malg').innerHTML = allergenOptions.filter(o => o.label).map(o => `<label><input type="checkbox" value="${esc(o.key)}"> ${esc(o.label)}</label>`).join('') || '<span class="muted">Aucun allergène configuré.</span>';
+  $('#mdiet').innerHTML = dietaryOptions.filter(o => o.label).map(o => `<label><input type="checkbox" value="${esc(o.key)}"> ${esc(o.label)}</label>`).join('') || '<span class="muted">Aucun régime configuré.</span>';
+}
+function editItem(m) {
+  resetForm(); $('#mid').value = m.id; $('#mn').value = m.name; $('#mc').value = m.category; $('#mp').value = m.price; $('#mpt').value = m.prep_minutes || 15; $('#md').value = m.description; $('#mpo').value = m.portion || '';
+  const alg = new Set(listOf(m.allergens)), die = new Set(listOf(m.dietary));
+  document.querySelectorAll('#malg input').forEach(i => i.checked = alg.has(i.value));
+  document.querySelectorAll('#mdiet input').forEach(i => i.checked = die.has(i.value));
+  $('#ma').checked = !!m.available; curImg = m.image || ''; $('#ft').textContent = 'Modifier : ' + m.name; $('#mx').classList.remove('hide'); showPrev();
+  $('#mf').scrollIntoView({ behavior: 'smooth' }); $('#mn').focus();
+  renderSizes(m.sizes || []);
+}
+$('#mx').addEventListener('click', resetForm);
+let sizeRows = [];
+function renderSizes(sizes) {
+  sizeRows = sizes.map((s, idx) => ({ ...s, _idx: idx }));
+  const escAttr = v => String(v).replace(/"/g, '"');
+  $('#msz').innerHTML = sizeRows.map((s, i) => `
+    <label style="display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;background:#fffdf6;border:1.5px solid var(--line);padding:8px 12px;border-radius:8px">
+      <input type="text" placeholder="Code (ex. S,M,L,XL,XXL)" value="${escAttr(s.size_code)}" data-scode readonly style="width:52px;font-weight:700;text-transform:uppercase;background:#f2e6c1">
+      <input type="text" placeholder="Libellé (ex. Small 25 cm)" value="${escAttr(s.size_label)}" data-slabel style="width:180px">
+      <input type="number" placeholder="Prix (DA)" value="${s.price}" data-sprice min="0" step="10" style="width:100px">
+      <label style="display:inline-flex;align-items:center;gap:4px"><input type="checkbox" ${s.is_default ? 'checked' : ''} data-sdef> Par défaut</label>
+      <button type="button" class="bad" data-sdel="${i}" aria-label="Supprimer cette taille">×</button>
+    </label>
+  `).join('') || '<span class="muted">Aucune taille définie — le prix de base sera utilisé.</span>';
+}
+function collectSizes() {
+  const out = [];
+  document.querySelectorAll('#msz label').forEach((lbl, i) => {
+    const code = lbl.querySelector('[data-scode]')?.value.trim().toUpperCase();
+    const label = lbl.querySelector('[data-slabel]')?.value.trim();
+    const price = parseInt(lbl.querySelector('[data-sprice]')?.value || '0', 10);
+    const isDefault = lbl.querySelector('[data-sdef]')?.checked;
+    if (!code || !label || !Number.isFinite(price) || price < 0) return;
+    out.push({ size_code: code, size_label: label, price, is_default: isDefault ? 1 : 0, sort_order: i });
+  });
+  // dedupe by code (keep first)
+  const seen = new Set();
+  return out.filter(s => seen.has(s.size_code) ? false : (seen.add(s.size_code), true));
+}
+$('#msz').addEventListener('click', e => {
+  if (e.target.matches('[data-sdel]')) {
+    const idx = +e.target.dataset.sdel;
+    sizeRows.splice(idx, 1);
+    renderSizes(sizeRows);
+  }
+});
+$('#addSize').addEventListener('click', () => {
+  const codes = ['S','M','L','XL','XXL'];
+  const used = new Set(sizeRows.map(s => s.size_code));
+  let next = codes.find(c => !used.has(c));
+  if (!next) next = 'SIZE' + (sizeRows.length + 1);
+  sizeRows.push({ size_code: next, size_label: '', price: 0, is_default: sizeRows.length === 0 ? 1 : 0, sort_order: sizeRows.length });
+  renderSizes(sizeRows);
+});
+$('#rmimg').addEventListener('click', () => { pending = null; removeImg = true; $('#mf2').value = ''; showPrev(); });
+$('#mf2').addEventListener('change', async e => {                  // shrink the photo in the browser before upload
+  const f = e.target.files[0]; if (!f) return; $('#merr').textContent = '';
+  try {
+    const bmp = await createImageBitmap(f), k = Math.min(1, 900 / Math.max(bmp.width, bmp.height));
+    const cv = document.createElement('canvas'); cv.width = Math.round(bmp.width * k); cv.height = Math.round(bmp.height * k);
+    cv.getContext('2d').drawImage(bmp, 0, 0, cv.width, cv.height);
+    pending = cv.toDataURL('image/jpeg', 0.82); removeImg = false; showPrev();
+  } catch { $('#merr').textContent = 'Impossible de lire cette image.'; e.target.value = ''; }
+});
+$('#mf').addEventListener('submit', async e => {
+  e.preventDefault(); const id = $('#mid').value; $('#merr').textContent = '';
+  const data = { name: $('#mn').value, category: $('#mc').value, price: +$('#mp').value, prep_minutes: +$('#mpt').value, description: $('#md').value, available: $('#ma').checked ? 1 : 0,
+    portion: $('#mpo').value, allergens: [...document.querySelectorAll('#malg input:checked')].map(i => i.value), dietary: [...document.querySelectorAll('#mdiet input:checked')].map(i => i.value),
+    sizes: collectSizes() };
+  if (pending) data.image = pending; else if (removeImg) data.removeImage = true;
+  $('#msave').disabled = true;
+  try { await api(id ? 'menu/' + id : 'menu', id ? 'PUT' : 'POST', data); resetForm(); await loadMenu(); }
+  catch (er) { $('#merr').textContent = er.message; }
+  $('#msave').disabled = false;
+});
+/* ---- sales / menu insights ---- */
+async function loadInsights() {
+  try {
+    const data = await api('insights?period=' + salesPeriod);
+    $('#insTopBody').innerHTML = (data.topItems || []).length
+      ? data.topItems.map(it => `<tr><td>${esc(it.name)}</td><td>${it.quantity}</td><td class="money">${fmt(it.revenue)}</td></tr>`).join('')
+      : '<tr><td colspan="3" class="sales-empty">Aucun plat vendu sur cette période.</td></tr>';
+    $('#insUnavailBody').innerHTML = (data.unavailable || []).length
+      ? data.unavailable.map(it => `<tr><td>${esc(it.name)}</td><td>${esc(it.category)}</td></tr>`).join('')
+      : '<tr><td colspan="2" class="sales-empty">Tous les articles sont disponibles.</td></tr>';
+  } catch (e) { /* handled by the sales panel */ }
+}
+
+/* ---- settings: hours, pause, delivery, pickup ---- */
+let pauseState = false, hoursState = {}, zonesState = [];
+const HOURS_DEFAULT_RANGE = ['08:00', '23:59'];                  // default slot shown for an unconfigured day
+function updatePauseBtn() {
+  const b = $('#pauseBtn'); if (!b) return;
+  b.textContent = pauseState ? '▶️ Reprendre les commandes' : 'Mettre en pause';
+  b.classList.toggle('bad', !pauseState); b.classList.toggle('pri', pauseState);
+}
+async function setPaused(paused) {
+  try { const r = await api('settings', 'PUT', { ordersPaused: !!paused }); pauseState = !!(r.service && r.service.paused); updatePauseBtn(); const sw = $('#pauseOn'); if (sw) sw.checked = pauseState; }
+  catch (e) { alert(e.message); }
+}
+function renderHours() {
+  $('#hoursGrid').innerHTML = WEEKDAYS.map(([n, label]) => {
+    const day = hoursState[n] || { ranges: [HOURS_DEFAULT_RANGE.slice()] }, ranges = day.ranges || [];
+    return `<div class="hours-row"><span class="hours-day">${esc(label)}</span>
+      <button type="button" data-hadd="${n}" ${ranges.length >= 3 ? 'disabled' : ''}>+ Créneau</button>
+      <div class="ranges" data-hranges="${n}">${ranges.map((r, idx) => `<span style="display:inline-flex;align-items:center;gap:4px;background:#fffdf6;border:1.5px solid var(--line);padding:4px 8px;border-radius:999px"><input type="time" value="${esc(r[0] || '')}"><span>–</span><input type="time" value="${esc(r[1] || '')}"><button type="button" class="bad" data-hdel="${n}:${idx}" aria-label="Supprimer ce créneau">×</button></span>`).join('') || '<span class="muted">Fermé</span>'}</div></div>`;
+  }).join('');
+}
+function readHoursFromDom() {
+  WEEKDAYS.forEach(([n]) => {
+    const ranges = [];
+    const box = document.querySelector(`[data-hranges="${n}"]`);
+    if (box) { const times = box.querySelectorAll('input[type="time"]'); for (let i = 0; i < times.length; i += 2) { const a = times[i].value, b = times[i + 1] && times[i + 1].value; if (a && b) ranges.push([a, b]); } }
+    hoursState[String(n)] = { closed: ranges.length === 0, ranges };   // a day is closed when it has no slots
+  });
+  return hoursState;
+}
+function drawHours(hours) {
+  hoursState = {};
+  for (const [n] of WEEKDAYS) { const d = hours && hours[String(n)]; hoursState[n] = d ? { closed: !!d.closed, ranges: Array.isArray(d.ranges) ? d.ranges.map(r => [String(r[0] || ''), String(r[1] || '')]) : [] } : { closed: false, ranges: [HOURS_DEFAULT_RANGE.slice()] }; }
+  renderHours();
+}
+function renderZones() {
+  $('#zonesList').innerHTML = zonesState.length ? zonesState.map((z, i) => `<div class="zones-row"><input type="text" maxlength="40" placeholder="Nom de la zone" value="${esc(z.name || '')}" data-zname="${i}"><input type="number" min="0" max="100000" step="10" value="${z.fee ?? 0}" data-zfee="${i}" aria-label="Frais de la zone"> <span class="muted">DA</span><button type="button" class="bad" data-zdel="${i}">Supprimer</button></div>`).join('') : '<p class="muted">Aucune zone : tous les clients paient les mêmes frais.</p>';
+}
+function readZonesFromDom() {
+  const out = []; document.querySelectorAll('[data-zname]').forEach(inp => { const i = inp.dataset.zname, fee = document.querySelector(`[data-zfee="${i}"]`)?.value; out.push({ name: inp.value.trim(), fee: fee === '' || fee == null ? 0 : +fee }); });
+  if (out.length || !document.querySelector('[data-zname]')) zonesState = out;
+  return zonesState;
+}
+function drawZones(zones) { zonesState = (zones || []).map(z => ({ name: z.name || '', fee: z.fee ?? 0 })); renderZones(); }
+function addZone() { readZonesFromDom(); zonesState.push({ name: '', fee: +$('#delFee').value || 0 }); renderZones(); }
+function renderOptionEditors() {
+  const draw = (kind, host, list) => {
+    host.innerHTML = list.map((o, i) => `<span class="opt-chip"><input type="text" maxlength="40" value="${esc(o.label)}" placeholder="Libellé" data-optlabel="${kind}:${i}" aria-label="Libellé de l’option"><button type="button" class="bad" data-delopt="${kind}:${i}" aria-label="Supprimer cette option">×</button></span>`).join('') || '<span class="muted">Aucune option.</span>';
+  };
+  draw('allergens', $('#allergenEditor'), allergenOptions);
+  draw('dietary', $('#dietaryEditor'), dietaryOptions);
+}
+function readOptionsFromDom() {
+  const read = (kind, base) => {
+    const inputs = [...document.querySelectorAll(`[data-optlabel^="${kind}:"]`)];
+    const out = inputs.map(inp => ({ key: (base[+inp.dataset.optlabel.split(':')[1]] || {}).key || '', label: inp.value.trim() }));
+    return out.length ? out : base.map(o => ({ ...o }));
+  };
+  allergenOptions = read('allergens', allergenOptions);
+  dietaryOptions = read('dietary', dietaryOptions);
+}
+const cleanOpts = list => list.filter(o => o.label).map(o => ({ key: o.key, label: o.label }));
+async function loadSettings(silent) {
+  try {
+    const r = await api('settings'), s = r.service || {};
+    pauseState = !!s.paused; updatePauseBtn();
+    $('#pauseOn').checked = pauseState; $('#pauseMsg').value = s.pauseMessage || '';
+    const d = s.delivery || {}; $('#delOn').checked = d.enabled !== false; $('#delFee').value = d.fee ?? ''; $('#delFree').value = d.freeFrom ?? ''; $('#delNote').value = d.notes || '';
+    const p = s.pickup || {}; $('#pickOn').checked = p.enabled !== false; $('#pickNote').value = p.notes || '';
+    allergenOptions = (Array.isArray(r.allergens) && r.allergens.length) ? r.allergens.map(o => ({ key: o.key, label: o.label })) : DEFAULT_ALLERGENS.slice();
+    dietaryOptions = (Array.isArray(r.dietary) && r.dietary.length) ? r.dietary.map(o => ({ key: o.key, label: o.label })) : DEFAULT_DIETARY.slice();
+    drawHours(s.hours || null); drawZones(d.zones || []); renderOptionEditors(); buildChips();
+    const rv = r.reservations || {}; $('#resvOn').checked = rv.enabled !== false; $('#resvPhone').value = rv.phone || ''; $('#resvLead').value = rv.leadDays || 60;
+    resvTables = r.tables || {}; renderTables();
+  } catch (e) { if (!silent) alert(e.message); }
+}
+async function saveSettings() {
+  const ok = $('#sok'), err = $('#serr'), btn = $('#saveSettings'); ok.textContent = ''; err.textContent = '';
+  readHoursFromDom(); readZonesFromDom(); readOptionsFromDom();
+  const hours = {}; WEEKDAYS.forEach(([n]) => { const ranges = ((hoursState[n] || {}).ranges || []).filter(r => r[0] && r[1]); hours[String(n)] = { closed: ranges.length === 0, ranges }; });
+  const payload = { hours, ordersPaused: $('#pauseOn').checked, pauseMessage: $('#pauseMsg').value,
+    delivery: { enabled: $('#delOn').checked, fee: +$('#delFee').value || 0, freeFrom: +$('#delFree').value || 0, notes: $('#delNote').value, zones: zonesState.map(z => ({ name: z.name, fee: z.fee })) },
+    pickup: { enabled: $('#pickOn').checked, notes: $('#pickNote').value },
+    allergens: cleanOpts(allergenOptions), dietary: cleanOpts(dietaryOptions),
+    reservations: { enabled: $('#resvOn').checked, phone: $('#resvPhone').value, leadDays: +$('#resvLead').value || 60 },
+    tables: readTablesFromDom() };
+  btn.disabled = true;
+  try {
+    const r = await api('settings', 'PUT', payload); pauseState = !!(r.service && r.service.paused); updatePauseBtn(); ok.textContent = 'Réglages enregistrés.';
+    if (r.saved && Array.isArray(r.saved.allergens)) allergenOptions = r.saved.allergens.map(o => ({ key: o.key, label: o.label }));
+    if (r.saved && Array.isArray(r.saved.dietary)) dietaryOptions = r.saved.dietary.map(o => ({ key: o.key, label: o.label }));
+    renderOptionEditors(); buildChips();
+  }
+  catch (e) { err.textContent = e.message; }
+  btn.disabled = false;
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.hadd !== undefined) { readHoursFromDom(); const n = +b.dataset.hadd, day = hoursState[n] || (hoursState[n] = { ranges: [] }); if ((day.ranges || []).length >= 3) return alert('Trois créneaux maximum par jour.'); day.ranges = day.ranges || []; day.ranges.push(HOURS_DEFAULT_RANGE.slice()); renderHours(); }
+  if (b.dataset.hdel !== undefined) { readHoursFromDom(); const [n, idx] = b.dataset.hdel.split(':').map(Number); const day = hoursState[n]; if (day) day.ranges.splice(idx, 1); renderHours(); }
+  if (b.dataset.zdel !== undefined) { readZonesFromDom(); zonesState.splice(+b.dataset.zdel, 1); renderZones(); }
+  if (b.dataset.addopt !== undefined) { readOptionsFromDom(); const kind = b.dataset.addopt, arr = kind === 'allergens' ? allergenOptions : dietaryOptions; arr.push({ key: '', label: '' }); renderOptionEditors(); const inputs = $(kind === 'allergens' ? '#allergenEditor' : '#dietaryEditor').querySelectorAll('input'); if (inputs.length) inputs[inputs.length - 1].focus(); }
+  if (b.dataset.delopt !== undefined) { readOptionsFromDom(); const [kind, i] = b.dataset.delopt.split(':'); const arr = kind === 'allergens' ? allergenOptions : dietaryOptions; arr.splice(+i, 1); renderOptionEditors(); }
+});
+
+/* ---- table reservations ---- */
+const RV_FLOW = {
+  pending: [['approved','Accepter','pri'],['rejected','Refuser','bad']],
+  phone_required: [['approved','Confirmer','pri'],['rejected','Refuser','bad']],
+  approved: [['completed','Terminée',''],['cancelled','Annuler','bad']],
+  rejected: [], cancelled: [], completed: [],
+};
+const RV_STATUS = { pending:{t:'À valider',c:'wait'}, phone_required:{t:'À rappeler',c:'call'}, approved:{t:'Confirmée',c:'ok'}, rejected:{t:'Refusée',c:'bad'}, cancelled:{t:'Annulée',c:'off'}, completed:{t:'Terminée',c:'ok'} };
+const TABLE_ZONES = [['inside','Intérieur',[2,4,8]],['outside','Extérieur',[4]]];
+let resvList = [], resvTables = {}, resvNew = 0;
+function rvDayLabel(date) {
+  try { const s = new Intl.DateTimeFormat('fr-FR', { weekday:'long', day:'numeric', month:'long' }).format(new Date(date + 'T12:00:00')); return s.charAt(0).toUpperCase() + s.slice(1); }
+  catch { return date; }
+}
+function rvCard(r) {
+  const S = RV_STATUS[r.status] || { t: r.status, c: 'off' };
+  const actions = (RV_FLOW[r.status] || []).map(([s,l,c]) => `<button type="button" class="${c||''}" data-rv="${r.id}" data-rs="${s}"${s === 'rejected' ? ' data-rv-confirm="1"' : ''}>${l}</button>`).join('');
+  return `<article class="rv-card ${S.c}">
+    <div class="rv-top"><b>${esc(r.time)}</b><span class="rv-badge ${S.c}">${S.t}</span></div>
+    ${r.editedAt ? '<div class="rv-edited">Modifiée par le client — à reconfirmer</div>' : ''}
+    <div>${esc(r.name)} · <a href="tel:${esc(r.phone)}">${esc(r.phone)}</a></div>
+    <div class="muted">${r.zone === 'outside' ? 'Extérieur' : 'Intérieur'} · table ${r.capacity} pers. · ${r.party} personne${r.party > 1 ? 's' : ''}${r.code ? ' · #' + esc(r.code) : ''}</div>
+    ${r.note ? `<div class="muted">📝 ${esc(r.note)}</div>` : ''}
+    ${r.adminNote ? `<div class="rv-note">Message : ${esc(r.adminNote)}</div>` : ''}
+    <div class="rv-actions">${actions}<button type="button" data-rvnote="${r.id}">Note au client</button></div>
+  </article>`;
+}
+function drawReservations() {
+  const host = $('#rvList'); if (!host) return;
+  const info = $('#rvInfo'); if (info) info.textContent = resvList.length ? resvList.length + ' réservation(s) affichée(s).' : '';
+  if (!resvList.length) { host.innerHTML = '<p class="muted">Aucune réservation pour ces filtres.</p>'; return; }
+  const groups = new Map();
+  for (const r of resvList) { if (!groups.has(r.date)) groups.set(r.date, []); groups.get(r.date).push(r); }
+  host.innerHTML = [...groups.entries()].map(([date, list]) => `<section class="rv-day"><h3>${esc(rvDayLabel(date))}</h3><div class="rv-grid">${list.map(rvCard).join('')}</div></section>`).join('');
+}
+async function loadReservations() {
+  const q = new URLSearchParams();
+  const st = $('#rvStatus')?.value || '', d = $('#rvDate')?.value || '', f = $('#rvFrom')?.value || '', t = $('#rvTo')?.value || '', term = ($('#rvQ')?.value || '').trim();
+  if (st) q.set('status', st); if (d) q.set('date', d); if (f) q.set('from', f); if (t) q.set('to', t); if (term) q.set('q', term);
+  try { resvList = await api('reservations' + (q.toString() ? '?' + q.toString() : '')); drawReservations(); }
+  catch (e) { const host = $('#rvList'); if (host) host.innerHTML = '<p class="muted">' + esc(e.message) + '</p>'; }
+}
+async function editResvNote(id) {
+  const r = resvList.find(x => x.id === id); if (!r) return;
+  const note = prompt('Message visible par le client sur sa page de réservation :', r.adminNote || '');
+  if (note === null) return;
+  try { await api('reservations/' + id, 'PATCH', { adminNote: note }); loadReservations(); } catch (e) { alert(e.message); }
+}
+function renderTables() {
+  const host = $('#tablesEditor'); if (!host) return;
+  host.innerHTML = TABLE_ZONES.map(([zone, label, caps]) => `<div class="tables-row"><b>${label}</b><div class="tables-caps">` + caps.map(c => `<label class="tcap">${c} pers.<input type="number" min="0" max="500" step="1" value="${(resvTables[zone] && resvTables[zone][c]) || 0}" data-rtable="${zone}:${c}" aria-label="${label} ${c} personnes"></label>`).join('') + `</div></div>`).join('');
+}
+function readTablesFromDom() {
+  const out = {};
+  document.querySelectorAll('[data-rtable]').forEach(inp => { const [zone, cap] = inp.dataset.rtable.split(':'); if (!out[zone]) out[zone] = {}; out[zone][cap] = Math.max(0, Math.min(500, +inp.value || 0)); });
+  resvTables = out; return out;
+}
+function markResvTab(n) { const b = document.querySelector('.tabs button[data-t="reservations"]'); if (b) b.textContent = '🍽️ Réservations' + (n ? ' • ' + n : ''); }
+['rvStatus','rvDate','rvFrom','rvTo'].forEach(id => { const el = $('#' + id); if (el) el.addEventListener('change', loadReservations); });
+{ const q = $('#rvQ'); if (q) q.addEventListener('input', () => { clearTimeout(q._t); q._t = setTimeout(loadReservations, 350); }); }
+
+/* ---- order extras: CSV export, ETA, printable ticket ---- */
+function exportCsv() {
+  const q = new URLSearchParams(), st = $('#ofStatus').value, mo = $('#ofMode').value, from = $('#ofFrom').value, to = $('#ofTo').value;
+  if (st) q.set('status', st); if (mo) q.set('mode', mo); if (from) q.set('from', from); if (to) q.set('to', to);
+  fetch('/api/admin/orders/export' + (q.toString() ? '?' + q.toString() : ''), { headers: { Authorization: 'Bearer ' + token } })
+    .then(async r => { if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error || 'Export impossible.'); const blob = await r.blob(), a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `commandes-${from || 'debut'}_${to || 'aujourdhui'}.csv`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); })
+    .catch(e => alert(e.message));
+}
+async function updateEta(id, min, max) {
+  try { await api('orders/' + id, 'PATCH', { eta_min: min === '' ? null : +min, eta_max: max === '' ? null : +max }); }
+  catch (e) { alert(e.message); }
+}
+function printOrder(id) {
+  const o = orders.get(id); if (!o) return;
+  const w = window.open('', '_blank', 'width=430,height=680');
+  if (!w) { alert('Autorisez les fenêtres pop-up pour imprimer le ticket.'); return; }
+  const items = typeof o.items === 'string' ? JSON.parse(o.items) : (o.items || []);
+  const rows = items.map(i => `<tr><td>${i.qty}×</td><td>${esc(i.name)}${i.request ? `<br><small>${esc(i.request)}</small>` : ''}</td><td class="r">${fmt(i.price * i.qty)}</td></tr>`).join('');
+  w.document.write(`<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><title>Ticket ${esc(o.code)}</title><style>
+    *{box-sizing:border-box}body{font:14px/1.45 system-ui,sans-serif;margin:16px;color:#111}
+    h1{font-size:19px;margin:0 0 2px}.m{color:#555;font-size:12px}
+    table{width:100%;border-collapse:collapse;margin:10px 0}td{padding:4px 0;vertical-align:top;border-bottom:1px dashed #ccc}
+    .r{text-align:right;white-space:nowrap}.tot{font-size:17px;font-weight:700;text-align:right;margin-top:8px}
+    hr{border:0;border-top:1px solid #999;margin:8px 0}@media print{body{margin:0}}
+  </style></head><body>
+    <h1>Delicioso</h1>
+    <div class="m">Commande #${esc(o.code)} · ${esc((o.created_at || '').slice(0, 16))} UTC</div>
+    <div class="m">${o.mode === 'delivery' ? '🛵 Livraison' : '🥡 À emporter'}${o.zone ? ' · ' + esc(o.zone) : ''}</div><hr>
+    <div><b>${esc(o.customer)}</b><br>${esc(o.phone)}${o.mode === 'delivery' && o.address ? '<br>' + esc(o.address) : ''}</div>
+    <table>${rows}</table>
+    <div class="m">Sous-total : ${fmt(o.subtotal)}</div>${o.fee ? `<div class="m">Livraison : ${fmt(o.fee)}</div>` : ''}
+    <div class="tot">TOTAL : ${fmt(o.total)}</div>${o.note ? `<div class="m" style="margin-top:8px">Note : ${esc(o.note)}</div>` : ''}
+    <p class="m">Merci !</p></body></html>`);
+  w.document.close(); w.focus(); setTimeout(() => { try { w.print(); } catch {} }, 300);
+}
+
+/* ---- order filter live wiring ---- */
+['ofStatus', 'ofMode', 'ofFrom', 'ofTo'].forEach(id => { const el = $('#' + id); if (el) el.addEventListener('change', drawOrders); });
+const ofQ = $('#ofQ'); if (ofQ) { ofQ.addEventListener('input', drawOrders); ofQ.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); drawOrders(); } }); }
+
+buildChips();
+if (token) start().catch(e => { try { sessionStorage.removeItem('tok'); } catch {} token = null; $('#login').classList.remove('hide'); $('#app').classList.add('hide'); $('#lerr').textContent = e.message || 'Session expirée. Reconnectez-vous.'; });
+</script></body></html>
